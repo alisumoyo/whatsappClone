@@ -5,7 +5,7 @@ const SideBar = () => {
     <>
       <Box component='section' sx={{ height: '30vh' }}>
         <Button color='#00a884' variant='outlined'>
-          HELLOOW
+          Button
         </Button>
       </Box>
     </>
