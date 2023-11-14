@@ -4,7 +4,10 @@ const SideBar = () => {
   return (
     <>
       <Box component='section' sx={{ height: '30vh' }}>
-        <Button color='#00a884' variant='outlined'>
+        <Button color='primary' variant='contained'>
+          Button
+        </Button>
+        <Button color='primary' variant='contained'>
           Button
         </Button>
       </Box>
