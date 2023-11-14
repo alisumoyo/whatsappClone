@@ -1,5 +1,5 @@
-import Landing from './components mui/Landing';
-import SideBar from './components mui/SideBar';
+import Landing from './componentsmui/Landing';
+import SideBar from './componentsmui/SideBar';
 
 export default function Home() {
   return (
