@@ -10,6 +10,9 @@ const SideBar = () => {
         <Button color='primary' variant='contained'>
           Button
         </Button>
+        <Button color='primary' variant='contained'>
+          Button
+        </Button>
       </Box>
     </>
   );
