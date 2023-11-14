@@ -2,8 +2,8 @@ import React from 'react';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import SideBar from './SIdeBAr';
+import Sidebar from './Sidebar';
+
 const Landing = () => {
   return (
     <>
@@ -20,7 +20,7 @@ const Landing = () => {
             position: 'static',
           }}
         >
-          <SideBar />
+          <Sidebar />
         </Box>
       </Container>
     </>

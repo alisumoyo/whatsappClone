@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-const SideBar = () => {
+const Sidebar = () => {
   return (
     <>
       <Box component='section' sx={{ height: '30vh' }}>
@@ -18,4 +18,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default Sidebar;
