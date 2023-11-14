@@ -3,26 +3,22 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Sidebar from './Sidebar';
+import ChatBg from './ChatBg';
 
 const Landing = () => {
   return (
     <>
-      <Container
-        maxWidth='fluid'
-        sx={{ bgcolor: 'pink', marginTop: '10px', overflow: 'hidden' }}
+      <Box
+        sx={{
+          bgcolor: '#cfe8fc',
+          height: '94vh',
+          color: '#333',
+          display: 'flex',
+        }}
       >
-        <span>HELLO</span>
-        <Box
-          sx={{
-            bgcolor: '#cfe8fc',
-            height: '94vh',
-            color: '#333',
-            position: 'static',
-          }}
-        >
-          <Sidebar />
-        </Box>
-      </Container>
+        <Sidebar />
+        <ChatBg />
+      </Box>
     </>
   );
 };

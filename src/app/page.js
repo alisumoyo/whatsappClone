@@ -1,11 +1,14 @@
+import { Box } from '@mui/material';
 import Landing from './componentsmui/Landing';
-import SideBar from './componentsmui/SideBar';
+import Layout from './componentsmui/layout';
 
 export default function Home() {
   return (
     <>
-      <Landing />
-      <SideBar />
+      {/* <Box sx={{ width: '100vw', height: '80px', bgcolor: 'geen' }}></Box>
+      <Box></Box> */}
+      {/* <Landing /> */}
+      <Layout />
     </>
   );
 }
