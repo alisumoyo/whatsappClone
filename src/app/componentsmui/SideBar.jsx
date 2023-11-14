@@ -11,7 +11,7 @@ const Sidebar = () => {
           Button
         </Button>
         <Button color='primary' variant='contained'>
-          Button
+          b3
         </Button>
       </Box>
     </>
