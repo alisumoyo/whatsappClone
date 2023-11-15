@@ -5,7 +5,32 @@
 }
 
 .chatBg_card {
+  background-color: #e9edef;
   width: 400px;
   height: 400px;
   margin: auto;
+  border: none;
+}
+.card_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chatBg_heading {
+  margin: 13px auto;
+}
+.card_content {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  margin: 20px auto;
+  color: #fff;
+  background-color: #008069;
+}
+.btn:hover {
+  color: #fff;
+  background-color: #045849;
 }

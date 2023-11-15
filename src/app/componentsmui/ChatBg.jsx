@@ -16,10 +16,11 @@ const ChatBg = () => {
         placeItem: 'center',
         flexGrow: '1',
         margin: '10px',
+        bgcolor: '#e9edef',
       }}
     >
       <Card className='chatBg_card'>
-        <CardContent>
+        <CardContent className='card_content'>
           <Image src={bgImg} alt='bgImg' width={320} height={188} />
           <div className='card_content'>
             <h2 className='chatBg_heading'>Download WhatsApp for Windows</h2>
@@ -27,7 +28,7 @@ const ChatBg = () => {
               Make calls, share your screen and get a faster experience when you
               download the Windows app.
             </p>
-            <Button color='success' variant='contained'>
+            <Button variant='outlined' className='btn'>
               Get the app
             </Button>
           </div>

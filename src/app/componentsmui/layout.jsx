@@ -1,4 +1,10 @@
 import { Box, Button } from '@mui/material';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined';
+import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import React from 'react';
 import ChatBg from './ChatBg';
 
@@ -21,8 +27,38 @@ const Layout = () => {
           display: 'flex',
         }}
       >
-        <Box sx={{ width: '400px', height: '100%', bgcolor: 'blue' }}></Box>
-        <Box sx={{ flexGrow: '1', height: '100%', bgcolor: 'pink' }}>
+        <Box
+          sx={{
+            width: '400px',
+            height: '100%',
+            bgcolor: 'blue',
+          }}
+        >
+          <Box
+            className='user-info'
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '8px 16px 8px 30px ',
+              color: '#fff',
+              bgcolor: '#333',
+              minHeight: '58px',
+            }}
+          >
+            <Box>
+              <AccountCircleOutlinedIcon />
+            </Box>
+            <Box sx={{ display: 'flex', gap: '16px' }}>
+              <GroupsOutlinedIcon />
+              <DonutLargeOutlinedIcon />
+              <RadioButtonCheckedOutlinedIcon />
+              <AddBoxOutlinedIcon />
+              <MoreVertOutlinedIcon />
+            </Box>
+          </Box>
+        </Box>
+        <Box sx={{ flexGrow: '1', height: '100%', bgcolor: '#e9edef' }}>
           <ChatBg />
         </Box>
       </Box>
