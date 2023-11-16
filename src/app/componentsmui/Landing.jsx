@@ -2,7 +2,6 @@
 // import Container from '@mui/material/Container';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
-// import Sidebar from './Sidebar';
 // import ChatBg from './ChatBg';
 
 // const Landing = () => {
@@ -16,7 +15,6 @@
 //           display: 'flex',
 //         }}
 //       >
-//         <Sidebar />
 //         <ChatBg />
 //       </Box>
 //     </>
