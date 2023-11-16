@@ -1,9 +1,10 @@
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
 import React from 'react';
 import ChatBg from './ChatBg';
 import Sidebar from './Sidebar';
 import UserInfo from './UserInfo';
+import SearchField from './SearchField';
 
 const Layout = () => {
   return (
@@ -39,6 +40,7 @@ const Layout = () => {
           }}
         >
           <Sidebar />
+          <SearchField />
           <UserInfo />
           <UserInfo />
           <UserInfo />
