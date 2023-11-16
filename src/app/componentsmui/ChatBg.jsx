@@ -10,13 +10,33 @@ import { Button } from '@mui/material';
 const ChatBg = () => {
   return (
     <>
-      <Card className='chatBg_card'>
-        <CardContent className='card_content'>
-          <div className='bgImg'>
+      <Card
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          bgcolor: '#e9edef',
+          width: '400px',
+          height: '400px',
+          border: 'none',
+          color: '#41525d',
+          border: 'none',
+          boxShadow: 'none',
+        }}
+      >
+        <CardContent
+          className='card_content'
+          sx={{
+            display: 'block',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div sx={{ display: 'flex', justifyContent: 'center' }}>
             <Image src={bgImg} alt='bgImg' width={320} height={188} />
           </div>
           <div className='card_content'>
-            <h2 className='chatBg_heading'>Download WhatsApp for Windows</h2>
+            <h2 sx={{ margin: '13px auto' }}>Download WhatsApp for Windows</h2>
             <p>
               Make calls, share your screen and get a faster experience when you
               download the Windows app.
