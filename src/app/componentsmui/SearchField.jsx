@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, TextField, InputBase } from '@mui/material';
 import { Search } from '@mui/icons-material';
-import MarkUnreadChatAltOutlinedIcon from '@mui/icons-material/MarkUnreadChatAltOutlined';
+import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
 
 const SearchField = () => {
   return (
@@ -37,7 +37,7 @@ const SearchField = () => {
             variant='outlined'
           />
         </Box>
-        <MarkUnreadChatAltOutlinedIcon sx={{ margin: '0px 10px' }} />
+        <FilterListOutlinedIcon sx={{ margin: '0px 10px' }} />
       </Box>
     </>
   );

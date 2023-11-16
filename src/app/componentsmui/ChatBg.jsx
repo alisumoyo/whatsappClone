@@ -6,6 +6,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import Box from '@mui/material/Box';
 import bgImg from '../assets/img.png';
 import { Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 const ChatBg = () => {
   return (
@@ -16,7 +17,8 @@ const ChatBg = () => {
           alignItems: 'center',
           justifyContent: 'center',
           bgcolor: '#e9edef',
-          width: '400px',
+          padding: '10px 20px',
+          width: '540px',
           height: '400px',
           border: 'none',
           color: '#41525d',
@@ -26,25 +28,48 @@ const ChatBg = () => {
       >
         <CardContent
           className='card_content'
-          sx={{
-            display: 'block',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
+          sx={
+            {
+              // display: 'felx',
+              // justifyContent: 'center',
+              // alignItems: 'center',
+            }
+          }
         >
-          <div sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: '20px',
+              fontWeight: 'thin',
+            }}
+          >
             <Image src={bgImg} alt='bgImg' width={320} height={188} />
-          </div>
-          <div className='card_content'>
-            <h2 sx={{ margin: '13px auto' }}>Download WhatsApp for Windows</h2>
-            <p>
+          </Box>
+          <Box sx={{ margin: '13px 0px' }}>
+            <Typography
+              variant='h5'
+              sx={{ display: 'flex', justifyContent: 'center', margin: '13px' }}
+            >
+              Download WhatsApp for Windows
+            </Typography>
+            <Typography
+              variant='p'
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                textAlign: 'center',
+              }}
+            >
               Make calls, share your screen and get a faster experience when you
               download the Windows app.
-            </p>
+            </Typography>
+
             <Button variant='outlined' className='btn'>
               Get the app
             </Button>
-          </div>
+          </Box>
         </CardContent>
       </Card>
       <Box

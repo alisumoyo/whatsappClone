@@ -21,8 +21,8 @@ const Layout = () => {
       </Box>
       <Box
         sx={{
-          width: '90vw',
-          height: '90vh',
+          width: '95vw',
+          height: '95vh',
           bgcolor: 'red',
           position: 'fixed',
           top: '50%',
