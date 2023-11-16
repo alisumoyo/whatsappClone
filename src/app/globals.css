@@ -5,17 +5,16 @@
 }
 
 .chatBg_card {
-  background-color: #e9edef;
-  width: 400px;
-  height: 400px;
-  margin: auto;
-  border: none;
-}
-.card_content {
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #e9edef;
+  width: 400px;
+  height: 400px;
+  border: none;
+  color: #41525d;
 }
+
 .chatBg_heading {
   margin: 13px auto;
 }
@@ -26,6 +25,7 @@
 }
 
 .btn {
+  display: flex;
   margin: 20px auto;
   color: #fff;
   background-color: #008069;
@@ -33,4 +33,13 @@
 .btn:hover {
   color: #fff;
   background-color: #045849;
+}
+.bgImg {
+  display: flex;
+  justify-content: center;
+}
+.user_info:hover {
+  transition: all 0.3s ease;
+  background-color: #bcbebe;
+  cursor: pointer;
 }

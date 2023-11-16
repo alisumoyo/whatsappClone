@@ -1,24 +1,34 @@
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined';
+import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 const Sidebar = () => {
   return (
     <>
       <Box
-        component='section'
-        sx={{ height: '100vh', bgcolor: 'purple', width: '442px' }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '8px 16px 8px 30px ',
+          color: '#fff',
+          bgcolor: '#333',
+          minHeight: '58px',
+        }}
       >
-        <div>
-          <Button color='primary' variant='contained'>
-            Button
-          </Button>
-          <Button color='primary' variant='contained'>
-            Button
-          </Button>
-          <Button color='primary' variant='oulined'>
-            b3
-          </Button>
-        </div>
-        NOTHING
+        <Box>
+          <AccountCircleOutlinedIcon fontSize='large' />
+        </Box>
+        <Box sx={{ display: 'flex', gap: '16px' }}>
+          <GroupsOutlinedIcon />
+          <DonutLargeOutlinedIcon />
+          <RadioButtonCheckedOutlinedIcon />
+          <AddBoxOutlinedIcon />
+          <MoreVertOutlinedIcon />
+        </Box>
       </Box>
     </>
   );

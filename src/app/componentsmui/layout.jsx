@@ -1,17 +1,21 @@
 import { Box, Button } from '@mui/material';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
-import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined';
-import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
+
 import React from 'react';
 import ChatBg from './ChatBg';
+import Sidebar from './Sidebar';
+import UserInfo from './UserInfo';
 
 const Layout = () => {
   return (
     <>
-      <Box sx={{ width: '100vw', height: '100vh', bgcolor: '#f3f3f3' }}>
+      <Box
+        sx={{
+          width: '100vw',
+          height: '100vh',
+          bgcolor: '#f3f3f3',
+          overflow: 'hidden',
+        }}
+      >
         <Box sx={{ height: '10%', width: '100vw', bgcolor: '#00a884' }}></Box>
       </Box>
       <Box
@@ -31,38 +35,29 @@ const Layout = () => {
           sx={{
             width: '400px',
             height: '100%',
-            bgcolor: 'blue',
+            bgcolor: '#f0f2f5',
           }}
         >
-          <Box
-            className='user-info'
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '8px 16px 8px 30px ',
-              color: '#fff',
-              bgcolor: '#333',
-              minHeight: '58px',
-            }}
-          >
-            <Box>
-              <AccountCircleOutlinedIcon />
-            </Box>
-            <Box sx={{ display: 'flex', gap: '16px' }}>
-              <GroupsOutlinedIcon />
-              <DonutLargeOutlinedIcon />
-              <RadioButtonCheckedOutlinedIcon />
-              <AddBoxOutlinedIcon />
-              <MoreVertOutlinedIcon />
-            </Box>
-          </Box>
+          <Sidebar />
+          <UserInfo />
+          <UserInfo />
+          <UserInfo />
         </Box>
-        <Box sx={{ flexGrow: '1', height: '100%', bgcolor: '#e9edef' }}>
+        <Box
+          sx={{
+            flexGrow: '1',
+            height: '100%',
+            bgcolor: '#e9edef',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexGrow: '1',
+            bgcolor: '#e9edef',
+          }}
+        >
           <ChatBg />
         </Box>
       </Box>
-      <Button></Button>
     </>
   );
 };
