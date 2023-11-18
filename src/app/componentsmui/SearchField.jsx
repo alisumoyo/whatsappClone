@@ -12,8 +12,11 @@ const SearchField = () => {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '8px 6px',
-          bgcolor: '#fff',
-          cursor:'pointer'
+          bgcolor: '#ffffff',
+          cursor: 'pointer',
+          '&:hover': {
+            bgcolor: '#e9edef',
+          },
         }}
       >
         <Box
@@ -23,16 +26,16 @@ const SearchField = () => {
             bgcolor: '#f0f2f5',
             borderRadius: '8px',
             padding: '4px ',
-            flexGrow:'1'
-
+            flexGrow: '1',
           }}
         >
           <Search sx={{ margin: '0px 10px' }} />
           <InputBase
             size='small'
-           placeholder='Search or start new chat'
+            placeholder='Search or start new chat'
             sx={{
               width: '100%',
+              bgcolor: '#f0f2f5',
             }}
             variant='outlined'
           />

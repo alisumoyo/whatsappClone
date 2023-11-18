@@ -23,7 +23,6 @@ const Layout = () => {
         sx={{
           width: '95vw',
           height: '95vh',
-          bgcolor: 'red',
           position: 'fixed',
           top: '50%',
           left: '50%',
@@ -37,13 +36,44 @@ const Layout = () => {
             width: '400px',
             height: '100%',
             bgcolor: '#f0f2f6',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          <Sidebar />
-          <SearchField />
-          <UserInfo />
-          <UserInfo />
-          <UserInfo />
+          <Box>
+            <Sidebar />
+            <SearchField />
+          </Box>
+          <Box
+            sx={{
+              flexGrow: '1',
+              overflowY: 'scroll',
+              '&:hover': {
+                opacity: 1,
+              },
+              '&::-webkit-scrollbar': {
+                width: '5px',
+              },
+              '&::-webkit-scrollbar-thumb': {
+                backgroundColor: '#b3b7b9',
+                opacity: 0,
+                borderRadius: '20px',
+              },
+            }}
+          >
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+            <UserInfo />
+          </Box>
         </Box>
         <Box
           sx={{

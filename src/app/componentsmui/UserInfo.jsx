@@ -16,7 +16,13 @@ const UserInfo = () => {
           color: '#3b4a54',
           display: 'flex',
           alignItems: 'center',
-          minHeight: '60px',
+          minHeight: '54px',
+          cursor: 'pointer',
+          '&:hover': {
+            transition: 'all 0.3s ease',
+            bgcolor: '#e9edef',
+          },
+          borderTop: '1px solid #e9edef',
         }}
       >
         <Box sx={{ padding: '12px 16px' }}>
@@ -28,12 +34,11 @@ const UserInfo = () => {
             justifyContent: 'center',
             width: '100%',
             padding: '3px',
-            borderBottom: '1px solid #333',
           }}
         >
           <Box sx={{ flexGrow: '1' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <p>NAME :</p>
+              <p>Name :</p>
               {/* <PushPinTwoToneIcon sx={{ marginRight: '10px' }} />npm e */}
             </Box>
           </Box>
