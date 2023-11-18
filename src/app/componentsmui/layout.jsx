@@ -36,10 +36,10 @@ const Layout = () => {
           sx={{
             width: '400px',
             height: '100%',
-            bgcolor: '#f0f2f5',
+            bgcolor: '#f0f2f6',
           }}
         >
-          <Sidebar/>
+          <Sidebar />
           <SearchField />
           <UserInfo />
           <UserInfo />
