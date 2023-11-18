@@ -4,6 +4,7 @@ import React from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
+import Sidebar from './Sidebar';
 
 const Layout = () => {
   return (
@@ -38,6 +39,7 @@ const Layout = () => {
             bgcolor: '#f0f2f5',
           }}
         >
+          <Sidebar />
           <SearchField />
           <UserInfo />
           <UserInfo />
