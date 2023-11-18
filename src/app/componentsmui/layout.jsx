@@ -39,7 +39,7 @@ const Layout = () => {
             bgcolor: '#f0f2f5',
           }}
         >
-          <Sidebar />
+          <Sidebar/>
           <SearchField />
           <UserInfo />
           <UserInfo />
