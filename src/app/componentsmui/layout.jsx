@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 
 import React from 'react';
 import ChatBg from './ChatBg';
-import Sidebar from './Sidebar';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 
@@ -39,7 +38,6 @@ const Layout = () => {
             bgcolor: '#f0f2f5',
           }}
         >
-          <Sidebar />
           <SearchField />
           <UserInfo />
           <UserInfo />
