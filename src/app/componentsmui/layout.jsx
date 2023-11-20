@@ -5,6 +5,7 @@ import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Sidebar from './Sidebar';
+import Chat from './Chat';
 
 const Layout = () => {
   return (
@@ -85,9 +86,11 @@ const Layout = () => {
             alignItems: 'center',
             flexGrow: '1',
             bgcolor: '#e9edef',
+            bgcolor: 'red',
           }}
         >
-          <ChatBg />
+          {/* <ChatBg /> */}
+          <Chat />
         </Box>
       </Box>
     </>
