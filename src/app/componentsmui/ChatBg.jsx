@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 const ChatBg = () => {
   return (
     <>
+    <Box sx={{display:'flex',justifyContent:'center'}}>
       <Card
         sx={{
           display: 'flex',
@@ -83,6 +84,7 @@ const ChatBg = () => {
       >
         <LockIcon />
         <span>Your personal messages are end-to-end encrypted</span>
+      </Box>
       </Box>
     </>
   );

@@ -6,6 +6,7 @@ import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
+import chatbg from '../assets/chatbg.jpg';
 
 const Layout = () => {
   return (
@@ -78,15 +79,14 @@ const Layout = () => {
         </Box>
         <Box
           sx={{
-            flexGrow: '1',
             height: '100%',
             bgcolor: '#e9edef',
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
-            alignItems: 'center',
-            flexGrow: '1',
             bgcolor: '#e9edef',
-            bgcolor: 'red',
+            bgcolor: '#333',
+            width: '900px',
           }}
         >
           {/* <ChatBg /> */}
