@@ -9,14 +9,19 @@
 *::-webkit-scrollbar {
   width: 5px;
 }
-::-webkit-scrollbar-track{
-  background-color:#f0f2f5;
+::-webkit-scrollbar-track {
+  background-color: #f0f2f5;
 }
 ::-webkit-scrollbar-thumb {
   background-color: #b3b7b9;
   border-radius: 20px;
 }
-
+.moreIcon-sub {
+  font-size: 14.5px;
+  color: #3b4a54;
+  padding-right: 58px;
+  padding-left: 24px;
+}
 .btn {
   display: flex;
   margin: 15px auto;
