@@ -28,6 +28,8 @@ const SearchField = () => {
           }}
         >
           <Search sx={{ margin: '0px 10px' }} fontSize='small'/>
+        <Tooltip title="Search input text box">
+          
           <InputBase
           type='search'
             placeholder='Search or start new chat'
@@ -37,7 +39,7 @@ const SearchField = () => {
               padding: '0px 8px 0px 4px',
             }}
             variant='text'
-          />
+          /></Tooltip>
         </Box>
         <Tooltip title="Unread chats filters">
           

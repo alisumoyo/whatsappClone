@@ -1,6 +1,16 @@
-"use client"
+'use client';
 import { useState } from 'react';
-import { Box, IconButton, InputBase, Tooltip,Divider, Typography,MenuItem,Menu } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  InputBase,
+  Tooltip,
+  Divider,
+  Typography,
+  MenuItem,
+  Menu,
+  ListItemIcon,
+} from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import React from 'react';
 import Button from '@mui/material/Button';
@@ -13,18 +23,31 @@ import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSati
 import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-
+import DescriptionIcon from '@mui/icons-material/Description';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import PollIcon from '@mui/icons-material/Poll';
+import LabelIcon from '@mui/icons-material/Label';
+import {  pink ,purple,yellow} from '@mui/material/colors';
 const Chat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [send, setSend] = useState(null);
+
   const open = Boolean(anchorEl);
+  const openDoc = Boolean(send);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleClickDoc = (event) => {
+    setSend(event.currentTarget);
+  };
   const handleClose = () => {
     setAnchorEl(null);
+    setSend(null);
   };
   const chatbg =
-    'https://ghostcode.in/content/images/wordpress/2016/09/super_hero_whatsapp_background_by_x_ama-d8fr7iz.jpg';
+    'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
   return (
     <>
       <Box
@@ -39,16 +62,17 @@ const Chat = () => {
           justifyContent: 'space-between',
         }}
       >
-        
-          <Box sx={{  display:'flex',alignItems:'center',gap:'10px'}}>
-            <Avatar alt='User' src='/static/images/avatar/1.jpg' />
-            <Box sx={{fontSize:'14px',color:'#111b21'}}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Avatar alt='User' src='/static/images/avatar/1.jpg' />
+          <Box sx={{ fontSize: '14px', color: '#111b21' }}>
             <Typography variant='h6'>username</Typography>
-            <Typography variant='p'><small>Last seen today at 13:08</small></Typography>
-            </Box>
+            <Typography variant='p'>
+              <small>Last seen today at 13:08</small>
+            </Typography>
           </Box>
-          <Box sx={{color: '#54656f',}}>
-            <Tooltip title='Get the App for calling'>
+        </Box>
+        <Box sx={{ color: '#54656f' }}>
+          <Tooltip title='Get the App for calling'>
             <Button
               variant='filledTonal'
               sx={{
@@ -58,63 +82,79 @@ const Chat = () => {
               <VideocamIcon />
               <ExpandMoreIcon />
             </Button>
-            </Tooltip>
-            <Tooltip title='Seacrh...'>
+          </Tooltip>
+          <Tooltip title='Seacrh...'>
             <IconButton>
               <SearchIcon />
             </IconButton>
-            </Tooltip>
-            <Tooltip title='Menu'>
-              <IconButton  id='basic-button'
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup='true'
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}>
-                <MoreVertOutlinedIcon fontSize='md'/>
-              </IconButton>
-            </Tooltip>
+          </Tooltip>
+          <Tooltip title='Menu'>
+            <IconButton
+              id='basic-button'
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup='true'
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              <MoreVertOutlinedIcon fontSize='md' />
+            </IconButton>
+          </Tooltip>
           <Menu
-          className='moreIcon-sub'
+            className='moreIcon-sub'
             id='basic-menu'
             anchorEl={anchorEl}
-
             open={open}
             onClose={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
-              
             }}
           >
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Contact info</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Select messages</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Close chat</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Mute notifications</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Disappering messages</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Clear chat</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Delete chat</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Report</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>BLock</MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Contact info
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Select messages
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Close chat
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Mute notifications
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Disappering messages
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Clear chat
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Delete chat
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              Report
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              BLock
+            </MenuItem>
           </Menu>
-          </Box>
         </Box>
+      </Box>
 
-{/* CHAT BG */}
       <Box
         sx={{
           flexGrow: '1',
+          display:'flex',
+          width: '100%',
           height: 'auto',
           backgroundImage: `url(${chatbg})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          overflowY:'auto'
+          overflowY: 'auto',
         }}
       >
         <h1>HELLO</h1>
-        <h1>HELLO</h1>
-        <h1>HELLO</h1>
-        <h1>HELLO</h1>
-        
+       
       </Box>
       <Box
         sx={{
@@ -129,9 +169,61 @@ const Chat = () => {
         <IconButton>
           <SentimentSatisfiedAltOutlinedIcon />
         </IconButton>
-        <IconButton>
+        <IconButton  id='basic-button'
+              aria-controls={openDoc ? 'basic-menu' : undefined}
+              aria-haspopup='true'
+              aria-expanded={openDoc ? 'true' : undefined}
+              onClick={handleClickDoc}>
           <AddIcon />
         </IconButton>
+        <Menu
+            className='moreIcon-sub'
+            id='basic-menu'
+            anchorEl={send}
+            open={openDoc}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <DescriptionIcon color='secondary'/>
+              </ListItemIcon>
+              Document
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <PhotoLibraryIcon color='success'/>
+              </ListItemIcon>
+              Photos & Videos
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <CameraAltIcon sx={{color:pink[500]}}/>
+              </ListItemIcon>
+              Photos & Videos
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <PersonIcon sx={{ color: purple[500] }}/>
+              </ListItemIcon>
+              Contact
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <PollIcon sx={{color:yellow[500],}}/>
+              </ListItemIcon>
+              Poll
+            </MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+              <ListItemIcon>
+              <LabelIcon color='primary'/>
+              </ListItemIcon>
+              Label
+            </MenuItem>
+          
+          </Menu>
 
         <InputBase
           size='small'

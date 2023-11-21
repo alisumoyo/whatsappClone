@@ -15,15 +15,15 @@ const Layout = () => {
         sx={{
           width: '100vw',
           height: '100vh',
-          bgcolor: '#f3f3f3',
+          bgcolor: '#8696a0',
           overflow: 'hidden',
         }}
       >
-        <Box sx={{ height: '10%', width: '100vw', bgcolor: '#00a884' }}></Box>
+        <Box sx={{ height: '20%', width: '100vw', bgcolor: '#00a884' }}></Box>
       </Box>
       <Box
         sx={{
-          width: '95vw',
+          width: '98vw',
           height: '95vh',
           position: 'fixed',
           top: '50%',
@@ -70,18 +70,15 @@ const Layout = () => {
         <Box
           sx={{
             height: '100%',
-            bgcolor: '#e9edef',
+            bgcolor: '#f0f2f5',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            bgcolor: '#e9edef',
-            // bgcolor: '#333',
-            // width: '900px',
             flexGrow:'1'
           }}
         >
-          {/* <ChatBg /> */}
-          <Chat />
+          <ChatBg />
+          {/* <Chat /> */}
         </Box>
       </Box>
     </>

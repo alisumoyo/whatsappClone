@@ -1,12 +1,20 @@
+'use client';
 import React from 'react';
-import { Box, Button } from '@mui/material';
+import { useState } from 'react';
+import { Box, IconButton, Menu, MenuItem } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import PushPinTwoToneIcon from '@mui/icons-material/PushPinTwoTone';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const UserInfo = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <>
       <Box
@@ -19,8 +27,8 @@ const UserInfo = () => {
           minHeight: '54px',
           cursor: 'pointer',
           '&:hover': {
-            transition: 'all 0.3s ease',
-            bgcolor: '#e9edef',
+            transition: 'all 0.4s',
+            bgcolor: '#f0f2f5',
           },
           borderTop: '1px solid #e9edef',
         }}
@@ -39,7 +47,6 @@ const UserInfo = () => {
           <Box sx={{ flexGrow: '1' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <p>Name :</p>
-              {/* <PushPinTwoToneIcon sx={{ marginRight: '10px' }} />npm e */}
             </Box>
           </Box>
           <Box
@@ -50,8 +57,43 @@ const UserInfo = () => {
             }}
           >
             <Typography variant='p'>Message</Typography>
-            <ExpandMoreIcon sx={{ marginRight: '10px' }} />
-            {/* <MoreVertIcon /> */}
+            <IconButton
+              sx={{ marginRight: '10px' }}
+              id='basic-button'
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup='true'
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+            <Menu
+              className='moreIcon-sub'
+              id='basic-menu'
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem className='moreIcon-sub' onClick={handleClose}>
+                Archieve Chats
+              </MenuItem>
+              <MenuItem className='moreIcon-sub' onClick={handleClose}>
+                Mute notifications
+              </MenuItem>
+              <MenuItem className='moreIcon-sub' onClick={handleClose}>
+                Exit group
+              </MenuItem>
+              <MenuItem className='moreIcon-sub' onClick={handleClose}>
+               Pin chat
+              </MenuItem>
+              <MenuItem className='moreIcon-sub' onClick={handleClose}>
+                Mark as read
+              </MenuItem>
+             
+            </Menu>
           </Box>
         </Box>
       </Box>
