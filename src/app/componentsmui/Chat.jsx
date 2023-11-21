@@ -6,13 +6,15 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
-import chatbg from '../assets/chatbg.jpg';
+// import chatbg from '../assets/chatbg.jpg';
 import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 
 const Chat = () => {
+  const chatbg =
+    'https://ghostcode.in/content/images/wordpress/2016/09/super_hero_whatsapp_background_by_x_ama-d8fr7iz.jpg';
   return (
     <>
       <Box
@@ -55,12 +57,46 @@ const Chat = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ flex: '1' }}>
-        {/* <Image
-          src={chatbg}
-          alt='chatbg'
-          style={{ width: '900px', height: '500px' }}
-        /> */}
+      <Box
+        sx={{
+          flexGrow: '1',
+          height: 'auto',
+          backgroundImage: `url(${chatbg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          overflowY:'auto'
+        }}
+      >
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
+        <h1>HELLO</h1>
       </Box>
       <Box
         sx={{

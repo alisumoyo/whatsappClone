@@ -49,18 +49,8 @@ const Layout = () => {
           <Box
             sx={{
               flexGrow: '1',
-              overflowY: 'scroll',
-              '&:hover': {
-                opacity: 1,
-              },
-              '&::-webkit-scrollbar': {
-                width: '5px',
-              },
-              '&::-webkit-scrollbar-thumb': {
-                backgroundColor: '#b3b7b9',
-                opacity: 0,
-                borderRadius: '20px',
-              },
+              overflowY: 'auto',
+          
             }}
           >
             <UserInfo />
@@ -85,8 +75,9 @@ const Layout = () => {
             flexDirection: 'column',
             justifyContent: 'center',
             bgcolor: '#e9edef',
-            bgcolor: '#333',
-            width: '900px',
+            // bgcolor: '#333',
+            // width: '900px',
+            flexGrow:'1'
           }}
         >
           {/* <ChatBg /> */}
