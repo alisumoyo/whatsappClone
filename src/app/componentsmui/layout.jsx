@@ -1,14 +1,22 @@
+'use client';
 import { Box } from '@mui/material';
-
-import React from 'react';
+import React, { useState } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
-import chatbg from '../assets/chatbg.jpg';
+// import chatbg from '../assets/chatbg.jpg';
 
 const Layout = () => {
+  const [cliked, setCliked] = useState(false);
+  const [data, setData] = useState(null);
+
+  const userClicked = () => {
+    // setCliked(true);
+    setData({ name: 'test' });
+  };
+
   return (
     <>
       <Box
@@ -50,21 +58,18 @@ const Layout = () => {
             sx={{
               flexGrow: '1',
               overflowY: 'auto',
-          
             }}
           >
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
-            <UserInfo />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
+            <UserInfo onClick={userClicked} />
           </Box>
         </Box>
         <Box
@@ -74,11 +79,10 @@ const Layout = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            flexGrow:'1'
+            flexGrow: '1',
           }}
         >
-          <ChatBg />
-          {/* <Chat /> */}
+          {data ? <Chat /> : <ChatBg />}
         </Box>
       </Box>
     </>

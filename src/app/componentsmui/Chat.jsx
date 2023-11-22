@@ -29,7 +29,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import PollIcon from '@mui/icons-material/Poll';
 import LabelIcon from '@mui/icons-material/Label';
-import {  pink ,purple,yellow} from '@mui/material/colors';
+import { pink, purple, yellow } from '@mui/material/colors';
 const Chat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
@@ -143,7 +143,7 @@ const Chat = () => {
       <Box
         sx={{
           flexGrow: '1',
-          display:'flex',
+          display: 'flex',
           width: '100%',
           height: 'auto',
           backgroundImage: `url(${chatbg})`,
@@ -154,7 +154,6 @@ const Chat = () => {
         }}
       >
         <h1>HELLO</h1>
-       
       </Box>
       <Box
         sx={{
@@ -169,61 +168,63 @@ const Chat = () => {
         <IconButton>
           <SentimentSatisfiedAltOutlinedIcon />
         </IconButton>
-        <IconButton  id='basic-button'
-              aria-controls={openDoc ? 'basic-menu' : undefined}
-              aria-haspopup='true'
-              aria-expanded={openDoc ? 'true' : undefined}
-              onClick={handleClickDoc}>
+        <IconButton
+          id='basic-button'
+          aria-controls={openDoc ? 'basic-menu' : undefined}
+          aria-haspopup='true'
+          aria-expanded={openDoc ? 'true' : undefined}
+          onClick={handleClickDoc}
+        >
           <AddIcon />
         </IconButton>
         <Menu
-            className='moreIcon-sub'
-            id='basic-menu'
-            anchorEl={send}
-            open={openDoc}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <DescriptionIcon color='secondary'/>
-              </ListItemIcon>
-              Document
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <PhotoLibraryIcon color='success'/>
-              </ListItemIcon>
-              Photos & Videos
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <CameraAltIcon sx={{color:pink[500]}}/>
-              </ListItemIcon>
-              Photos & Videos
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <PersonIcon sx={{ color: purple[500] }}/>
-              </ListItemIcon>
-              Contact
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <PollIcon sx={{color:yellow[500],}}/>
-              </ListItemIcon>
-              Poll
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              <ListItemIcon>
-              <LabelIcon color='primary'/>
-              </ListItemIcon>
-              Label
-            </MenuItem>
-          
-          </Menu>
+          // sx={{ top: '344px', left: '413px' }}
+          className='moreIcon-sub'
+          id='basic-menu'
+          anchorEl={send}
+          open={openDoc}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <DescriptionIcon color='secondary' />
+            </ListItemIcon>
+            Document
+          </MenuItem>
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <PhotoLibraryIcon color='success' />
+            </ListItemIcon>
+            Photos & Videos
+          </MenuItem>
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <CameraAltIcon sx={{ color: pink[500] }} />
+            </ListItemIcon>
+            Photos & Videos
+          </MenuItem>
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <PersonIcon sx={{ color: purple[500] }} />
+            </ListItemIcon>
+            Contact
+          </MenuItem>
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <PollIcon sx={{ color: yellow[500] }} />
+            </ListItemIcon>
+            Poll
+          </MenuItem>
+          <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <ListItemIcon>
+              <LabelIcon color='primary' />
+            </ListItemIcon>
+            Label
+          </MenuItem>
+        </Menu>
 
         <InputBase
           size='small'

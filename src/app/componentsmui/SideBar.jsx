@@ -7,7 +7,7 @@ import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined';
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
-import { IconButton, Tooltip, Menu, Button, MenuItem, Divider } from '@mui/material';
+import { IconButton, Tooltip, Menu, Button, MenuItem, Divider, Avatar } from '@mui/material';
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 const Sidebar = () => {
@@ -26,14 +26,15 @@ const Sidebar = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '8px 20px ',
+          padding: '8px 16px ',
           color: '#54656f',
           bgcolor: '#f0f2f5',
           minHeight: '54px',
         }}
       >
         <Box>
-          <AccountCircleOutlinedIcon fontSize='large' />
+          <Avatar/>
+          {/* <AccountCircleOutlinedIcon fontSize='large' /> */}
         </Box>
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>

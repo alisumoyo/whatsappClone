@@ -9,6 +9,7 @@ import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 const ChatBg = () => {
+ 
   return (
     <>
     <Box sx={{display:'flex',justifyContent:'center'}}>

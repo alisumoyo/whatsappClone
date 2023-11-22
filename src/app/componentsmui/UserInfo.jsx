@@ -6,7 +6,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const UserInfo = () => {
+const UserInfo = ({onClick}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -17,7 +17,7 @@ const UserInfo = () => {
   };
   return (
     <>
-      <Box
+      <Box onClick={onClick}
         sx={{
           bgcolor: '#fff',
           color: '#3b4a54',
