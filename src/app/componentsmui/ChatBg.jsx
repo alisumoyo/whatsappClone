@@ -17,7 +17,7 @@ const ChatBg = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          bgcolor: '#e9edef',
+          bgcolor: '#f0f2f5',
           padding: '10px 20px',
           width: '540px',
           height: '400px',

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useState } from 'react';
-import { Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Avatar, Box, IconButton, Menu, MenuItem } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -18,27 +18,28 @@ const UserInfo = () => {
   return (
     <>
       <Box
-        className='user_info'
         sx={{
           bgcolor: '#fff',
           color: '#3b4a54',
+          color:'#111b21',
           display: 'flex',
           alignItems: 'center',
-          minHeight: '54px',
+          minHeight: '50px',
           cursor: 'pointer',
+          borderTop: '1px solid #e9edef',
           '&:hover': {
             transition: 'all 0.4s',
             bgcolor: '#f0f2f5',
           },
-          borderTop: '1px solid #e9edef',
         }}
       >
-        <Box sx={{ padding: '12px 16px' }}>
-          <AccountCircleOutlinedIcon fontSize='large' />
+        <Box sx={{ padding: '8px 16px' }}>
+        <Avatar alt='User' src='' />
+          {/* <AccountCircleOutlinedIcon fontSize='large' /> */}
         </Box>
         <Box
           sx={{
-            display: 'block',
+            display: 'flex',
             justifyContent: 'center',
             width: '100%',
             padding: '3px',
@@ -46,28 +47,19 @@ const UserInfo = () => {
         >
           <Box sx={{ flexGrow: '1' }}>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <p>Name :</p>
+              <Typography variant='p'>Name :</Typography>
+              <Typography variant="p" sx={{color:'#667781',fontSize:'12px'}}>12/3/2023</Typography>
             </Box>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              overflow: 'hidden',
-            }}
-          >
-            <Typography variant='p'>Message</Typography>
-            <IconButton
-              sx={{ marginRight: '10px' }}
-              id='basic-button'
+            <Box sx={{ color:'#667781',fontSize:'12px',display: 'flex', justifyContent: 'space-between',alignItems:'center' }}>
+          <Typography variant='p'>Message</Typography>
+          <ExpandMoreIcon  id='basic-button'
               aria-controls={open ? 'basic-menu' : undefined}
               aria-haspopup='true'
               aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-            <Menu
+              onClick={handleClick}/>
+              </Box>
+          </Box>
+          <Menu
               className='moreIcon-sub'
               id='basic-menu'
               anchorEl={anchorEl}
@@ -94,7 +86,9 @@ const UserInfo = () => {
               </MenuItem>
              
             </Menu>
-          </Box>
+        
+              
+            
         </Box>
       </Box>
     </>

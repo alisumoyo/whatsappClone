@@ -63,7 +63,7 @@ const Chat = () => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Avatar alt='User' src='/static/images/avatar/1.jpg' />
+          <Avatar alt='User' src='' />
           <Box sx={{ fontSize: '14px', color: '#111b21' }}>
             <Typography variant='h6'>username</Typography>
             <Typography variant='p'>
