@@ -1,20 +1,20 @@
 'use client';
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
-// import chatbg from '../assets/chatbg.jpg';
+import { DataContext } from '@/Contexts/MyContextProvider';
 
 const Layout = () => {
-  const [cliked, setCliked] = useState(false);
-  const [data, setData] = useState(null);
+  const {data,setData}=useContext(DataContext)
+
 
   const userClicked = () => {
-    // setCliked(true);
-    setData({ name: 'test' });
+    setData({ name: 'Whatsapp' });
+    console.log('DATA')
   };
 
   return (

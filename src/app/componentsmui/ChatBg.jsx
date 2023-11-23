@@ -9,83 +9,101 @@ import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 const ChatBg = () => {
- 
   return (
     <>
-    <Box sx={{display:'flex',justifyContent:'center'}}>
-      <Card
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: '#f0f2f5',
-          padding: '10px 20px',
-          width: '540px',
-          height: '400px',
-          border: 'none',
-          color: '#41525d',
-          border: 'none',
-          boxShadow: 'none',
-        }}
-      >
-        <CardContent
-          className='card_content'
-          sx={
-            {
-              // display: 'felx',
-              // justifyContent: 'center',
-              // alignItems: 'center',
-            }
-          }
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Card
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            bgcolor: '#f0f2f5',
+            padding: '10px 20px',
+            width: '540px',
+            height: '400px',
+            border: 'none',
+            color: '#41525d',
+            border: 'none',
+            boxShadow: 'none',
+          }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginBottom: '20px',
-              fontWeight: 'thin',
-            }}
+          <CardContent
+            className='card_content'
+            sx={
+              {
+                // display: 'felx',
+                // justifyContent: 'center',
+                // alignItems: 'center',
+              }
+            }
           >
-            <Image src={bgImg} alt='bgImg' width={320} height={188} />
-          </Box>
-          <Box sx={{ margin: '13px 0px' }}>
-            <Typography
-              variant='h5'
-              sx={{ display: 'flex', justifyContent: 'center', margin: '13px' }}
-            >
-              Download WhatsApp for Windows
-            </Typography>
-            <Typography
-              variant='p'
+            <Box
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
-                textAlign: 'center',
+                alignItems: 'center',
+                marginBottom: '20px',
+                fontWeight: 'thin',
               }}
             >
-              Make calls, share your screen and get a faster experience when you
-              download the Windows app.
-            </Typography>
-
-            <Button variant='outlined' className='btn'>
-              Get the app
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '550px',
-          color: '#8696a0',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <LockIcon />
-        <span>Your personal messages are end-to-end encrypted</span>
-      </Box>
+              <Image src={bgImg} alt='bgImg' width={320} height={188} />
+            </Box>
+            <Box sx={{ margin: '13px 0px' }}>
+              <Typography
+                variant='h5'
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  margin: '13px',
+                }}
+              >
+                Download WhatsApp for Windows
+              </Typography>
+              <Typography
+                variant='p'
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                Make calls, share your screen and get a faster experience when
+                you download the Windows app.
+              </Typography>
+              <Box>
+                <Button
+                  variant='contained'
+                  sx={{
+                    display: 'flex',
+                    margin: '15px auto',
+                    color: '#fff',
+                    borderRadius: '25px',
+                    backgroundColor: '#008069',
+                    '&hover': {
+                      backgroundColor: '#045849',
+                    },
+                  }}
+                >
+                  Get the app
+                </Button>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '550px',
+            color: '#8696a0',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <LockIcon />
+          <Typography variant='span'>
+            Your personal messages are end-to-end encrypted
+          </Typography>
+        </Box>
       </Box>
     </>
   );

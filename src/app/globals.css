@@ -19,15 +19,4 @@
 .moreIcon-sub {
   font-size: 14.5px;
   color: #3b4a54;
-  padding-right: 58px;
-  padding-left: 24px;
-}
-.btn {
-  display: flex;
-  margin: 15px auto;
-  color: #fff;
-  background-color: #008069;
-}
-.btn:hover {
-  background-color: #045849;
 }

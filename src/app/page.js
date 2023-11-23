@@ -1,9 +1,12 @@
+import MyContextProvider from '@/Contexts/MyContextProvider';
 import Layout from './componentsmui/layout';
 
 export default function Home() {
   return (
     <>
-      <Layout />
+      <MyContextProvider>
+        <Layout />
+      </MyContextProvider>
     </>
   );
 }

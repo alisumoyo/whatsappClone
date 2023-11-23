@@ -153,7 +153,7 @@ const Chat = () => {
           overflowY: 'auto',
         }}
       >
-        <h1>HELLO</h1>
+        <Typography variant='p'>HELLO</Typography>
       </Box>
       <Box
         sx={{
@@ -175,10 +175,23 @@ const Chat = () => {
           aria-expanded={openDoc ? 'true' : undefined}
           onClick={handleClickDoc}
         >
-          <AddIcon />
+          <AddIcon
+            sx={
+              openDoc
+                ? { transform: 'rotate(135deg)', transition: 'all 0.3s' }
+                : { transition: 'all 0.3s' }
+            }
+          />
         </IconButton>
         <Menu
-          // sx={{ top: '344px', left: '413px' }}
+          sx={{
+            '.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper': {
+              borderRadius: ' 16px',
+              bottom: '75px !important',
+              left: '480px !important',
+              top: 'unset !important',
+            },
+          }}
           className='moreIcon-sub'
           id='basic-menu'
           anchorEl={send}
