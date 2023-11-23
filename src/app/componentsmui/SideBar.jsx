@@ -19,6 +19,9 @@ const Sidebar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const openSettings=()=>{
+    console.log('Settings');
+  }
   return (
     <>
       <Box
@@ -80,7 +83,7 @@ const Sidebar = () => {
             <MenuItem className='moreIcon-sub' onClick={handleClose}>New commuinty</MenuItem>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>Starred messages</MenuItem>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>Select chats</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>Settings</MenuItem>
+            <MenuItem className='moreIcon-sub' onClick={openSettings}>Settings</MenuItem>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>Log out</MenuItem>
             <Divider/>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>Get Whatsapp for Windows</MenuItem>

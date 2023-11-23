@@ -7,6 +7,7 @@ import SearchField from './SearchField';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { DataContext } from '@/app/Contexts/MyContextProvider';
+import SettingsBar from './SettingsBar';
 
 const Layout = () => {
   const {data,setData}=useContext(DataContext)
@@ -42,7 +43,7 @@ const Layout = () => {
         }}
       >
         {/* sidebar section users */}
-        <Box
+        {/* <Box
           sx={{
             width: '400px',
             height: '100%',
@@ -72,8 +73,8 @@ const Layout = () => {
             <UserInfo onClick={userClicked} />
             <UserInfo onClick={userClicked} />
           </Box>
-        </Box>
-
+        </Box> */}
+<SettingsBar/>
 {/* Chat sections */}
         <Box
           sx={{
