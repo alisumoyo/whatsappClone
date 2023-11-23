@@ -27,16 +27,7 @@ const ChatBg = () => {
             boxShadow: 'none',
           }}
         >
-          <CardContent
-            className='card_content'
-            sx={
-              {
-                // display: 'felx',
-                // justifyContent: 'center',
-                // alignItems: 'center',
-              }
-            }
-          >
+          <CardContent>
             <Box
               sx={{
                 display: 'flex',

@@ -6,7 +6,7 @@ import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
-import { DataContext } from '@/Contexts/MyContextProvider';
+import { DataContext } from '@/app/Contexts/MyContextProvider';
 
 const Layout = () => {
   const {data,setData}=useContext(DataContext)
