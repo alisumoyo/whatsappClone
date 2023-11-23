@@ -41,6 +41,7 @@ const Layout = () => {
           display: 'flex',
         }}
       >
+        {/* sidebar section users */}
         <Box
           sx={{
             width: '400px',
@@ -72,6 +73,8 @@ const Layout = () => {
             <UserInfo onClick={userClicked} />
           </Box>
         </Box>
+
+{/* Chat sections */}
         <Box
           sx={{
             height: '100%',

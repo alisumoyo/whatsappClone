@@ -31,7 +31,6 @@ import PollIcon from '@mui/icons-material/Poll';
 import LabelIcon from '@mui/icons-material/Label';
 import { pink, purple, yellow } from '@mui/material/colors';
 
-
 const Chat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
@@ -65,7 +64,10 @@ const Chat = () => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Avatar alt='User' src='' />
+          <Avatar
+            alt='User'
+            src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+          />
           <Box sx={{ fontSize: '14px', color: '#111b21' }}>
             <Typography variant='h6'>username</Typography>
             <Typography variant='p'>
@@ -136,7 +138,7 @@ const Chat = () => {
               Report
             </MenuItem>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              BLock
+              Block
             </MenuItem>
           </Menu>
         </Box>
