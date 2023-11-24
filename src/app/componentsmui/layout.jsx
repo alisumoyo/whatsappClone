@@ -41,42 +41,63 @@ const Layout = () => {
           display: 'flex',
         }}
       >
-        {/*sidebar section users */}
-        {openSettings ? (
-          <SettingsBar />
-        ) : (
-          <Box
-            sx={{
-              width: '400px',
-              height: '100%',
-              bgcolor: '#f0f2f6',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <Box>
-              <Sidebar />
-              <SearchField />
-            </Box>
+        {/* SIDE BAR LAYOUT & RENDERING COMPONENETS */}
+        <Box
+          sx={{
+            width: '400px',
+            height: '100%',
+            bgcolor: '#f0f2f6',
+            display: 'flex',
+            flexDirection: 'column',
+            transition: 'all 0.5s ease-in-out',
+          }}
+        >
+          {/*SIDEBAR MAIN START */}
+          {openSettings ? (
+            <SettingsBar />
+            
+          ) : (
             <Box
               sx={{
-                flexGrow: '1',
-                overflowY: 'auto',
+                height: '100%',
+                bgcolor: '#f0f2f6',
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
+              <Box>
+                <Sidebar />
+                <SearchField />
+              </Box>
+              <Box
+                sx={{
+                  height: '100%',
+                  overflow: 'auto',
+                  flexGrow: '1',
+                }}
+              >
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+                <UserInfo onClick={userClicked} />
+              </Box>
             </Box>
-          </Box>
-        )}
+          )}
+
+          {/*SIDEBAR MAIN END */}
+          {/* SIDEBAR SETTINGS START*/}
+          {/* SIDEBAR SETTINGS END*/}
+        </Box>
         {/* Chat sections */}
         <Box
           sx={{

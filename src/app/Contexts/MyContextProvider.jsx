@@ -6,7 +6,7 @@ export const DataContext = createContext('');
 
 const MyContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
-  const [openSettings,setOpenSettings]=useState(false)
+  const [openSettings,setOpenSettings]=useState(true)
 
   return (
     <>
