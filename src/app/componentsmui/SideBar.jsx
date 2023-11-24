@@ -86,6 +86,14 @@ const Sidebar = () => {
             </IconButton>
           </Tooltip>
           <Menu
+            sx={{
+              '.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper': {
+                borderRadius: ' 16px',
+                // bottom: '75px !important',
+                left: '190px !important',
+                top: '70px !important',
+              },
+            }}
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
