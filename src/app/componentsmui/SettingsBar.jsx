@@ -19,6 +19,51 @@ import ThemeCard from './ThemeCard';
 
 const SettingsBar = () => {
   const { setOpenSettings } = useContext(DataContext);
+  const SideBarIconBox = [
+    {
+      icon: <NotificationsIcon fontSize='small' />,
+      text: 'Notifications',
+      method: () => alert('hello'),
+    },
+    {
+      icon: <LockIcon fontSize='small' />,
+      text: 'Privacy',
+    },
+    {
+      icon: <SecurityIcon fontSize='small' />,
+      text: 'Security',
+    },
+    {
+      content: <ThemeCard />,
+      button: (
+        <SettingsSideBox
+          icon={<Brightness6Icon fontSize='small' />}
+          text='Theme'
+        />
+      ),
+    },
+    {
+      icon: <DownloadIcon fontSize='small' />,
+      text: 'Media auto-download',
+    },
+    {
+      icon: <DescriptionIcon fontSize='small' />,
+      text: 'Request account info',
+    },
+
+    {
+      icon: <KeyboardIcon fontSize='small' />,
+      text: 'Keyboard shortcuts',
+    },
+    {
+      icon: <HelpIcon fontSize='small' />,
+      text: 'Help',
+    },
+    {
+      icon: <LogoutIcon fontSize='small' />,
+      text: 'Logout',
+    },
+  ];
 
   const closeSettings = () => {
     setOpenSettings(false);
@@ -44,39 +89,24 @@ const SettingsBar = () => {
       <SearchField />
       <Box sx={{ height: '100%', overflow: 'auto', flexGrow: '1' }}>
         <ProfileSideBarBox />
-        <SettingsSideBox
-          icon={<NotificationsIcon fontSize='small' />}
-          text='Notifications'
-        />
-        <SettingsSideBox icon={<LockIcon fontSize='small' />} text='Privacy' />
-        <SettingsSideBox
-          icon={<SecurityIcon fontSize='small' />}
-          text='Security'
-        />
-
-        <DialogBox
-          button={
-            <SettingsSideBox
-              icon={<Brightness6Icon fontSize='small' />}
-              text='Theme'
-            />
-          }
-          content={<ThemeCard />}
-        />
-        <SettingsSideBox
-          icon={<DownloadIcon fontSize='small' />}
-          text='Media auto-download'
-        />
-        <SettingsSideBox
-          icon={<DescriptionIcon fontSize='small' />}
-          text='Request account info'
-        />
-        <SettingsSideBox
-          icon={<KeyboardIcon fontSize='small' />}
-          text='Keyboard shortcuts'
-        />
-        <SettingsSideBox icon={<HelpIcon fontSize='small' />} text='Help' />
-        <SettingsSideBox icon={<LogoutIcon fontSize='small' />} text='Logout' />
+        {SideBarIconBox.map((item, index) => (
+          <>
+            {item.content && item.button ? (
+              <DialogBox
+                key={index}
+                button={item.button}
+                content={item.content}
+              />
+            ) : (
+              <SettingsSideBox
+                key={index}
+                icon={item.icon}
+                text={item.text}
+                onClick={item.method}
+              />
+            )}
+          </>
+        ))}
       </Box>
     </>
   );

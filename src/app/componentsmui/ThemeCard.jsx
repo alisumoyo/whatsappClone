@@ -10,15 +10,11 @@ import FormLabel from '@mui/material/FormLabel';
 
 const ThemeCard = () => {
   return (
-    <Card sx={{ minWidth: 500, color: '#000' }}>
+    <Card sx={{ minWidth: 500, color: '#3b4a54', padding: '30px' }}>
       <CardContent>
         <FormControl>
-          <FormLabel id='demo-radio-buttons-group-label'>Theme</FormLabel>
-          <RadioGroup
-            aria-labelledby='demo-radio-buttons-group-label'
-            defaultValue='light'
-            name='radio-buttons-group'
-          >
+          <FormLabel>Theme</FormLabel>
+          <RadioGroup defaultValue='light'>
             <FormControlLabel value='light' control={<Radio />} label='Light' />
             <FormControlLabel value='dark' control={<Radio />} label='Dark' />
             <FormControlLabel
@@ -29,11 +25,23 @@ const ThemeCard = () => {
           </RadioGroup>
         </FormControl>
       </CardContent>
-      <CardActions sx={{display:'flex',justifyContent:'space-between'}}>
-        <Button variant='outlined' color='error'>
+      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button
+          variant='text'
+          sx={{ bgcolor: '#fff', color: '#008069', borderRadius: '25px' }}
+        >
           Cancel
         </Button>
-        <Button variant='contained' color='success'>
+        <Button
+          variant='contained'
+          sx={{
+            bgcolor: '#008069',
+            borderRadius: '25px',
+            '&:hover': {
+              bgcolor: '#008069',
+            },
+          }}
+        >
           OK
         </Button>
       </CardActions>
