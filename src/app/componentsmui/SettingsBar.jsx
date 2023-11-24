@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useContext } from 'react';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchField from './SearchField';
 import SettingsSideBox from './SettingsSideBox';
@@ -14,8 +14,12 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ProfileSideBarBox from './ProfileSideBarBox';
+import { DataContext } from '../Contexts/MyContextProvider';
 
 const SettingsBar = () => {
+  const { setOpenSettings } = useContext(DataContext);
+
+  // const ={{icon:<LogoutIcon/>,text:'logout'}}
 
   //  "Keyboard shortcuts"
   //  "Request account info"
@@ -27,7 +31,9 @@ const SettingsBar = () => {
   //  "Theme"
   //  "Security"
   //  "Notifications"
-
+  const closeSettings = () => {
+    setOpenSettings(false);
+  };
   return (
     <>
       <Box
@@ -50,12 +56,14 @@ const SettingsBar = () => {
             padding: '25px 20px',
           }}
         >
-            <ProfileSideBarBox/>
-          <ArrowBackIcon />
+          <IconButton onClick={closeSettings}>
+            <ArrowBackIcon />
+          </IconButton>
           <Typography variant='4'>Settings</Typography>
         </Box>
         <SearchField />
-        <Box sx={{ height: '100%', overflow: 'auto' ,flexGrow:'1'}}>
+        <ProfileSideBarBox />
+        <Box sx={{ height: '100%', overflow: 'auto', flexGrow: '1' }}>
           <SettingsSideBox
             icon={<NotificationsIcon fontSize='small' />}
             text='Notifications'
@@ -92,7 +100,6 @@ const SettingsBar = () => {
             icon={<LogoutIcon fontSize='small' />}
             text='Notifications'
           />
-      
         </Box>
       </Box>
     </>

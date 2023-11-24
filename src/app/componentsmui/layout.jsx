@@ -10,12 +10,11 @@ import { DataContext } from '@/app/Contexts/MyContextProvider';
 import SettingsBar from './SettingsBar';
 
 const Layout = () => {
-  const {data,setData}=useContext(DataContext)
-
+  const { data, setData, openSettings } = useContext(DataContext);
 
   const userClicked = () => {
     setData({ name: 'Whatsapp' });
-    console.log('DATA')
+    console.log('DATA');
   };
 
   return (
@@ -42,40 +41,43 @@ const Layout = () => {
           display: 'flex',
         }}
       >
-        {/* sidebar section users */}
-        {/* <Box
-          sx={{
-            width: '400px',
-            height: '100%',
-            bgcolor: '#f0f2f6',
-            display: 'flex',
-            flexDirection: 'column',
-          }}
-        >
-          <Box>
-            <Sidebar />
-            <SearchField />
-          </Box>
+        {/*sidebar section users */}
+        {openSettings ? (
+          <SettingsBar />
+        ) : (
           <Box
             sx={{
-              flexGrow: '1',
-              overflowY: 'auto',
+              width: '400px',
+              height: '100%',
+              bgcolor: '#f0f2f6',
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
-            <UserInfo onClick={userClicked} />
+            <Box>
+              <Sidebar />
+              <SearchField />
+            </Box>
+            <Box
+              sx={{
+                flexGrow: '1',
+                overflowY: 'auto',
+              }}
+            >
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+            </Box>
           </Box>
-        </Box> */}
-<SettingsBar/>
-{/* Chat sections */}
+        )}
+        {/* Chat sections */}
         <Box
           sx={{
             height: '100%',

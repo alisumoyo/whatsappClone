@@ -6,10 +6,11 @@ export const DataContext = createContext('');
 
 const MyContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
+  const [openSettings,setOpenSettings]=useState(false)
 
   return (
     <>
-      <DataContext.Provider value={{ data, setData }}>
+      <DataContext.Provider value={{ data, setData ,openSettings,setOpenSettings}}>
         {children}
       </DataContext.Provider>
     </>
