@@ -14,7 +14,6 @@ const Layout = () => {
 
   const userClicked = () => {
     setData({ name: 'Whatsapp' });
-    console.log('DATA');
   };
 
   return (
@@ -55,7 +54,6 @@ const Layout = () => {
           {/*SIDEBAR MAIN START */}
           {openSettings ? (
             <SettingsBar />
-            
           ) : (
             <Box
               sx={{

@@ -95,7 +95,11 @@ const SignIn = () => {
       </Button>
       <Box>
         <Typography variant='h6'> Already have an account?</Typography>
-        <Link href={'/signup'}>Singup</Link>
+        <Link href={'/signup'}>
+          <Button variant='contained' color='primary' fullWidth>
+            Singup
+          </Button>
+        </Link>
       </Box>
     </Container>
   );

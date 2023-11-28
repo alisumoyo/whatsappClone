@@ -5,8 +5,9 @@ import {
   createUserWithEmailAndPassword,
   auth,
   db,
+  doc,
+  setDoc,
 } from '../firebase/friebaseConfig';
-import { collection, addDoc } from 'firebase/firestore'; // Import Firestore functions
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -17,7 +18,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
-const router = useRouter();
+  const router = useRouter();
   const handleSignup = async () => {
     try {
       if (password !== confirmPassword) {
@@ -32,7 +33,7 @@ const router = useRouter();
       );
       const user = userCredential.user;
 
-      await addDoc(collection(db, 'users'), {
+      await setDoc(doc(db, 'users', user.uid), {
         userId: user.uid,
         name,
         email,
@@ -40,7 +41,7 @@ const router = useRouter();
       });
 
       console.log('User registered successfully:', user);
-      router.push('/signin')
+      router.push('/signin');
     } catch (error) {
       console.error('Error signing up:', error.message);
       setError(error.message);
@@ -148,8 +149,12 @@ const router = useRouter();
         Signup
       </Button>
       <Box>
-        <Typography variant='h6'> Dont have an account?</Typography>
-        <Link href={'/signin'}>Signin</Link>
+        <Typography variant='p'> Dont have an account?</Typography>
+        <Link href={'/signin'}>
+          <Button variant='contained' color='primary' fullWidth>
+            Signin
+          </Button>
+        </Link>
       </Box>
     </Container>
   );

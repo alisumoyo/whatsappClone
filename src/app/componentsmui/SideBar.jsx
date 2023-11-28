@@ -1,11 +1,8 @@
 'use client';
 import Box from '@mui/material/Box';
 import { useContext, useState } from 'react';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined';
 import RadioButtonCheckedOutlinedIcon from '@mui/icons-material/RadioButtonCheckedOutlined';
-import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import {
   IconButton,
@@ -19,9 +16,15 @@ import {
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import { DataContext } from '../Contexts/MyContextProvider';
+import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { Person } from '@mui/icons-material';
+import Image from 'next/image';
 
 const Sidebar = () => {
-  const { openSettings, setOpenSettings } = useContext(DataContext);
+  const { user } = useContext(getLoggedUser);
+  const [profileImg, setProfileImg] = useState(null);
+
+  const { setOpenSettings } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const open = Boolean(anchorEl);
@@ -33,8 +36,12 @@ const Sidebar = () => {
   };
   const openSettingsClick = () => {
     setOpenSettings(true);
-    console.log('Settings');
   };
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    setProfileImg(file);
+  };
+
   return (
     <>
       <Box
@@ -49,9 +56,20 @@ const Sidebar = () => {
         }}
       >
         <Box>
-          <Avatar />
-          {/* <AccountCircleOutlinedIcon fontSize='large' /> */}
+          <Avatar>
+           
+          </Avatar>
+          <label variant='text' sx={{ width: 32, height: 32 }}>
+            <Person />
+            <input
+              type='file'
+              accept='image/*'
+              onChange={handleChange}
+              style={{ display: 'none' }}
+            />
+          </label>
         </Box>
+        {/* {user?.email} */}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>
             <IconButton>

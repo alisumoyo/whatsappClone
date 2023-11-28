@@ -24,6 +24,7 @@ const SettingsBar = () => {
       icon: <NotificationsIcon fontSize='small' />,
       text: 'Notifications',
       method: () => alert('hello'),
+      
     },
     {
       icon: <LockIcon fontSize='small' />,
