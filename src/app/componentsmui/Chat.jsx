@@ -5,7 +5,6 @@ import {
   IconButton,
   InputBase,
   Tooltip,
-  Divider,
   Typography,
   MenuItem,
   Menu,
@@ -20,7 +19,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 // import chatbg from '../assets/chatbg.jpg';
 import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import Image from 'next/image';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -145,22 +143,22 @@ const Chat = () => {
       </Box>
 
       <Box
-  sx={{
-    flexGrow: '1',
-    display: 'flex',
-    width: '100%',
-    height: 'auto',
-    backgroundImage: `url(${chatbg})`,
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    overflowY: 'auto',
-    width: '100%', // Set the desired width
-    height: '300px', // Set the desired height
-  }}
->
-  <Typography variant='p'>HELLO</Typography>
-</Box>
+        sx={{
+          flexGrow: '1',
+          display: 'flex',
+          width: '100%',
+          height: 'auto',
+          backgroundImage: `url(${chatbg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          overflowY: 'auto',
+          width: '100%', // Set the desired width
+          height: '300px', // Set the desired height
+        }}
+      >
+        <Typography variant='p'>HELLO</Typography>
+      </Box>
       <Box
         sx={{
           display: 'flex',

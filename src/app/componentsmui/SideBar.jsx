@@ -17,16 +17,31 @@ import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import { DataContext } from '../Contexts/MyContextProvider';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
-import { Person } from '@mui/icons-material';
-import Image from 'next/image';
+import {
+  ref,
+  storage,
+  uploadBytes,
+  auth,
+  signOut,
+} from '../firebase/friebaseConfig';
+import { useRouter } from 'next/router';
 
 const Sidebar = () => {
+  const router = useRouter();
   const { user } = useContext(getLoggedUser);
-  const [profileImg, setProfileImg] = useState(null);
 
   const { setOpenSettings } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('SignOut Successfull');
+        router.push('signin');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,10 +51,6 @@ const Sidebar = () => {
   };
   const openSettingsClick = () => {
     setOpenSettings(true);
-  };
-  const handleChange = (e) => {
-    const file = e.target.files[0];
-    setProfileImg(file);
   };
 
   return (
@@ -56,20 +67,9 @@ const Sidebar = () => {
         }}
       >
         <Box>
-          <Avatar>
-           
-          </Avatar>
-          <label variant='text' sx={{ width: 32, height: 32 }}>
-            <Person />
-            <input
-              type='file'
-              accept='image/*'
-              onChange={handleChange}
-              style={{ display: 'none' }}
-            />
-          </label>
+          <Avatar>AK</Avatar>
         </Box>
-        {/* {user?.email} */}
+        {user?.email}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>
             <IconButton>
@@ -135,7 +135,7 @@ const Sidebar = () => {
             <MenuItem className='moreIcon-sub' onClick={openSettingsClick}>
               Settings
             </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <MenuItem className='moreIcon-sub' onClick={logout}>
               Log out
             </MenuItem>
             <Divider />

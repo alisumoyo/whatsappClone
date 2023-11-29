@@ -78,7 +78,8 @@ const SettingsBar = () => {
           color: '#fff',
           display: 'flex',
           alignItems: 'flex-end',
-          gap: '30px',
+          justifyContent:'flex-start',
+          gap: '20px',
           padding: '25px 20px',
         }}
       >

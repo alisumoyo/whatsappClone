@@ -15,8 +15,7 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // console.log('Authenticated');
-      router.push('/whatsappweb');
+      router.push('/index');
     } catch (error) {
       alert(error);
     }
