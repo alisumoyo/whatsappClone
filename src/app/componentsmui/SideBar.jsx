@@ -25,11 +25,12 @@ import {
   signOut,
 } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Sidebar = () => {
   const router = useRouter();
   const { user } = useContext(getLoggedUser);
-
+  console.log(user);
   const { setOpenSettings } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const logout = () => {
@@ -52,7 +53,7 @@ const Sidebar = () => {
   const openSettingsClick = () => {
     setOpenSettings(true);
   };
-
+  const userImgFirebase = user?.proImgLink;
   return (
     <>
       <Box
@@ -67,7 +68,7 @@ const Sidebar = () => {
         }}
       >
         <Box>
-          <Avatar>AK</Avatar>
+          <Avatar src={userImgFirebase} />
         </Box>
         {user?.email}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
