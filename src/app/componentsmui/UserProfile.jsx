@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Button, IconButton, Typography, Avatar } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { PersonPinCircleOutlined } from '@mui/icons-material';
-const UserProfile = () => {
+import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { DataContext } from '../Contexts/MyContextProvider';
+
+const UserProfile = ({ sx }) => {
+  const { user } = useContext(getLoggedUser);
+  const { openProfile, setOpenProfile } = useContext(DataContext);
+
   return (
     <>
-      <Box>
+      <Box
+        sx={sx}
+        style={
+          openProfile
+            ? { transform: 'translateX(0%)', bgcolor: '#f0f2f6' }
+            : { transform: 'translateX(-100%)' }
+        }
+      >
         <Box
           sx={{
             height: '108px',
@@ -17,7 +29,10 @@ const UserProfile = () => {
             padding: '0px 20px',
           }}
         >
-          <IconButton sx={{ marginBottom: '16px' }}>
+          <IconButton
+            onClick={() => setOpenProfile(false)}
+            sx={{ marginBottom: '16px' }}
+          >
             <ArrowBackIcon sx={{ color: '#fff' }} />
           </IconButton>
 
@@ -30,74 +45,84 @@ const UserProfile = () => {
             bgcolor: '#f0f2f6',
             display: 'flex',
             alignItems: 'center',
+            justifyContent: 'center',
             cursor: 'pointer',
-            margin: '20px 0px',
+            padding: '20px 0px',
           }}
         >
-          <Box
-            sx={{
-              padding: '0px 25%',
-              width: '100%',
-              '&:hover': {
-                bgcolor: '#fff',
-              },
-            }}
-          >
-            <label htmlFor='avatar-input' sx={{ cursor: 'pointer' }}>
-              <Avatar
-                src=''
-                alt='userProImg'
-                sx={{ width: 180, height: 180 }}
-              />
-              <input
-                id='avatar-input'
-                type='file'
-                accept='image/*'
-                // onChange={handleChange}
-                style={{ display: 'none' }}
-              />
-            </label>
-          </Box>
+          <label htmlFor='avatar-input' sx={{ cursor: 'pointer' }}>
+            <Avatar
+              src={user?.proImgLink}
+              alt='userProImg'
+              sx={{ width: 180, height: 180 }}
+            />
+            <input
+              id='avatar-input'
+              type='file'
+              accept='image/*'
+              // onChange={handleChange}
+              style={{ display: 'none' }}
+            />
+          </label>
         </Box>
 
         <Box>
           <Box
             sx={{
-              minHeight: '78px',
+              minHeight: '66px',
               padding: '14px 30px',
               marginBottom: '10px',
               bgcolor: '#fff',
             }}
           >
-            <Typography variant='subtitle1'>Your Name</Typography>
-            <Typography variant='subtitle1' flexGrow={1}>
-              AFAQ
+            <Typography
+              variant='subtitle1'
+              sx={{ color: '#008069', fontSize: '12px' }}
+            >
+              Your Name
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              flexGrow={1}
+              sx={{ color: '#3b4a54', fontSize: '14px' }}
+            >
+              {user?.name}
             </Typography>
           </Box>
           <Box
             sx={{
               minHeight: '66px',
               padding: '14px 30px',
-              marginBottom: '10px',
               bgcolor: '#f0f2f6',
             }}
           >
-            <Typography variant='body1'>
+            <Typography
+              variant='body1'
+              sx={{ color: '#667781', fontSize: '0.8rem', lineHeight: '1.4' }}
+            >
               This is not your username or pin. This name will be visible to
               your WhatsApp contacts.
             </Typography>
           </Box>
           <Box
             sx={{
-              minHeight: '78px',
+              minHeight: '66px',
               padding: '14px 30px',
-              marginBottom: '10px',
               bgcolor: '#fff',
             }}
           >
-            <Typography variant='subtitle1'>About</Typography>
-            <Typography variant='subtitle1' flexGrow={1}>
-              Bio Edit Input
+            <Typography
+              variant='subtitle1'
+              sx={{ color: '#008069', fontSize: '12px' }}
+            >
+              About
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              flexGrow={1}
+              sx={{ color: '#3b4a54', fontSize: '14px' }}
+            >
+              {user?.name}
             </Typography>
           </Box>
         </Box>

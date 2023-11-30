@@ -11,10 +11,12 @@ import {
   db,
 } from '../firebase/friebaseConfig'; // Corrected the import path
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { DataContext } from '../Contexts/MyContextProvider';
 
 const ProfileSideBarBox = () => {
   const [profileImg, setProfileImg] = useState(null);
   const { user } = useContext(getLoggedUser);
+  const { setOpenProfile } = useContext(DataContext);
   console.log(user?.proImgLink);
   const handleChange = async (e) => {
     const userImage = e.target.files[0];
@@ -57,6 +59,7 @@ const ProfileSideBarBox = () => {
           bgcolor: '#f0f2f6',
         },
       }}
+      onClick={() => setOpenProfile(true)}
     >
       <Box sx={{ padding: '8px 20px' }}>
         <label

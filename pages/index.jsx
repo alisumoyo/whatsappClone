@@ -1,12 +1,12 @@
-import React from 'react'
+import Landing from '@/app/componentsmui/Landing';
+import React from 'react';
 
 const index = () => {
   return (
-   <>
-   
-   <h1>HELLO WHATSAPP</h1>
-   </>
-  )
-}
+    <>
+      <Landing />
+    </>
+  );
+};
 
-export default index
+export default index;

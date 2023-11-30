@@ -17,21 +17,15 @@ import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import { DataContext } from '../Contexts/MyContextProvider';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
-import {
-  ref,
-  storage,
-  uploadBytes,
-  auth,
-  signOut,
-} from '../firebase/friebaseConfig';
+import { auth, signOut } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 const Sidebar = () => {
   const router = useRouter();
   const { user } = useContext(getLoggedUser);
-  console.log(user);
-  const { setOpenSettings } = useContext(DataContext);
+  const { setOpenSettings, openProfile, setOpenProfile } =
+    useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const logout = () => {
     signOut(auth)
@@ -53,6 +47,7 @@ const Sidebar = () => {
   const openSettingsClick = () => {
     setOpenSettings(true);
   };
+
   const userImgFirebase = user?.proImgLink;
   return (
     <>
@@ -68,7 +63,7 @@ const Sidebar = () => {
         }}
       >
         <Box>
-          <Avatar src={userImgFirebase} />
+          <Avatar src={userImgFirebase} onClick={() => setOpenProfile(true)} />
         </Box>
         {user?.name}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
@@ -117,22 +112,15 @@ const Sidebar = () => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
+            onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              New Group
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              New commuinty
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Starred messages
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Select chats
-            </MenuItem>
+            <MenuItem className='moreIcon-sub'>New Group</MenuItem>
+            <MenuItem className='moreIcon-sub'>New commuinty</MenuItem>
+            <MenuItem className='moreIcon-sub'>Starred messages</MenuItem>
+            <MenuItem className='moreIcon-sub'>Select chats</MenuItem>
             <MenuItem className='moreIcon-sub' onClick={openSettingsClick}>
               Settings
             </MenuItem>
@@ -140,7 +128,7 @@ const Sidebar = () => {
               Log out
             </MenuItem>
             <Divider />
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <MenuItem className='moreIcon-sub'>
               Get Whatsapp for Windows
             </MenuItem>
           </Menu>

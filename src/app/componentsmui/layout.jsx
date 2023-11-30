@@ -11,8 +11,17 @@ import SettingsBar from './SettingsBar';
 import UserProfile from './UserProfile';
 
 const Layout = () => {
-  const { data, setData, openSettings } = useContext(DataContext);
-
+  const { data, setData, openSettings, openProfile } = useContext(DataContext);
+  const menuStyles = {
+    position: 'absolute',
+    bgcolor: '#fff',
+    zIndex: '1000',
+    width: '100%',
+    height: '100%',
+    left: '0',
+    top: '0',
+    transition: 'all 0.3s ease-in-out',
+  };
   const userClicked = () => {
     setData({ name: 'Whatsapp' });
   };
@@ -50,50 +59,48 @@ const Layout = () => {
             display: 'flex',
             flexDirection: 'column',
             transition: 'all 0.5s ease-in-out',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
           {/*SIDEBAR MAIN START */}
-          {openSettings ? (
-            <SettingsBar />
-          ) : (
-            <UserProfile />
-            // <Box
-            //   sx={{
-            //     height: '100%',
-            //     bgcolor: '#f0f2f6',
-            //     display: 'flex',
-            //     flexDirection: 'column',
-            //   }}
-            // >
-            //   <Box>
-            //     <Sidebar />
-            //     <SearchField />
-            //   </Box>
-            //   <Box
-            //     sx={{
-            //       height: '100%',
-            //       overflow: 'auto',
-            //       flexGrow: '1',
-            //     }}
-            //   >
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //     <UserInfo onClick={userClicked} />
-            //   </Box>
-            // </Box>
-          )}
-
+          <SettingsBar sx={menuStyles } />
+          <UserProfile sx={menuStyles} />
+          <Box
+            sx={{
+              height: '100%',
+              bgcolor: '#f0f2f6',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Box>
+              <Sidebar />
+              <SearchField />
+            </Box>
+            <Box
+              sx={{
+                height: '100%',
+                overflow: 'auto',
+                flexGrow: '1',
+              }}
+            >
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+              <UserInfo onClick={userClicked} />
+            </Box>
+          </Box>
           {/*SIDEBAR MAIN END */}
           {/* SIDEBAR SETTINGS START*/}
           {/* SIDEBAR SETTINGS END*/}

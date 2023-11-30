@@ -146,16 +146,15 @@ const Chat = () => {
         sx={{
           flexGrow: '1',
           display: 'flex',
-          flexDirection:'column',
-          width: '100%',
-          height: 'auto',
+          flexDirection: 'column',
+
           backgroundImage: `url(${chatbg})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           overflowY: 'auto',
-          width: '100%', // Set the desired width
-          height: '300px', // Set the desired height
+          width: '100%',
+          height: '300px',
         }}
       >
         <Typography variant='p'>HELLO</Typography>

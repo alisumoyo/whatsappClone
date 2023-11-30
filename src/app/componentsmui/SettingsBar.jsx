@@ -17,8 +17,8 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import DialogBox from './DialogBox';
 import ThemeCard from './ThemeCard';
 
-const SettingsBar = () => {
-  const { setOpenSettings } = useContext(DataContext);
+const SettingsBar = ({sx}) => {
+  const { openSettings,setOpenSettings } = useContext(DataContext);
   const SideBarIconBox = [
     {
       icon: <NotificationsIcon fontSize='small' />,
@@ -69,7 +69,14 @@ const SettingsBar = () => {
     setOpenSettings(false);
   };
   return (
-    <>
+    <Box
+      sx={sx}
+      style={
+        openSettings
+          ? { transform: 'translateX(0%)' }
+          : { transform: 'translateX(-100%)' }
+      }
+    >
       <Box
         sx={{
           height: '108px',
@@ -81,7 +88,7 @@ const SettingsBar = () => {
           padding: '0px 20px',
         }}
       >
-        <IconButton onClick={closeSettings} sx={{ marginBottom: '16px' }}>
+        <IconButton onClick={()=>setOpenSettings(false)} sx={{ marginBottom: '16px' }}>
           <ArrowBackIcon sx={{ color: '#fff' }} />
         </IconButton>
 
@@ -111,7 +118,7 @@ const SettingsBar = () => {
           </>
         ))}
       </Box>
-    </>
+    </Box>
   );
 };
 

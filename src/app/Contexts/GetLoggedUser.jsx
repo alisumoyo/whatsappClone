@@ -23,7 +23,7 @@ const LoggedUser = ({ children }) => {
           (docSnapshot) => {
             if (docSnapshot.exists()) {
               const data = docSnapshot.data();
-              console.log('Document Data:', data);
+              // console.log('Document Data:', data);
               setUser(data);
             } else {
             //   console.log('Document does not exist');
