@@ -8,6 +8,7 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { DataContext } from '@/app/Contexts/MyContextProvider';
 import SettingsBar from './SettingsBar';
+import UserProfile from './UserProfile';
 
 const Layout = () => {
   const { data, setData, openSettings } = useContext(DataContext);
@@ -55,41 +56,42 @@ const Layout = () => {
           {openSettings ? (
             <SettingsBar />
           ) : (
-            <Box
-              sx={{
-                height: '100%',
-                bgcolor: '#f0f2f6',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <Box>
-                <Sidebar />
-                <SearchField />
-              </Box>
-              <Box
-                sx={{
-                  height: '100%',
-                  overflow: 'auto',
-                  flexGrow: '1',
-                }}
-              >
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-                <UserInfo onClick={userClicked} />
-              </Box>
-            </Box>
+            <UserProfile />
+            // <Box
+            //   sx={{
+            //     height: '100%',
+            //     bgcolor: '#f0f2f6',
+            //     display: 'flex',
+            //     flexDirection: 'column',
+            //   }}
+            // >
+            //   <Box>
+            //     <Sidebar />
+            //     <SearchField />
+            //   </Box>
+            //   <Box
+            //     sx={{
+            //       height: '100%',
+            //       overflow: 'auto',
+            //       flexGrow: '1',
+            //     }}
+            //   >
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //     <UserInfo onClick={userClicked} />
+            //   </Box>
+            // </Box>
           )}
 
           {/*SIDEBAR MAIN END */}

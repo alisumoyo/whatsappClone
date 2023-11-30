@@ -24,7 +24,6 @@ const SettingsBar = () => {
       icon: <NotificationsIcon fontSize='small' />,
       text: 'Notifications',
       method: () => alert('hello'),
-      
     },
     {
       icon: <LockIcon fontSize='small' />,
@@ -78,15 +77,17 @@ const SettingsBar = () => {
           color: '#fff',
           display: 'flex',
           alignItems: 'flex-end',
-          justifyContent:'flex-start',
-          gap: '20px',
-          padding: '25px 20px',
+          gap: '10px',
+          padding: '0px 20px',
         }}
       >
-        <IconButton onClick={closeSettings}>
+        <IconButton onClick={closeSettings} sx={{ marginBottom: '16px' }}>
           <ArrowBackIcon sx={{ color: '#fff' }} />
         </IconButton>
-        <Typography variant='4'>Settings</Typography>
+
+        <Typography variant='h6' sx={{ flexGrow: '1', marginBottom: '20px' }}>
+          Settings
+        </Typography>
       </Box>
       <SearchField />
       <Box sx={{ height: '100%', overflow: 'auto', flexGrow: '1' }}>
