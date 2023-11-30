@@ -146,6 +146,7 @@ const Chat = () => {
         sx={{
           flexGrow: '1',
           display: 'flex',
+          flexDirection:'column',
           width: '100%',
           height: 'auto',
           backgroundImage: `url(${chatbg})`,
@@ -157,6 +158,47 @@ const Chat = () => {
           height: '300px', // Set the desired height
         }}
       >
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
+        <Typography variant='p'>HELLO</Typography>
         <Typography variant='p'>HELLO</Typography>
       </Box>
       <Box

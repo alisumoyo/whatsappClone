@@ -15,7 +15,7 @@ import { getLoggedUser } from '../Contexts/GetLoggedUser';
 const ProfileSideBarBox = () => {
   const [profileImg, setProfileImg] = useState(null);
   const { user } = useContext(getLoggedUser);
-  console.log(user.proImgLink);
+  console.log(user?.proImgLink);
   const handleChange = async (e) => {
     const userImage = e.target.files[0];
 
@@ -45,7 +45,7 @@ const ProfileSideBarBox = () => {
     }
   };
   const userImgFirebase = user?.proImgLink;
-  const userName=user?.name;
+  const userName = user?.name;
   return (
     <Box
       sx={{

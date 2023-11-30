@@ -70,7 +70,7 @@ const Sidebar = () => {
         <Box>
           <Avatar src={userImgFirebase} />
         </Box>
-        {user?.email}
+        {user?.name}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>
             <IconButton>
