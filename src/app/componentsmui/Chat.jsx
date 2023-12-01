@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {
   Box,
   IconButton,
@@ -28,8 +28,10 @@ import PersonIcon from '@mui/icons-material/Person';
 import PollIcon from '@mui/icons-material/Poll';
 import LabelIcon from '@mui/icons-material/Label';
 import { pink, purple, yellow } from '@mui/material/colors';
+import { DataContext } from '../Contexts/MyContextProvider';
 
 const Chat = () => {
+  const { setData } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
 
@@ -44,6 +46,9 @@ const Chat = () => {
   const handleClose = () => {
     setAnchorEl(null);
     setSend(null);
+  };
+  const handleCloseChat = () => {
+    setData(null);
   };
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
@@ -117,7 +122,7 @@ const Chat = () => {
             <MenuItem className='moreIcon-sub' onClick={handleClose}>
               Select messages
             </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
+            <MenuItem className='moreIcon-sub' onClick={handleCloseChat}>
               Close chat
             </MenuItem>
             <MenuItem className='moreIcon-sub' onClick={handleClose}>

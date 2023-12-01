@@ -15,7 +15,7 @@ const SignIn = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/index');
+      router.push('/whatsapp');
     } catch (error) {
       alert(error);
     }
@@ -80,23 +80,57 @@ const SignIn = () => {
         variant='outlined'
         onClick={handleSignin}
         sx={{
-          bgcolor: '#1976d2',
+          bgcolor: '#25d366',
+          border: 'none',
           color: '#fff',
-          fontSize: '18px',
+          fontSize: '16px',
           '&:hover': {
-            bgcolor: '#005596',
+            bgcolor: '#0aa884',
             color: '##fff',
             fontWeight: 'bold',
+            outline: 'none',
+            border: 'none',
           },
         }}
       >
         Sign In
       </Button>
-      <Box>
-        <Typography variant='h6'> Already have an account?</Typography>
+      <Box
+        sx={{
+          marginTop: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Typography
+          sx={{
+            padding: '10px 20px',
+            bgcolor: '#25d366',
+            color: '#fff',
+            borderRadius: '4px',
+          }}
+        >
+          Dont have an account?
+        </Typography>
         <Link href={'/signup'}>
-          <Button variant='contained' color='primary' fullWidth>
-            Singup
+          <Button
+            variant='contained'
+            sx={{
+              bgcolor: '#25d366',
+              border: 'none',
+              color: '#fff',
+              fontSize: '16px',
+              '&:hover': {
+                bgcolor: '#0aa884',
+                color: '##fff',
+                fontWeight: 'bold',
+                outline: 'none',
+                border: 'none',
+              },
+            }}
+          >
+            Sing up
           </Button>
         </Link>
       </Box>

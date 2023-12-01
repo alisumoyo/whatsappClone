@@ -136,22 +136,51 @@ const Signup = () => {
         variant='outlined'
         onClick={handleSignup}
         sx={{
-          bgcolor: '#00a884',
+          bgcolor: '#25d366',
+          border: 'none',
           color: '#fff',
-          fontSize: '18px',
+          fontSize: '16px',
           '&:hover': {
             bgcolor: '#0aa884',
             color: '##fff',
             fontWeight: 'bold',
+            outline: 'none',
+            border: 'none',
           },
         }}
       >
         Signup
       </Button>
-      <Box>
-        <Typography variant='p'> Dont have an account?</Typography>
+      <Box
+        sx={{
+          marginTop: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <Typography
+          sx={{ padding: '10px 20px', bgcolor: '#25d366', color: '#fff',borderRadius:"4px" }}
+        >
+          Already have an account?
+        </Typography>
         <Link href={'/signin'}>
-          <Button variant='contained' color='primary' fullWidth>
+          <Button
+            variant='contained'
+            sx={{
+              bgcolor: '#25d366',
+              border: 'none',
+              color: '#fff',
+              fontSize: '16px',
+              '&:hover': {
+                bgcolor: '#0aa884',
+                color: '##fff',
+                fontWeight: 'bold',
+                outline: 'none',
+                border: 'none',
+              },
+            }}
+          >
             Signin
           </Button>
         </Link>

@@ -7,6 +7,7 @@ import Image from 'next/image';
 import whatsappTextLogo from '../assets/whatsappLogo.png';
 // import bgLanding from '../assets/bgLanding.jpg';
 import { PersonAdd, Login } from '@mui/icons-material';
+import Link from 'next/link';
 
 const Landing = () => {
   const bgLanding =
@@ -31,21 +32,17 @@ const Landing = () => {
         <AppBar
           sx={{
             minHeight: '80px',
-            bgcolor: 'transparent',
-            // color: '#1c1e21',
-            color: '#333',
-            background: '#ffffff82',
-            backdropFilter: 'blur(12px)',
+            color: '#fff',
+            background: '#3333339e',
+            backdropFilter: 'blur(16px)',
           }}
         >
           <Toolbar
             sx={{
               display: 'flex',
               justifyContent: 'space-between',
-              alignItems: 'center',
               width: '100%',
-              maxWidth: '1200px',
-              margin: '0 auto',
+              flexGrow: '1',
             }}
           >
             <Image
@@ -54,18 +51,30 @@ const Landing = () => {
               width={130}
               height={30}
             />
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box>
               <Button color='inherit'>Home</Button>
               <Button color='inherit'>Features</Button>
               <Button color='inherit'>Contact</Button>
             </Box>
             <Box>
-              <Button startIcon={<Login />} color='inherit'>
-                Login
-              </Button>
-              <Button endIcon={<PersonAdd />} color='inherit'>
-                Signup
-              </Button>
+              <Link href={'signin'} color='inherit'>
+                <Button
+                  startIcon={<Login />}
+                  color='inherit'
+                  sx={{ color: '#fff' }}
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href={'signup'}>
+                <Button
+                  endIcon={<PersonAdd />}
+                  color='inherit'
+                  sx={{ color: '#fff' }}
+                >
+                  Signup
+                </Button>
+              </Link>
             </Box>
           </Toolbar>
         </AppBar>
@@ -82,11 +91,11 @@ const Landing = () => {
         >
           <Typography
             variant='h4'
-            sx={{ color: '#25d366', marginBottom: '16px' }}
+            sx={{ color: '#25d366',color:'#333', marginBottom: '16px' }}
           >
             WHATSAPP
           </Typography>
-          <Typography variant='h6' sx={{ color: '#fff' }}>
+          <Typography variant='h6' sx={{ color: '#fff', width: '400px' }}>
             Whatsapp helps you connect and share with the people in your life
           </Typography>
         </Container>

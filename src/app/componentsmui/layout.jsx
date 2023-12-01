@@ -28,6 +28,7 @@ const Layout = () => {
 
   return (
     <>
+      {/* START OF LAYOUT */}
       <Box
         sx={{
           width: '100vw',
@@ -63,9 +64,15 @@ const Layout = () => {
             overflow: 'hidden',
           }}
         >
-          {/*SIDEBAR MAIN START */}
-          <SettingsBar sx={menuStyles } />
+          {/* SIDEBAR SETTINGS START*/}
+          <SettingsBar sx={menuStyles} />
+          {/* SIDEBAR SETTINGS END*/}
+
+          {/* UserProfile SETTINGS START*/}
           <UserProfile sx={menuStyles} />
+          {/* UserProfile SETTINGS END*/}
+
+          {/*SIDEBAR CHAT START */}
           <Box
             sx={{
               height: '100%',
@@ -101,11 +108,9 @@ const Layout = () => {
               <UserInfo onClick={userClicked} />
             </Box>
           </Box>
-          {/*SIDEBAR MAIN END */}
-          {/* SIDEBAR SETTINGS START*/}
-          {/* SIDEBAR SETTINGS END*/}
+          {/*SIDEBAR CHAT END */}
         </Box>
-        {/* Chat sections */}
+        {/* Chat SECTION  START*/}
         <Box
           sx={{
             height: '100%',
@@ -118,7 +123,9 @@ const Layout = () => {
         >
           {data ? <Chat /> : <ChatBg />}
         </Box>
+        {/* Chat SECTION  END*/}
       </Box>
+      {/* END OF LAYOUT */}
     </>
   );
 };
