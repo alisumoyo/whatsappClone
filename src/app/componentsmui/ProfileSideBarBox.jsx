@@ -1,6 +1,5 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import React, { useContext, useState } from 'react';
-
 import {
   storage,
   ref,
@@ -9,15 +8,15 @@ import {
   setDoc,
   doc,
   db,
-} from '../firebase/friebaseConfig'; // Corrected the import path
+} from '../firebase/friebaseConfig';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { DataContext } from '../Contexts/MyContextProvider';
 
 const ProfileSideBarBox = () => {
-  const [profileImg, setProfileImg] = useState(null);
   const { user } = useContext(getLoggedUser);
   const { setOpenProfile } = useContext(DataContext);
-  console.log(user?.proImgLink);
+  const [profileImg, setProfileImg] = useState(null);
+
   const handleChange = async (e) => {
     const userImage = e.target.files[0];
 
@@ -40,10 +39,10 @@ const ProfileSideBarBox = () => {
       const userDocRef = doc(db, 'users', user.userId); // Replace 'YOUR_COLLECTION' with your actual collection name
       await setDoc(userDocRef, { proImgLink: downloadUrl }, { merge: true });
 
-      console.log(
-        'Image uploaded to Firebase Storage and user document:',
-        downloadUrl
-      );
+      // console.log(
+      //   'Image uploaded to Firebase Storage and user document:',
+      //   downloadUrl
+      // );
     }
   };
   const userImgFirebase = user?.proImgLink;

@@ -160,7 +160,12 @@ const Signup = () => {
         }}
       >
         <Typography
-          sx={{ padding: '10px 20px', bgcolor: '#25d366', color: '#fff',borderRadius:"4px" }}
+          sx={{
+            padding: '10px 20px',
+            bgcolor: '#25d366',
+            color: '#fff',
+            borderRadius: '4px',
+          }}
         >
           Already have an account?
         </Typography>

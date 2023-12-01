@@ -91,7 +91,7 @@ const Landing = () => {
         >
           <Typography
             variant='h4'
-            sx={{ color: '#25d366',color:'#333', marginBottom: '16px' }}
+            sx={{ color: '#25d366', color: '#333', marginBottom: '16px' }}
           >
             WHATSAPP
           </Typography>

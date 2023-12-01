@@ -7,6 +7,7 @@ const MyContextProvider = ({ children }) => {
   const [data, setData] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+  const [openNewChat, setOpenNewChat] = useState(false);
 
   return (
     <>
@@ -18,6 +19,8 @@ const MyContextProvider = ({ children }) => {
           setOpenSettings,
           openProfile,
           setOpenProfile,
+          openNewChat,
+          setOpenNewChat,
         }}
       >
         {children}

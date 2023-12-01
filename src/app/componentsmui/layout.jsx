@@ -9,9 +9,10 @@ import Chat from './Chat';
 import { DataContext } from '@/app/Contexts/MyContextProvider';
 import SettingsBar from './SettingsBar';
 import UserProfile from './UserProfile';
+import NewChat from './NewChat';
 
 const Layout = () => {
-  const { data, setData, openSettings, openProfile } = useContext(DataContext);
+  const { data, setData } = useContext(DataContext);
   const menuStyles = {
     position: 'absolute',
     bgcolor: '#fff',
@@ -71,6 +72,10 @@ const Layout = () => {
           {/* UserProfile SETTINGS START*/}
           <UserProfile sx={menuStyles} />
           {/* UserProfile SETTINGS END*/}
+
+          {/* SIDEBAR NEWCHAT START*/}
+          <NewChat sx={menuStyles} />
+          {/* SIDEBAR NEWCHAT END*/}
 
           {/*SIDEBAR CHAT START */}
           <Box

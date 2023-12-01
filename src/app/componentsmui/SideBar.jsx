@@ -8,7 +8,6 @@ import {
   IconButton,
   Tooltip,
   Menu,
-  Button,
   MenuItem,
   Divider,
   Avatar,
@@ -19,18 +18,17 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { auth, signOut } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 const Sidebar = () => {
   const router = useRouter();
   const { user } = useContext(getLoggedUser);
-  const { setOpenSettings, openProfile, setOpenProfile } =
+  const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
     useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const logout = () => {
     signOut(auth)
       .then(() => {
-        console.log('SignOut Successfull');
+        // console.log('SignOut Successfull');
         router.push('signin');
       })
       .catch((error) => {
@@ -43,9 +41,6 @@ const Sidebar = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-  const openSettingsClick = () => {
-    setOpenSettings(true);
   };
 
   const userImgFirebase = user?.proImgLink;
@@ -65,7 +60,6 @@ const Sidebar = () => {
         <Box>
           <Avatar src={userImgFirebase} onClick={() => setOpenProfile(true)} />
         </Box>
-        {user?.name}
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>
             <IconButton>
@@ -83,7 +77,7 @@ const Sidebar = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title='New chat'>
-            <IconButton>
+            <IconButton onClick={() => setOpenNewChat(true)}>
               <AddCommentRoundedIcon fontSize='md' />
             </IconButton>
           </Tooltip>
@@ -121,7 +115,10 @@ const Sidebar = () => {
             <MenuItem className='moreIcon-sub'>New commuinty</MenuItem>
             <MenuItem className='moreIcon-sub'>Starred messages</MenuItem>
             <MenuItem className='moreIcon-sub'>Select chats</MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={openSettingsClick}>
+            <MenuItem
+              className='moreIcon-sub'
+              onClick={() => setOpenSettings(true)}
+            >
               Settings
             </MenuItem>
             <MenuItem className='moreIcon-sub' onClick={logout}>

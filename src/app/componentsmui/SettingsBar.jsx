@@ -16,9 +16,10 @@ import ProfileSideBarBox from './ProfileSideBarBox';
 import { DataContext } from '../Contexts/MyContextProvider';
 import DialogBox from './DialogBox';
 import ThemeCard from './ThemeCard';
+import SideBarHeading from './SideBarHead';
 
-const SettingsBar = ({sx}) => {
-  const { openSettings,setOpenSettings } = useContext(DataContext);
+const SettingsBar = ({ sx }) => {
+  const { openSettings, setOpenSettings } = useContext(DataContext);
   const SideBarIconBox = [
     {
       icon: <NotificationsIcon fontSize='small' />,
@@ -65,9 +66,6 @@ const SettingsBar = ({sx}) => {
     },
   ];
 
-  const closeSettings = () => {
-    setOpenSettings(false);
-  };
   return (
     <Box
       sx={sx}
@@ -77,7 +75,7 @@ const SettingsBar = ({sx}) => {
           : { transform: 'translateX(-100%)' }
       }
     >
-      <Box
+      {/* <Box
         sx={{
           height: '108px',
           bgcolor: '#008069',
@@ -88,19 +86,30 @@ const SettingsBar = ({sx}) => {
           padding: '0px 20px',
         }}
       >
-        <IconButton onClick={()=>setOpenSettings(false)} sx={{ marginBottom: '16px' }}>
+        <IconButton
+          onClick={() => setOpenSettings(false)}
+          sx={{ marginBottom: '16px' }}
+        >
           <ArrowBackIcon sx={{ color: '#fff' }} />
         </IconButton>
 
         <Typography variant='h6' sx={{ flexGrow: '1', marginBottom: '20px' }}>
           Settings
         </Typography>
-      </Box>
+      </Box> */}
+      <SideBarHeading label='Settings' onClick={() => setOpenSettings(false)} />
       <SearchField />
-      <Box sx={{ height: '100%', overflow: 'auto', flexGrow: '1' }}>
+      <Box
+        sx={{
+          height: '100%',
+          overflow: 'auto',
+          flexGrow: '1',
+          overflowY: 'auto',
+        }}
+      >
         <ProfileSideBarBox />
         {SideBarIconBox.map((item, index) => (
-          <>
+          <Box key={index}>
             {item.content && item.button ? (
               <DialogBox
                 key={index}
@@ -115,7 +124,7 @@ const SettingsBar = ({sx}) => {
                 onClick={item.method}
               />
             )}
-          </>
+          </Box>
         ))}
       </Box>
     </Box>
