@@ -2,7 +2,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Avatar, Box, IconButton, Menu, MenuItem } from '@mui/material';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -36,7 +35,6 @@ const UserInfo = ({ onClick }) => {
       >
         <Box sx={{ padding: '8px 16px' }}>
           <Avatar alt='User' src='' />
-          {/* <AccountCircleOutlinedIcon fontSize='large' /> */}
         </Box>
         <Box
           sx={{

@@ -1,5 +1,5 @@
 'use client';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
@@ -29,7 +29,7 @@ const Layout = () => {
 
   return (
     <>
-      {/* START OF LAYOUT */}
+      {/* START OF LAYOUT BG*/}
       <Box
         sx={{
           width: '100vw',
@@ -40,6 +40,8 @@ const Layout = () => {
       >
         <Box sx={{ height: '20%', width: '100vw', bgcolor: '#00a884' }}></Box>
       </Box>
+      {/* END OF LAYOUT BG*/}
+
       <Box
         sx={{
           width: '98vw',
@@ -52,7 +54,7 @@ const Layout = () => {
           display: 'flex',
         }}
       >
-        {/* SIDE BAR LAYOUT & RENDERING COMPONENETS */}
+        {/* SIDE BAR SECTION START */}
         <Box
           sx={{
             width: '400px',
@@ -115,10 +117,12 @@ const Layout = () => {
           </Box>
           {/*SIDEBAR CHAT END */}
         </Box>
+
+        {/* SIDE BAR SECTION END */}
+
         {/* Chat SECTION  START*/}
         <Box
           sx={{
-            height: '100%',
             bgcolor: '#f0f2f5',
             display: 'flex',
             flexDirection: 'column',
@@ -130,7 +134,6 @@ const Layout = () => {
         </Box>
         {/* Chat SECTION  END*/}
       </Box>
-      {/* END OF LAYOUT */}
     </>
   );
 };

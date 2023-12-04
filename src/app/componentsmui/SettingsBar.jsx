@@ -101,10 +101,9 @@ const SettingsBar = ({ sx }) => {
       <SearchField />
       <Box
         sx={{
-          height: '100%',
+          // height: '100%',
           overflow: 'auto',
-          flexGrow: '1',
-          overflowY: 'auto',
+          // flexGrow: '1',
         }}
       >
         <ProfileSideBarBox />

@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 const ChatBg = () => {
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center',width:"100%" }}>
         <Card
           sx={{
             display: 'flex',
@@ -19,7 +19,7 @@ const ChatBg = () => {
             justifyContent: 'center',
             bgcolor: '#f0f2f5',
             padding: '10px 20px',
-            width: '540px',
+            width: '100%',
             height: '400px',
             border: 'none',
             color: '#41525d',
@@ -37,7 +37,13 @@ const ChatBg = () => {
                 fontWeight: 'thin',
               }}
             >
-              <Image src={bgImg} alt='bgImg' width={320} height={188} />
+              <Image
+                src={bgImg}
+                alt='bgImg'
+                width={320}
+                height={188}
+                priority='true'
+              />
             </Box>
             <Box sx={{ margin: '13px 0px' }}>
               <Typography

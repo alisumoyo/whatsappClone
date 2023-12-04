@@ -20,10 +20,8 @@ const Landing = () => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          overflowY: 'auto',
           width: '100%',
-          height: '300px',
-          minHeight: '100vh',
+          height:'100vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -39,7 +37,6 @@ const Landing = () => {
         >
           <Toolbar
             sx={{
-              display: 'flex',
               justifyContent: 'space-between',
               width: '100%',
               flexGrow: '1',

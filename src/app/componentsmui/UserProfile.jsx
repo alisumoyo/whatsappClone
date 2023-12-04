@@ -3,6 +3,7 @@ import { Box, Button, IconButton, Typography, Avatar } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { DataContext } from '../Contexts/MyContextProvider';
+import SideBarHeading from './SideBarHead';
 
 const UserProfile = ({ sx }) => {
   const { user } = useContext(getLoggedUser);
@@ -14,11 +15,15 @@ const UserProfile = ({ sx }) => {
         sx={sx}
         style={
           openProfile
-            ? { transform: 'translateX(0%)', bgcolor: '#f0f2f6' }
+            ? {
+                transform: 'translateX(0%)',
+                display: 'flex',
+                flexDirection: 'column',
+              }
             : { transform: 'translateX(-100%)' }
         }
       >
-        <Box
+        {/* <Box
           sx={{
             height: '108px',
             bgcolor: '#008069',
@@ -39,7 +44,8 @@ const UserProfile = ({ sx }) => {
           <Typography variant='h6' sx={{ flexGrow: '1', marginBottom: '20px' }}>
             Profile
           </Typography>
-        </Box>
+        </Box> */}
+        <SideBarHeading label='Profile' onClick={() => setOpenProfile(false)} />
         <Box
           sx={{
             bgcolor: '#f0f2f6',
@@ -66,12 +72,11 @@ const UserProfile = ({ sx }) => {
           </label>
         </Box>
 
-        <Box>
+        <Box sx={{ bgcolor: '#f0f2f6', bgcolor: 'red', flexGrow: '1' }}>
           <Box
             sx={{
               minHeight: '66px',
               padding: '14px 30px',
-              marginBottom: '10px',
               bgcolor: '#fff',
             }}
           >
