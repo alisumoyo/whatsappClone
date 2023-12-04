@@ -4,14 +4,18 @@ import { Avatar, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
+import { useState } from 'react';
 
 const AddNewUser = () => {
-  const { userCollection } = useContext(GetRegUsersContext);
+  const { userCollection, addNewUser } = useContext(GetRegUsersContext);
+
   return (
     <>
-      {userCollection?.map((user,index) => (
+      {userCollection?.map((user, index) => (
         <>
-          <Box key={index}
+          <Box
+            key={index}
+            onClick={() => addNewUser(user)}
             sx={{
               bgcolor: '#fff',
               color: '#3b4a54',

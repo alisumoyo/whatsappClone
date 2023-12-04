@@ -7,7 +7,7 @@ const signup = () => {
     <>
       <Head>
         <title>SignUp</title>
-        {/* <link rel="icon" href='@/app/assets/signup.ico' /> */}
+        <link rel='icon' href='./logged.ico' />
       </Head>
       <Signup />
     </>

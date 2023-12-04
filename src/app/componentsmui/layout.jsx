@@ -95,25 +95,14 @@ const Layout = () => {
             </Box>
             <Box
               sx={{
-                height: '100%',
+                // height: '100%',
                 overflow: 'auto',
                 flexGrow: '1',
               }}
             >
               <UserInfo onClick={userClicked} />
               <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
+            
             </Box>
           </Box>
           {/*SIDEBAR CHAT END */}

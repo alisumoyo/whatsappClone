@@ -7,6 +7,7 @@ const signin = () => {
     <>
       <Head>
         <title>SignIn</title>
+        <link rel='icon' href='./logged.ico' />
       </Head>
       <SignIn />
     </>

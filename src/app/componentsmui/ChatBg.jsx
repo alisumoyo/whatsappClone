@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 const ChatBg = () => {
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'center',width:"100%" }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
         <Card
           sx={{
             display: 'flex',
@@ -76,7 +76,7 @@ const ChatBg = () => {
                     color: '#fff',
                     borderRadius: '25px',
                     backgroundColor: '#008069',
-                    '&hover': {
+                    '&:hover': {
                       backgroundColor: '#045849',
                     },
                   }}

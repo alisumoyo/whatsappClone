@@ -23,11 +23,8 @@ import { GetRegUsersContext } from '../Contexts/getRegUsers';
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
   const { fetchData } = useContext(GetRegUsersContext);
-  // const {userCollection,setSearchText}=useContext(GetRegUsersContext)
   const handleEnter = (value) => {
     fetchData(value);
-
-    console.log(value);
   };
 
   return (

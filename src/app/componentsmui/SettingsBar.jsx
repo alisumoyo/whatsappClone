@@ -103,7 +103,7 @@ const SettingsBar = ({ sx }) => {
         sx={{
           // height: '100%',
           overflow: 'auto',
-          // flexGrow: '1',
+          flexGrow: '1',
         }}
       >
         <ProfileSideBarBox />
