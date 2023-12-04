@@ -4,12 +4,12 @@ import React, { useContext, useState } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
-// import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { DataContext } from '@/app/Contexts/MyContextProvider';
 import SettingsBar from './SettingsBar';
 import UserProfile from './UserProfile';
 import NewChat from './NewChat';
+import ChatHead from './ChatHead';
 
 const Layout = () => {
   const { data, setData } = useContext(DataContext);
@@ -89,7 +89,7 @@ const Layout = () => {
             }}
           >
             <Box>
-              {/* <Sidebar /> */}
+              <ChatHead/>
               <SearchField />
             </Box>
             <Box

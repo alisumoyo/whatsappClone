@@ -19,7 +19,7 @@ import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { auth, signOut } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
 
-const Sidebar = () => {
+const ChatHead = () => {
   const router = useRouter();
   const { user } = useContext(getLoggedUser);
   const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
@@ -135,4 +135,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default ChatHead;
