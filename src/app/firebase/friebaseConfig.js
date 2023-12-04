@@ -7,12 +7,16 @@ import {
   doc,
   setDoc,
   onSnapshot,
+  query,
+  where,
+  getDocs,
 } from 'firebase/firestore';
 import {
   getAuth,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,signOut
+  onAuthStateChanged,
+  signOut,
 } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
@@ -35,5 +39,8 @@ export {
   doc,
   setDoc,
   onSnapshot,
-  signOut
+  signOut,
+  query,
+  where,
+  getDocs,
 };

@@ -83,8 +83,14 @@ const SignIn = () => {
           variant='outlined'
           autoComplete='email'
           required
-          error={signInError.includes('email')}
-          helperText={signInError.includes('email') && signInError}
+          error={
+            signInError.includes('email') ||
+            (email.trim() === '' && signInError === '')
+          }
+          helperText={
+            (signInError.includes('email') && signInError) ||
+            (email.trim() === '' && 'Email is required')
+          }
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -98,8 +104,14 @@ const SignIn = () => {
           fullWidth
           margin='normal'
           variant='outlined'
-          error={signInError.includes('password')}
-          helperText={signInError.includes('password') && signInError}
+          error={
+            signInError.includes('password') ||
+            (password.trim() === '' && signInError === '')
+          }
+          helperText={
+            (signInError.includes('password') && signInError) ||
+            (password.trim() === '' && 'Password is required')
+          }
           style={{ marginBottom: '16px' }}
         />
 

@@ -24,7 +24,7 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const bgImg =
     'https://img.freepik.com/premium-photo/3d-rendering-bunch-square-badges-with-whatsapp-logo-green-background_284880-352.jpg?size=626&ext=jpg&ga=GA1.1.1803636316.1701302400&semt=ais';
@@ -51,7 +51,7 @@ const Signup = () => {
         return;
       }
 
-      setLoading(true); // Set loading to true
+      setLoading(true);
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -66,13 +66,13 @@ const Signup = () => {
         number,
       });
 
-      console.log('User registered successfully:', user);
+      // console.log('User registered successfully:', user);
       router.push('/signin');
     } catch (error) {
       console.error('Error signing up:', error.message);
       setError(error.message);
     } finally {
-      setLoading(false); // Set loading to false after signup process completes
+      setLoading(false);
     }
   };
 
@@ -117,6 +117,9 @@ const Signup = () => {
           fullWidth
           margin='normal'
           variant='outlined'
+          required
+          error={!name.trim() && error.includes('name')}
+          helperText={!name.trim() && error.includes('name') && error}
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -127,6 +130,9 @@ const Signup = () => {
           fullWidth
           margin='normal'
           variant='outlined'
+          required
+          error={!email.trim() && error.includes('email')}
+          helperText={!email.trim() && error.includes('email') && error}
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -137,6 +143,9 @@ const Signup = () => {
           fullWidth
           margin='normal'
           variant='outlined'
+          required
+          error={!number.trim() && error.includes('number')}
+          helperText={!number.trim() && error.includes('number') && error}
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -147,6 +156,9 @@ const Signup = () => {
           fullWidth
           margin='normal'
           variant='outlined'
+          required
+          error={!password.trim() && error.includes('password')}
+          helperText={!password.trim() && error.includes('password') && error}
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -157,19 +169,30 @@ const Signup = () => {
           fullWidth
           margin='normal'
           variant='outlined'
+          required
+          error={!confirmPassword.trim() && error.includes('confirmPassword')}
+          helperText={
+            !confirmPassword.trim() &&
+            error.includes('confirmPassword') &&
+            error
+          }
           style={{ marginBottom: '16px' }}
         />
-        {loading && <CircularProgress style={{ marginBottom: '16px' }} />}{' '}
-        {/* Loader component */}
-        {error && (
-          <Typography
-            variant='body2'
-            color='error'
-            style={{ marginBottom: '16px' }}
-          >
-            {error}
-          </Typography>
-        )}
+        {loading && <CircularProgress style={{ marginBottom: '16px' }} />}
+        {error &&
+          !error.includes('name') &&
+          !error.includes('email') &&
+          !error.includes('number') &&
+          !error.includes('password') &&
+          !error.includes('confirmPassword') && (
+            <Typography
+              variant='body2'
+              color='error'
+              style={{ marginBottom: '16px' }}
+            >
+              {error}
+            </Typography>
+          )}
         <Button
           variant='outlined'
           onClick={handleSignup}

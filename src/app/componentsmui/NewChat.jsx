@@ -18,9 +18,17 @@ import DialogBox from './DialogBox';
 import ThemeCard from './ThemeCard';
 import AddNewUser from './AddNewUser';
 import SideBarHeading from './SideBarHead';
+import { GetRegUsersContext } from '../Contexts/getRegUsers';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
+  const { fetchData } = useContext(GetRegUsersContext);
+  // const {userCollection,setSearchText}=useContext(GetRegUsersContext)
+  const handleEnter = (value) => {
+    fetchData(value);
+
+    console.log(value);
+  };
 
   return (
     <Box
@@ -54,7 +62,7 @@ const NewChat = ({ sx }) => {
         </Typography>
       </Box> */}
       <SideBarHeading label='New Chat' onClick={() => setOpenNewChat(false)} />
-      <SearchField />
+      <SearchField onKeyPress={(value) => handleEnter(value)} />
       <Box
         sx={{
           bgcolor: '#fff',

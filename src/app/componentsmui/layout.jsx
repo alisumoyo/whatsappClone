@@ -57,7 +57,8 @@ const Layout = () => {
         {/* SIDE BAR SECTION START */}
         <Box
           sx={{
-            width: '400px',
+            minWidth: '400px',
+            width:'400px',
             height: '100%',
             bgcolor: '#f0f2f6',
             display: 'flex',
