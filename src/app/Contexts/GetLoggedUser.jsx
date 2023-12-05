@@ -15,7 +15,6 @@ const LoggedUser = ({ children }) => {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      // console.log('User:', user);
       if (user) {
         const userDocRef = doc(db, 'users', user.uid);
         const unsubscribe = onSnapshot(

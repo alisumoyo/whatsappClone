@@ -9,6 +9,7 @@ const index = () => {
     <>
       <Head>
         <title>Whatsapp</title>
+        <link rel='icon' href='./whatsapp.ico' />
       </Head>
       <GetRegUsersProvider>
         <LoggedUser>

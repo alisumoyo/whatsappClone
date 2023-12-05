@@ -1,13 +1,38 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Button, IconButton, Typography, Avatar } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { DataContext } from '../Contexts/MyContextProvider';
 import SideBarHeading from './SideBarHead';
+import EditIcon from '@mui/icons-material/Edit';
+import DoneIcon from '@mui/icons-material/Done';
+import { updateDoc, db, doc } from '../firebase/friebaseConfig';
 
 const UserProfile = ({ sx }) => {
   const { user } = useContext(getLoggedUser);
-  const { openProfile, setOpenProfile } = useContext(DataContext);
+  const { openProfile, setOpenProfile, updateUserInfo } =
+    useContext(DataContext);
+
+  const [editingName, setEditingName] = useState(false);
+  const [editingAbout, setEditingAbout] = useState(false);
+  const [editedName, setEditedName] = useState(user?.name || '');
+  const [editedAbout, setEditedAbout] = useState(user?.about || '');
+
+  const handleSave = async () => {
+    if (user && user.userId) {
+      const docRef = doc(db, 'users', user.userId);
+
+      try {
+        await updateDoc(docRef, {
+          name: editedName,
+          bio: editedAbout,
+        });
+        setEditingName(false);
+        setEditingAbout(false);
+      } catch (error) {
+        console.error('Error updating document:', error);
+      }
+    }
+  };
 
   return (
     <>
@@ -23,28 +48,6 @@ const UserProfile = ({ sx }) => {
             : { transform: 'translateX(-100%)' }
         }
       >
-        {/* <Box
-          sx={{
-            height: '108px',
-            bgcolor: '#008069',
-            color: '#fff',
-            display: 'flex',
-            alignItems: 'flex-end',
-            gap: '10px',
-            padding: '0px 20px',
-          }}
-        >
-          <IconButton
-            onClick={() => setOpenProfile(false)}
-            sx={{ marginBottom: '16px' }}
-          >
-            <ArrowBackIcon sx={{ color: '#fff' }} />
-          </IconButton>
-
-          <Typography variant='h6' sx={{ flexGrow: '1', marginBottom: '20px' }}>
-            Profile
-          </Typography>
-        </Box> */}
         <SideBarHeading label='Profile' onClick={() => setOpenProfile(false)} />
         <Box
           sx={{
@@ -56,12 +59,13 @@ const UserProfile = ({ sx }) => {
             padding: '20px 0px',
           }}
         >
-          <label htmlFor='avatar-input' sx={{ cursor: 'pointer' }}>
+          <label htmlFor='avatar-input'>
             <Avatar
               src={user?.proImgLink}
               alt='userProImg'
-              sx={{ width: 180, height: 180 }}
+              sx={{ width: 180, height: 180, cursor: 'pointer' }}
             />
+
             <input
               id='avatar-input'
               type='file'
@@ -72,11 +76,11 @@ const UserProfile = ({ sx }) => {
           </label>
         </Box>
 
-        <Box sx={{ bgcolor: '#f0f2f6', bgcolor: 'red', flexGrow: '1' }}>
+        <Box sx={{ bgcolor: '#f0f2f6', flexGrow: '1' }}>
           <Box
             sx={{
-              minHeight: '66px',
-              padding: '14px 30px',
+              minHeight: '56px',
+              padding: '10px 30px',
               bgcolor: '#fff',
             }}
           >
@@ -86,14 +90,39 @@ const UserProfile = ({ sx }) => {
             >
               Your Name
             </Typography>
-            <Typography
-              variant='subtitle1'
-              flexGrow={1}
-              sx={{ color: '#3b4a54', fontSize: '14px' }}
-            >
-              {user?.name}
-            </Typography>
+            {editingName ? (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <input
+                  type='text'
+                  value={editedName}
+                  onChange={(e) => setEditedName(e.target.value)}
+                  style={{
+                    border: 'none',
+                    outline: 'none',
+                    borderBottom: '0.5px solid #333',
+                    width: '100%',
+                  }}
+                />
+                <IconButton onClick={handleSave}>
+                  <DoneIcon />
+                </IconButton>
+              </Box>
+            ) : (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography
+                  variant='subtitle1'
+                  flexGrow={1}
+                  sx={{ color: '#3b4a54', fontSize: '14px' }}
+                >
+                  {user?.name}
+                </Typography>
+                <IconButton onClick={() => setEditingName(true)}>
+                  <EditIcon fontSize='small' />
+                </IconButton>
+              </Box>
+            )}
           </Box>
+
           <Box
             sx={{
               minHeight: '66px',
@@ -111,8 +140,8 @@ const UserProfile = ({ sx }) => {
           </Box>
           <Box
             sx={{
-              minHeight: '66px',
-              padding: '14px 30px',
+              minHeight: '56px',
+              padding: '10px 30px',
               bgcolor: '#fff',
             }}
           >
@@ -122,12 +151,57 @@ const UserProfile = ({ sx }) => {
             >
               About
             </Typography>
+            {editingAbout ? (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <input
+                  type='text'
+                  value={editedAbout}
+                  onChange={(e) => setEditedAbout(e.target.value)}
+                  style={{
+                    border: 'none',
+                    outline: 'none',
+                    borderBottom: '0.5px solid #333',
+                    width: '100%',
+                  }}
+                />
+                <IconButton onClick={handleSave}>
+                  <DoneIcon />
+                </IconButton>
+              </Box>
+            ) : (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography
+                  variant='subtitle1'
+                  flexGrow={1}
+                  sx={{ color: '#3b4a54', fontSize: '14px' }}
+                >
+                  {user?.bio}
+                </Typography>
+                <IconButton onClick={() => setEditingAbout(true)}>
+                  <EditIcon fontSize='small' />
+                </IconButton>
+              </Box>
+            )}
+          </Box>
+          <Box
+            sx={{
+              minHeight: '66px',
+              padding: '14px 30px',
+              bgcolor: '#fff',
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              sx={{ color: '#008069', fontSize: '12px' }}
+            >
+              Contact Number
+            </Typography>
             <Typography
               variant='subtitle1'
               flexGrow={1}
               sx={{ color: '#3b4a54', fontSize: '14px' }}
             >
-              {user?.name}
+              {user?.number}
             </Typography>
           </Box>
         </Box>

@@ -43,7 +43,7 @@ const ChatHead = () => {
     setAnchorEl(null);
   };
 
-  const userImgFirebase = user?.proImgLink;
+  // const userImgFirebase = user?.proImgLink;
   return (
     <>
       <Box
@@ -58,7 +58,7 @@ const ChatHead = () => {
         }}
       >
         <Box>
-          <Avatar src={userImgFirebase} onClick={() => setOpenProfile(true)} />
+          <Avatar src={user?.proImgLink} onClick={() => setOpenProfile(true)} />
         </Box>
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>

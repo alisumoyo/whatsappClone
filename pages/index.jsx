@@ -5,8 +5,9 @@ import React from 'react';
 const index = () => {
   return (
     <>
-     <Head>
+      <Head>
         <title>Home</title>
+        <link rel='icon' href='./whatsapp.ico' />
       </Head>
       <Landing />
     </>

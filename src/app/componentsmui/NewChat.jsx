@@ -36,28 +36,6 @@ const NewChat = ({ sx }) => {
           : { transform: 'translateX(-100%)' }
       }
     >
-      {/* <Box
-        sx={{
-          height: '108px',
-          bgcolor: '#008069',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'flex-end',
-          gap: '10px',
-          padding: '0px 20px',
-        }}
-      >
-        <IconButton
-          onClick={() => setOpenNewChat(false)}
-          sx={{ marginBottom: '16px' }}
-        >
-          <ArrowBackIcon sx={{ color: '#fff' }} />
-        </IconButton>
-
-        <Typography variant='h6' sx={{ flexGrow: '1', marginBottom: '20px' }}>
-          New Chat
-        </Typography>
-      </Box> */}
       <SideBarHeading label='New Chat' onClick={() => setOpenNewChat(false)} />
       <SearchField onKeyPress={(value) => handleEnter(value)} />
       <Box

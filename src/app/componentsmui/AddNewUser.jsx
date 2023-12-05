@@ -36,34 +36,22 @@ const AddNewUser = () => {
             </Box>
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                width: '100%',
-                padding: '3px',
+                flexGrow: '1',
               }}
             >
-              <Box sx={{ flexGrow: '1', paddingRight: '10px' }}>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography variant='p'>{user?.name}</Typography>
-                  <Typography
-                    variant='p'
-                    sx={{ color: '#667781', fontSize: '12px' }}
-                  >
-                    12/3/2023
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    color: '#667781',
-                    fontSize: '12px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Typography variant='p'>Message</Typography>
-                  <ExpandMoreIcon />
-                </Box>
+              <Box>
+                <Typography variant='p'>{user.name}</Typography>
+              </Box>
+              <Box
+                sx={{
+                  color: '#667781',
+                  fontSize: '12px',
+                  marginTop: '3px',
+                }}
+              >
+                <Typography variant='p'>
+                  Hey There! I am using WhatsApp.
+                </Typography>
               </Box>
             </Box>
           </Box>

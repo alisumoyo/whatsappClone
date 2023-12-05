@@ -10,6 +10,7 @@ import {
   query,
   where,
   getDocs,
+  updateDoc,
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -43,4 +44,5 @@ export {
   query,
   where,
   getDocs,
+  updateDoc,
 };
