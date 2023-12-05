@@ -1,3 +1,4 @@
+import GetAddedUsers from '@/app/Contexts/GetAddedUsers.jsx';
 import LoggedUser from '@/app/Contexts/GetLoggedUser';
 import MyContextProvider from '@/app/Contexts/MyContextProvider';
 import GetRegUsersProvider from '@/app/Contexts/getRegUsers';
@@ -11,13 +12,15 @@ const index = () => {
         <title>Whatsapp</title>
         <link rel='icon' href='./whatsapp.ico' />
       </Head>
-      <GetRegUsersProvider>
-        <LoggedUser>
-          <MyContextProvider>
-            <Layout />
-          </MyContextProvider>
-        </LoggedUser>
-      </GetRegUsersProvider>
+      <GetAddedUsers>
+        <GetRegUsersProvider>
+          <LoggedUser>
+            <MyContextProvider>
+              <Layout />
+            </MyContextProvider>
+          </LoggedUser>
+        </GetRegUsersProvider>
+      </GetAddedUsers>
     </>
   );
 };

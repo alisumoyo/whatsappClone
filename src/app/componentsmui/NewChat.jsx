@@ -1,27 +1,16 @@
 import React, { useContext } from 'react';
-import { Box, Button, IconButton, Typography } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Box, Typography } from '@mui/material';
 import SearchField from './SearchField';
-import SettingsSideBox from './SettingsSideBox';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import LockIcon from '@mui/icons-material/Lock';
-import SecurityIcon from '@mui/icons-material/Security';
-import Brightness6Icon from '@mui/icons-material/Brightness6';
-import DownloadIcon from '@mui/icons-material/Download';
-import DescriptionIcon from '@mui/icons-material/Description';
-import HelpIcon from '@mui/icons-material/Help';
-import KeyboardIcon from '@mui/icons-material/Keyboard';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ProfileSideBarBox from './ProfileSideBarBox';
 import { DataContext } from '../Contexts/MyContextProvider';
-import DialogBox from './DialogBox';
-import ThemeCard from './ThemeCard';
 import AddNewUser from './AddNewUser';
 import SideBarHeading from './SideBarHead';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
+import { useState } from 'react';
+import { getLoggedUser } from '../Contexts/GetLoggedUser';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
+  
   const { fetchData } = useContext(GetRegUsersContext);
   const handleEnter = (value) => {
     fetchData(value);

@@ -5,19 +5,15 @@ import {
   query,
   where,
   onSnapshot,
-  doc,
-  setDoc,
-  addDoc,
 } from '../firebase/friebaseConfig';
 import { createContext } from 'react';
-import { getLoggedUser } from './GetLoggedUser';
 
 export const GetRegUsersContext = createContext();
 
 const GetRegUsersProvider = ({ children }) => {
   const [userCollection, setUserCollection] = useState([]);
+  const [addedUsers, setAddedUsers] = useState([]);
 
-  // const { user } = useContext(getLoggedUser);
   const fetchData = async (newUserQuery) => {
     let path = '';
 
@@ -52,16 +48,8 @@ const GetRegUsersProvider = ({ children }) => {
     }
   };
 
-  const addNewUser = (user) => {
-    // // const userDocRef = doc(db, `users/${user.ui}`);
-
-    // addDoc(userDocRef, { name: '' }).then('doc added');
-  };
-
   return (
-    <GetRegUsersContext.Provider
-      value={{ userCollection, fetchData, addNewUser }}
-    >
+    <GetRegUsersContext.Provider value={{ userCollection, fetchData }}>
       {children}
     </GetRegUsersContext.Provider>
   );

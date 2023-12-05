@@ -5,17 +5,19 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
 import { useState } from 'react';
+import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 
 const AddNewUser = () => {
-  const { userCollection, addNewUser } = useContext(GetRegUsersContext);
+  const { userCollection } = useContext(GetRegUsersContext);
+  const { addNewUser } = useContext(GetAddedUsers);
+
 
   return (
     <>
-      {userCollection?.map((user, index) => (
-        <>
+      {userCollection?.map((addUser, index) => (
           <Box
             key={index}
-            onClick={() => addNewUser(user)}
+            onClick={() => addNewUser(addUser)}
             sx={{
               bgcolor: '#fff',
               color: '#3b4a54',
@@ -32,7 +34,7 @@ const AddNewUser = () => {
             }}
           >
             <Box sx={{ padding: '8px 16px' }}>
-              <Avatar alt='User' src={user.proImgLink} />
+              <Avatar alt='User' src={addUser.proImgLink} />
             </Box>
             <Box
               sx={{
@@ -40,7 +42,7 @@ const AddNewUser = () => {
               }}
             >
               <Box>
-                <Typography variant='p'>{user.name}</Typography>
+                <Typography variant='p'>{addUser.name}</Typography>
               </Box>
               <Box
                 sx={{
@@ -55,7 +57,6 @@ const AddNewUser = () => {
               </Box>
             </Box>
           </Box>
-        </>
       ))}
     </>
   );
