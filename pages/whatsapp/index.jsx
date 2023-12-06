@@ -1,18 +1,19 @@
-import GetAddedUsers from '@/app/Contexts/GetAddedUsers.jsx';
+import GetAddedUsersProvider from '@/app/Contexts/GetAddedUsers.jsx';
 import LoggedUser from '@/app/Contexts/GetLoggedUser';
 import MyContextProvider from '@/app/Contexts/MyContextProvider';
 import GetRegUsersProvider from '@/app/Contexts/getRegUsers';
 import Layout from '@/app/componentsmui/layout';
 import Head from 'next/head';
 
-const index = () => {
+const whatsapp = () => {
   return (
     <>
       <Head>
         <title>Whatsapp</title>
         <link rel='icon' href='./whatsapp.ico' />
       </Head>
-      <GetAddedUsers>
+
+      <GetAddedUsersProvider>
         <GetRegUsersProvider>
           <LoggedUser>
             <MyContextProvider>
@@ -20,9 +21,9 @@ const index = () => {
             </MyContextProvider>
           </LoggedUser>
         </GetRegUsersProvider>
-      </GetAddedUsers>
+      </GetAddedUsersProvider>
     </>
   );
 };
 
-export default index;
+export default whatsapp;

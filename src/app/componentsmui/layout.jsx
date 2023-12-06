@@ -11,6 +11,7 @@ import UserProfile from './UserProfile';
 import NewChat from './NewChat';
 import ChatHead from './ChatHead';
 
+
 const Layout = () => {
   const { data, setData } = useContext(DataContext);
   const menuStyles = {
@@ -58,7 +59,7 @@ const Layout = () => {
         <Box
           sx={{
             minWidth: '400px',
-            width:'400px',
+            width: '400px',
             height: '100%',
             bgcolor: '#f0f2f6',
             display: 'flex',
@@ -90,19 +91,17 @@ const Layout = () => {
             }}
           >
             <Box>
-              <ChatHead/>
+              <ChatHead />
               <SearchField />
             </Box>
             <Box
               sx={{
-                // height: '100%',
                 overflow: 'auto',
                 flexGrow: '1',
               }}
             >
               <UserInfo onClick={userClicked} />
-              <UserInfo onClick={userClicked} />
-            
+              
             </Box>
           </Box>
           {/*SIDEBAR CHAT END */}

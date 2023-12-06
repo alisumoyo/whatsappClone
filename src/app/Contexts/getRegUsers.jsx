@@ -12,7 +12,6 @@ export const GetRegUsersContext = createContext();
 
 const GetRegUsersProvider = ({ children }) => {
   const [userCollection, setUserCollection] = useState([]);
-  const [addedUsers, setAddedUsers] = useState([]);
 
   const fetchData = async (newUserQuery) => {
     let path = '';

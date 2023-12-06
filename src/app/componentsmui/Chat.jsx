@@ -34,7 +34,7 @@ const Chat = () => {
   const { setData } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
-
+  // const { addedUsers } = useContext(GetAddedUsers);
   const open = Boolean(anchorEl);
   const openDoc = Boolean(send);
   const handleClick = (event) => {
