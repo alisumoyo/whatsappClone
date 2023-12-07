@@ -10,10 +10,11 @@ import { getLoggedUser } from '../Contexts/GetLoggedUser';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
+  const {user}=useContext(getLoggedUser)
   
   const { fetchData } = useContext(GetRegUsersContext);
   const handleEnter = (value) => {
-    fetchData(value);
+    fetchData(value,user);
   };
 
   return (

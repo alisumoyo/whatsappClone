@@ -14,15 +14,15 @@ const LoggedUser = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const userDocRef = doc(db, 'users', user.uid);
+    onAuthStateChanged(auth, (loginUser) => {
+      if (loginUser) {
+        const userDocRef = doc(db, 'users', loginUser.uid);
         const unsubscribe = onSnapshot(
           userDocRef,
           (docSnapshot) => {
             if (docSnapshot.exists()) {
               const data = docSnapshot.data();
-              // console.log('Document Data:', data);
+              console.log('Document Data:', data);
               setUser(data);
             } else {
               //   console.log('Document does not exist');

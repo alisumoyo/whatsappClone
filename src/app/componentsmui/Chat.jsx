@@ -17,7 +17,6 @@ import VideocamIcon from '@mui/icons-material/Videocam';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
-// import chatbg from '../assets/chatbg.jpg';
 import SentimentSatisfiedAltOutlinedIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
@@ -29,14 +28,33 @@ import PollIcon from '@mui/icons-material/Poll';
 import LabelIcon from '@mui/icons-material/Label';
 import { pink, purple, yellow } from '@mui/material/colors';
 import { DataContext } from '../Contexts/MyContextProvider';
+import Message from './Message';
+import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 
 const Chat = () => {
+
   const { setData } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
-  // const { addedUsers } = useContext(GetAddedUsers);
+
+
+  const [message, setMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState([]);
+  const {user}=useContext(getLoggedUser)
+  const {currentChatUser}=useContext(GetAddedUsers)
+
+  const sendMessage = (e) => {
+    if (e.key === 'Enter') {
+      // Send message to server (implement logic)
+      // Add message to chat history
+      setChatHistory([...chatHistory, message]);
+      setMessage('');
+    }
+  };
   const open = Boolean(anchorEl);
   const openDoc = Boolean(send);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -69,10 +87,10 @@ const Chat = () => {
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Avatar
             alt='User'
-            src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            src={currentChatUser.proImgLink}
           />
           <Box sx={{ fontSize: '14px', color: '#111b21' }}>
-            <Typography variant='h6'>username</Typography>
+            <Typography variant='h6'>{currentChatUser.name}</Typography>
             <Typography variant='p'>
               <small>Last seen today at 13:08</small>
             </Typography>
@@ -160,50 +178,39 @@ const Chat = () => {
           overflowY: 'auto',
           width: '100%',
           height: '300px',
+          position: 'relative',
         }}
       >
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
-        <Typography variant='p'>HELLO</Typography>
+        {/* <Box
+          sx={{
+            borderRadius: '16px 0px 16px 16px',
+            padding: '6px 12px 6px 8px',
+            bgcolor: '#d9fdd3',
+            maxWidth: '360px',
+            width: 'fit-content',
+            position: 'absolute',
+            top: '12px',
+            right: '20px',
+          }}
+        >
+          <Typography
+            variant='h3'
+            sx={{ fontSize: '14px', height: 'auto', overflow: 'hidden' }}
+          >
+            {message}
+          </Typography>
+          <Box sx={{ display: 'flex' }}>
+            <CheckIcon sx={{ fontSize: '8px' }} />
+            <CheckIcon sx={{ fontSize: '8px' }} />
+          </Box>
+        </Box> */}
+        {chatHistory.map((message, index) => (
+          <Message
+            key={index}
+            message={message}
+            isSentByMe={message.sender === user.userId}
+          />
+        ))}
       </Box>
       <Box
         sx={{
@@ -300,6 +307,9 @@ const Chat = () => {
             flexGrow: '1',
           }}
           variant='outlined'
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={sendMessage}
         />
         <IconButton>
           <KeyboardVoiceIcon />

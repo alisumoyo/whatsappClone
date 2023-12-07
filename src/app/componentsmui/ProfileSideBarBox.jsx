@@ -36,7 +36,8 @@ const ProfileSideBarBox = () => {
       const downloadUrl = await getDownloadURL(storageRef);
 
       // Update user document with the image URL
-      const userDocRef = doc(db, 'users', user.userId); // Replace 'YOUR_COLLECTION' with your actual collection name
+      const userDocRef = doc(db, 'users', user.userId);
+       // Replace 'YOUR_COLLECTION' with your actual collection name
       await setDoc(userDocRef, { proImgLink: downloadUrl }, { merge: true });
 
       // console.log(

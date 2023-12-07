@@ -19,7 +19,7 @@ export const GetAddedUsers = createContext();
 
 const GetAddedUsersProvider = ({ children }) => {
   const [addedUsers, setAddedUsers] = useState([]);
-  // const { setOpenNewChat } = useContext(MyContextProvider);
+  const [currentChatUser,setCurrentChatUser]=useState({})
 
   const addNewUser = (addUser) => {
     console.log(addUser);
@@ -33,9 +33,7 @@ const GetAddedUsersProvider = ({ children }) => {
           addUser.id
         );
         setDoc(contactedUsersRef, addUser)
-          // const snapshot =  getDoc(contactedUsersRef);
-          // // const userData = snapshot.data()
-          // console.log(snapshot)
+          
           .then((docRef) => {
             console.log('Document written with ID: ', docRef);
           })
@@ -68,7 +66,7 @@ const GetAddedUsersProvider = ({ children }) => {
   }, []);
 
   return (
-    <GetAddedUsers.Provider value={{ addNewUser, addedUsers }}>
+    <GetAddedUsers.Provider value={{ addNewUser, addedUsers ,currentChatUser,setCurrentChatUser}}>
       {children}
     </GetAddedUsers.Provider>
   );

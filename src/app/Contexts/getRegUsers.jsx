@@ -13,37 +13,38 @@ export const GetRegUsersContext = createContext();
 const GetRegUsersProvider = ({ children }) => {
   const [userCollection, setUserCollection] = useState([]);
 
-  const fetchData = async (newUserQuery) => {
+  const fetchData = async (newUserQuery, user) => {
     let path = '';
-
-    try {
-      if (newUserQuery === 'all') {
-        path = query(collection(db, 'users'));
-      } else {
-        const isEmailSearch = newUserQuery.trim().endsWith('@gmail.com');
-
-        if (isEmailSearch) {
-          path = query(
-            collection(db, 'users'),
-            where('email', '==', newUserQuery.trim())
-          );
+    if (user) {
+      try {
+        if (newUserQuery === 'all') {
+          path = query(collection(db, 'users'));
         } else {
-          path = query(
-            collection(db, 'users'),
-            where('name', '==', newUserQuery.trim())
-          );
-        }
-      }
+          const isEmailSearch = newUserQuery.trim().endsWith('@gmail.com');
 
-      onSnapshot(path, (querySnapshot) => {
-        const users = [];
-        querySnapshot.forEach((doc) => {
-          users.push({ ...doc.data(), id: doc.id });
+          if (isEmailSearch) {
+            path = query(
+              collection(db, 'users'),
+              where('email', '==', newUserQuery.trim())
+            );
+          } else {
+            path = query(
+              collection(db, 'users'),
+              where('name', '==', newUserQuery.trim())
+            );
+          }
+        }
+
+        onSnapshot(path, (querySnapshot) => {
+          const users = [];
+          querySnapshot.forEach((doc) => {
+            users.push({ ...doc.data(), id: doc.id });
+          });
+          setUserCollection(users);
         });
-        setUserCollection(users);
-      });
-    } catch (error) {
-      console.error('Error fetching data: ', error);
+      } catch (error) {
+        console.error('Error fetching data: ', error);
+      }
     }
   };
 
