@@ -1,19 +1,18 @@
 'use client';
 import { Box, Grid } from '@mui/material';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
 import SearchField from './SearchField';
 import Chat from './Chat';
-import { DataContext } from '@/app/Contexts/MyContextProvider';
 import SettingsBar from './SettingsBar';
 import UserProfile from './UserProfile';
 import NewChat from './NewChat';
 import ChatHead from './ChatHead';
-
+import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 
 const Layout = () => {
-  const { data, setData } = useContext(DataContext);
+  const { currentChatUser } = useContext(GetAddedUsers);
   const menuStyles = {
     position: 'absolute',
     bgcolor: '#fff',
@@ -23,9 +22,6 @@ const Layout = () => {
     left: '0',
     top: '0',
     transition: 'all 0.3s ease-in-out',
-  };
-  const userClicked = () => {
-    setData({ name: 'Whatsapp' });
   };
 
   return (
@@ -100,8 +96,7 @@ const Layout = () => {
                 flexGrow: '1',
               }}
             >
-              <UserInfo onClick={userClicked} />
-              
+              <UserInfo />
             </Box>
           </Box>
           {/*SIDEBAR CHAT END */}
@@ -119,7 +114,7 @@ const Layout = () => {
             flexGrow: '1',
           }}
         >
-          {data ? <Chat /> : <ChatBg />}
+          {currentChatUser ? <Chat /> : <ChatBg />}
         </Box>
         {/* Chat SECTION  END*/}
       </Box>

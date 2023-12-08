@@ -4,17 +4,19 @@ import { Avatar, Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
+import { DataContext } from '../Contexts/MyContextProvider';
 
 const AddNewUser = () => {
   const { userCollection } = useContext(GetRegUsersContext);
   const { addNewUser } = useContext(GetAddedUsers);
+  const { setOpenNewChat } = useContext(DataContext);
 
   return (
     <>
       {userCollection?.map((addUser, index) => (
         <Box
           key={index}
-          onClick={() => addNewUser(addUser)}
+          onClick={() => addNewUser(addUser,setOpenNewChat)}
           sx={{
             bgcolor: '#fff',
             color: '#3b4a54',

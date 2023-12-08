@@ -1,45 +1,37 @@
-import { useContext, useState } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import {
   db,
   collection,
   query,
-  where,
   onSnapshot,
   doc,
   setDoc,
-  addDoc,
   onAuthStateChanged,
   auth,
-  getDoc,
 } from '../firebase/friebaseConfig';
-import { createContext } from 'react';
-import { useEffect } from 'react';
 
 export const GetAddedUsers = createContext();
 
 const GetAddedUsersProvider = ({ children }) => {
   const [addedUsers, setAddedUsers] = useState([]);
-  const [currentChatUser,setCurrentChatUser]=useState({})
+  const [currentChatUser, setCurrentChatUser] = useState({});
 
-  const addNewUser = (addUser) => {
-    console.log(addUser);
+  const addNewUser = (addUser, setOpenNewChat) => {
     onAuthStateChanged(auth, (loggedInUser) => {
       if (loggedInUser) {
-        const contactedUsersRef = doc(
-          db,
-          'users',
-          loggedInUser.uid,
-          'contactedUsers',
-          addUser.id
-        );
-        setDoc(contactedUsersRef, addUser)
-          
-          .then((docRef) => {
-            console.log('Document written with ID: ', docRef);
-          })
-          .catch((error) => {
-            console.error('Error adding document: ', error);
-          });
+        try {
+          const contactedUsersRef = doc(
+            db,
+            'users',
+            loggedInUser.uid,
+            'contactedUsers',
+            addUser.id
+          );
+          setDoc(contactedUsersRef, addUser);
+          setOpenNewChat(false);
+        } catch (error) {
+          console.error('Error adding document: ', error);
+        }
       }
     });
   };
@@ -66,7 +58,9 @@ const GetAddedUsersProvider = ({ children }) => {
   }, []);
 
   return (
-    <GetAddedUsers.Provider value={{ addNewUser, addedUsers ,currentChatUser,setCurrentChatUser}}>
+    <GetAddedUsers.Provider
+      value={{ addNewUser, addedUsers, currentChatUser, setCurrentChatUser }}
+    >
       {children}
     </GetAddedUsers.Provider>
   );

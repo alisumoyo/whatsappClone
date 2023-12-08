@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Box, Button, IconButton, Typography, Avatar } from '@mui/material';
+import { Box, IconButton, Typography, Avatar } from '@mui/material';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { DataContext } from '../Contexts/MyContextProvider';
 import SideBarHeading from './SideBarHead';

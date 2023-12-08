@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import Image from 'next/image';
 import whatsappTextLogo from '../assets/whatsappLogo.png';
-// import bgLanding from '../assets/bgLanding.jpg';
 import { PersonAdd, Login } from '@mui/icons-material';
 import Link from 'next/link';
 

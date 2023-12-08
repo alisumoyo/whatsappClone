@@ -4,7 +4,6 @@ import { createContext, useState } from 'react';
 export const DataContext = createContext('');
 
 const MyContextProvider = ({ children }) => {
-  const [data, setData] = useState(null);
   const [openSettings, setOpenSettings] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [openNewChat, setOpenNewChat] = useState(false);
@@ -13,8 +12,6 @@ const MyContextProvider = ({ children }) => {
     <>
       <DataContext.Provider
         value={{
-          data,
-          setData,
           openSettings,
           setOpenSettings,
           openProfile,

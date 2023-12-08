@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { useState, useContext } from 'react';
-import { Avatar, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { Avatar, Box, Menu, MenuItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
@@ -12,8 +12,7 @@ const CustomMenu = ({ chatUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { user } = useContext(getLoggedUser);
-
-  const { addedUsers } = useContext(GetAddedUsers);
+  const { setCurrentChatUser } = useContext(GetAddedUsers);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,6 +26,7 @@ const CustomMenu = ({ chatUser }) => {
       deletedDocId
     );
     deleteDoc(contactedUsersRef);
+    setCurrentChatUser({});
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -77,12 +77,11 @@ const CustomMenu = ({ chatUser }) => {
   );
 };
 
-const UserInfo = ({ onClick }) => {
+const UserInfo = () => {
   const { addedUsers, setCurrentChatUser } = useContext(GetAddedUsers);
 
   const handleClick = (chatUser) => {
     setCurrentChatUser(chatUser);
-    onClick();
   };
 
   return (
@@ -90,7 +89,7 @@ const UserInfo = ({ onClick }) => {
       {addedUsers.map((chatUser, index) => (
         <Box
           key={index}
-          onClick={()=>handleClick(chatUser)}
+          onClick={() => handleClick(chatUser)}
           sx={{
             bgcolor: '#fff',
             color: '#3b4a54',
@@ -123,7 +122,7 @@ const UserInfo = ({ onClick }) => {
                   variant='caption'
                   sx={{ color: '#667781', fontSize: '12px' }}
                 >
-                  {chatUser.id}
+                  time
                 </Typography>
               </Box>
               <Box

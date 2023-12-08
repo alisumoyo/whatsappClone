@@ -34,7 +34,6 @@ import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 
 const Chat = () => {
 
-  const { setData } = useContext(DataContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
 
@@ -42,7 +41,7 @@ const Chat = () => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const {user}=useContext(getLoggedUser)
-  const {currentChatUser}=useContext(GetAddedUsers)
+  const {currentChatUser,setCurrentChatUser}=useContext(GetAddedUsers)
 
   const sendMessage = (e) => {
     if (e.key === 'Enter') {
@@ -66,7 +65,7 @@ const Chat = () => {
     setSend(null);
   };
   const handleCloseChat = () => {
-    setData(null);
+    setCurrentChatUser(null)
   };
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
