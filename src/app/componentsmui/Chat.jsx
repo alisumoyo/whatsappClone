@@ -31,26 +31,43 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import Message from './Message';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
+import {
+  doc,
+  addDoc,
+  db,
+  serverTimestamp,
+  setDoc,
+  collection,
+} from '../firebase/friebaseConfig';
 
 const Chat = () => {
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
 
-
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-  const {user}=useContext(getLoggedUser)
-  const {currentChatUser,setCurrentChatUser}=useContext(GetAddedUsers)
-
-  const sendMessage = (e) => {
+  const { user } = useContext(getLoggedUser);
+  const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
+  const date=new Date()
+  const sendMessage = async (e) => {
     if (e.key === 'Enter') {
-      // Send message to server (implement logic)
-      // Add message to chat history
-      setChatHistory([...chatHistory, message]);
-      setMessage('');
+      const chat = {
+        senderId: user.userId,
+        receiverId: currentChatUser.id,
+        messageText: message,
+        date: date,
+      };
+      console.log("Chat object:", chat);
+      try {
+        const collectionRef = collection(db, 'chats');
+        await addDoc(collectionRef, chat);
+        setMessage('')
+      } catch (error) {
+        console.error('Error sending message:', error);
+      }
     }
   };
+
   const open = Boolean(anchorEl);
   const openDoc = Boolean(send);
 
@@ -65,7 +82,7 @@ const Chat = () => {
     setSend(null);
   };
   const handleCloseChat = () => {
-    setCurrentChatUser(null)
+    setCurrentChatUser(null);
   };
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
@@ -84,10 +101,7 @@ const Chat = () => {
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Avatar
-            alt='User'
-            src={currentChatUser.proImgLink}
-          />
+          <Avatar alt='User' src={currentChatUser.proImgLink} />
           <Box sx={{ fontSize: '14px', color: '#111b21' }}>
             <Typography variant='h6'>{currentChatUser.name}</Typography>
             <Typography variant='p'>
@@ -207,7 +221,7 @@ const Chat = () => {
           <Message
             key={index}
             message={message}
-            isSentByMe={message.sender === user.userId}
+            isSentByMe={message.sender === user.uid}
           />
         ))}
       </Box>

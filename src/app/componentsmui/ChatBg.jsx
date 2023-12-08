@@ -9,6 +9,16 @@ import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 const ChatBg = () => {
+const  handleButtonClick = () => {
+    const isConfirmed = window.confirm('https://web.whatsapp.com wants to open this application.');
+
+    if (isConfirmed) {
+      // Open the link if the user clicked OK
+      window.location.href = 'https://www.microsoft.com/store/productId/9NKSQGP7F2NH?ocid=pdpshare'; // Replace with your desired link
+    } else {
+      // Do something else or nothing if the user clicked Cancel
+    }
+  };
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
@@ -69,6 +79,7 @@ const ChatBg = () => {
               </Typography>
               <Box>
                 <Button
+                  onClick={handleButtonClick}
                   variant='contained'
                   sx={{
                     display: 'flex',

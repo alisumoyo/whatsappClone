@@ -12,7 +12,7 @@ import {
   getDocs,
   updateDoc,
   getDoc,
-  deleteDoc,
+  deleteDoc,serverTimestamp
 } from 'firebase/firestore';
 import {
   getAuth,
@@ -48,5 +48,5 @@ export {
   getDocs,
   updateDoc,
   getDoc,
-  deleteDoc,
+  deleteDoc,serverTimestamp
 };
