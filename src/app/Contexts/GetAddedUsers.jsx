@@ -14,7 +14,7 @@ export const GetAddedUsers = createContext();
 
 const GetAddedUsersProvider = ({ children }) => {
   const [addedUsers, setAddedUsers] = useState([]);
-  const [currentChatUser, setCurrentChatUser] = useState({});
+  const [currentChatUser, setCurrentChatUser] = useState();
 
   const addNewUser = (addUser, setOpenNewChat) => {
     onAuthStateChanged(auth, (loggedInUser) => {
@@ -28,6 +28,7 @@ const GetAddedUsersProvider = ({ children }) => {
             addUser.id
           );
           setDoc(contactedUsersRef, addUser);
+          
           setOpenNewChat(false);
         } catch (error) {
           console.error('Error adding document: ', error);

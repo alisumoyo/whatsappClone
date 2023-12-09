@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import {
   Box,
   IconButton,
@@ -27,8 +27,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import PollIcon from '@mui/icons-material/Poll';
 import LabelIcon from '@mui/icons-material/Label';
 import { pink, purple, yellow } from '@mui/material/colors';
-import { DataContext } from '../Contexts/MyContextProvider';
-import Message from './Message';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 import {
@@ -38,30 +36,99 @@ import {
   serverTimestamp,
   setDoc,
   collection,
+  getDocs,
+  query,
+  where,
 } from '../firebase/friebaseConfig';
+
+const Message = ({ message, userId }) => {
+  const isSentByMe = message.senderId === userId;
+
+  const messageStyle = {
+    borderRadius: isSentByMe ? '16px 0px 16px 16px' : '0px 16px 16px 16px',
+    padding: '6px 12px 6px 8px',
+    marginBottom: '20px',
+    bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
+    maxWidth: '300px',
+    width: 'fit-content',
+    position:'relative',
+    top:'10px',
+    left: isSentByMe ? '75%;' : '12px', // Align right for user's messages
+    // right: isSentByMe ? ' -468px;' : '12px', // Align right for user's messages
+  };
+
+  return (
+    <Box sx={messageStyle}>
+      <Typography variant='h3' sx={{ fontSize: '14px' }}>
+        {message.messageText}
+      </Typography>
+    </Box>
+  );
+};
 
 const Chat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [send, setSend] = useState(null);
 
   const [message, setMessage] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
   const { user } = useContext(getLoggedUser);
   const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
-  const date=new Date()
+  const [chatMessages, setChatMessages] = useState([]);
+
+  const getChatmessages = async () => {
+    try {
+      const collectionRef = collection(db, 'chats');
+
+      // Query messages sent by the user to currentChatUser
+      const sentMessagesSnapshot = await getDocs(
+        query(
+          collectionRef,
+          where('senderId', '==', user.userId),
+          where('receiverId', '==', currentChatUser.id)
+        )
+      );
+
+      const receivedMessagesSnapshot = await getDocs(
+        query(
+          collectionRef,
+          where('senderId', '==', currentChatUser.id),
+          where('receiverId', '==', user.userId)
+        )
+      );
+
+      const allMessages = [
+        ...sentMessagesSnapshot.docs.map((doc) => doc.data()),
+        ...receivedMessagesSnapshot.docs.map((doc) => doc.data()),
+      ].sort((a, b) => a.date - b.date);
+
+      setChatMessages(allMessages);
+
+      return allMessages;
+    } catch (error) {
+      console.error('Error fetching chat messages:', error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    getChatmessages();
+  }, [currentChatUser]);
+
+  const date = new Date();
   const sendMessage = async (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && currentChatUser.id && user.userId) {
       const chat = {
         senderId: user.userId,
         receiverId: currentChatUser.id,
         messageText: message,
         date: date,
       };
-      console.log("Chat object:", chat);
+      // console.log("Chat object:", chat);
       try {
         const collectionRef = collection(db, 'chats');
         await addDoc(collectionRef, chat);
-        setMessage('')
+        setMessage('');
+        await getChatmessages();
       } catch (error) {
         console.error('Error sending message:', error);
       }
@@ -183,48 +250,22 @@ const Chat = () => {
           flexGrow: '1',
           display: 'flex',
           flexDirection: 'column',
-
-          backgroundImage: `url(${chatbg})`,
+          // backgroundImage: `url(${chatbg})`,
+          bgcolor:'#333',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          overflowY: 'auto',
+          overflowY: 'hidden',
           width: '100%',
           height: '300px',
           position: 'relative',
         }}
       >
-        {/* <Box
-          sx={{
-            borderRadius: '16px 0px 16px 16px',
-            padding: '6px 12px 6px 8px',
-            bgcolor: '#d9fdd3',
-            maxWidth: '360px',
-            width: 'fit-content',
-            position: 'absolute',
-            top: '12px',
-            right: '20px',
-          }}
-        >
-          <Typography
-            variant='h3'
-            sx={{ fontSize: '14px', height: 'auto', overflow: 'hidden' }}
-          >
-            {message}
-          </Typography>
-          <Box sx={{ display: 'flex' }}>
-            <CheckIcon sx={{ fontSize: '8px' }} />
-            <CheckIcon sx={{ fontSize: '8px' }} />
-          </Box>
-        </Box> */}
-        {chatHistory.map((message, index) => (
-          <Message
-            key={index}
-            message={message}
-            isSentByMe={message.sender === user.uid}
-          />
+        {chatMessages.map((message, index) => (
+          <Message key={index} message={message} userId={user.userId} />
         ))}
       </Box>
+
       <Box
         sx={{
           display: 'flex',

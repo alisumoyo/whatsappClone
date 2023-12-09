@@ -1,6 +1,5 @@
 'use client';
-import React from 'react';
-import { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Avatar, Box, Menu, MenuItem } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -80,8 +79,9 @@ const CustomMenu = ({ chatUser }) => {
 const UserInfo = () => {
   const { addedUsers, setCurrentChatUser } = useContext(GetAddedUsers);
 
-  const handleClick = (chatUser) => {
-    setCurrentChatUser(chatUser);
+  const handleClick = async (chatUser) => {
+    await setCurrentChatUser(chatUser);
+    // console.log(chatUser);
   };
 
   return (
@@ -122,7 +122,7 @@ const UserInfo = () => {
                   variant='caption'
                   sx={{ color: '#667781', fontSize: '12px' }}
                 >
-                  time
+                  {/* {timeNow} */}
                 </Typography>
               </Box>
               <Box
