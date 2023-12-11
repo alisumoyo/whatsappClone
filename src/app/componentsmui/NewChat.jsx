@@ -10,11 +10,11 @@ import { getLoggedUser } from '../Contexts/GetLoggedUser';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
-  const {user}=useContext(getLoggedUser)
-  
+  const { user } = useContext(getLoggedUser);
+
   const { fetchData } = useContext(GetRegUsersContext);
   const handleEnter = (value) => {
-    fetchData(value,user);
+    fetchData(value, user);
   };
 
   return (
@@ -49,13 +49,16 @@ const NewChat = ({ sx }) => {
             fontSize: '1.1rem',
             padding: '12px 24px',
             fontWeight: '200',
-            flexGrow: '1',
           }}
         >
           Contact on Whatsapp
         </Typography>
       </Box>
-      <AddNewUser />
+      <Box
+        sx={{ flexGrow: '1', bgcolor: 'red', height: '100%', overflow: 'auto' }}
+      >
+        <AddNewUser />
+      </Box>
     </Box>
   );
 };

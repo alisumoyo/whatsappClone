@@ -24,6 +24,7 @@ const ChatHead = () => {
   const { user } = useContext(getLoggedUser);
   const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
     useContext(DataContext);
+    
   const [anchorEl, setAnchorEl] = useState(null);
   const logout = () => {
     signOut(auth)

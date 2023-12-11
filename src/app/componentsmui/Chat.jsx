@@ -39,9 +39,11 @@ import {
   getDocs,
   query,
   where,
+  deleteDoc,
+  onSnapshot,
 } from '../firebase/friebaseConfig';
 
-const Message = ({ message, userId }) => {
+const Message = ({ message, userId, onDelete }) => {
   const isSentByMe = message.senderId === userId;
 
   const messageStyle = {
@@ -51,17 +53,69 @@ const Message = ({ message, userId }) => {
     bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
     maxWidth: '300px',
     width: 'fit-content',
-    position:'relative',
-    top:'10px',
-    left: isSentByMe ? '75%;' : '12px', // Align right for user's messages
-    // right: isSentByMe ? ' -468px;' : '12px', // Align right for user's messages
+    position: 'relative',
+    top: '10px',
+    left: isSentByMe ? '75%;' : '12px',
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // console.log('SignOut Successfull');
+        router.push('signin');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
     <Box sx={messageStyle}>
       <Typography variant='h3' sx={{ fontSize: '14px' }}>
         {message.messageText}
+        <IconButton
+          id='basic-button'
+          aria-controls={open ? 'basic-menu' : undefined}
+          aria-haspopup='true'
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+        >
+          <MoreVertOutlinedIcon sx={{ fontSize: '12px' }} />
+        </IconButton>
       </Typography>
+      <Box
+        sx={{
+          marginTop: '8px',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Menu
+          id='basic-menu'
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          onClick={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem
+            className='moreIcon-sub'
+            onClick={() => onDelete(message.msgDocId)}
+          >
+            Delete Msg
+          </MenuItem>
+          <MenuItem className='moreIcon-sub'>Edit Msg</MenuItem>
+        </Menu>
+      </Box>
     </Box>
   );
 };
@@ -77,42 +131,29 @@ const Chat = () => {
 
   const getChatmessages = async () => {
     try {
-      const collectionRef = collection(db, 'chats');
-
-      // Query messages sent by the user to currentChatUser
-      const sentMessagesSnapshot = await getDocs(
+      onSnapshot(
         query(
-          collectionRef,
-          where('senderId', '==', user.userId),
-          where('receiverId', '==', currentChatUser.id)
-        )
+          collection(db, 'chats'),
+          where('senderId', 'in', [user.userId, currentChatUser.id]),
+          where('receiverId', 'in', [user.userId, currentChatUser.id])
+        ),
+        (querySnapshot) => {
+          const allMessages = [];
+          querySnapshot.forEach((doc) => {
+            const messageData = doc.data();
+            const msgDocId = doc.id;
+            const dateObject = new Date(messageData.date);
+            allMessages.push({ ...messageData, dateObject, msgDocId });
+          });
+          allMessages.sort((a, b) => a.date - b.date);
+          setChatMessages(allMessages);
+        }
       );
-
-      const receivedMessagesSnapshot = await getDocs(
-        query(
-          collectionRef,
-          where('senderId', '==', currentChatUser.id),
-          where('receiverId', '==', user.userId)
-        )
-      );
-
-      const allMessages = [
-        ...sentMessagesSnapshot.docs.map((doc) => doc.data()),
-        ...receivedMessagesSnapshot.docs.map((doc) => doc.data()),
-      ].sort((a, b) => a.date - b.date);
-
-      setChatMessages(allMessages);
-
-      return allMessages;
     } catch (error) {
       console.error('Error fetching chat messages:', error);
       return [];
     }
   };
-
-  useEffect(() => {
-    getChatmessages();
-  }, [currentChatUser]);
 
   const date = new Date();
   const sendMessage = async (e) => {
@@ -134,6 +175,14 @@ const Chat = () => {
       }
     }
   };
+  const handleDelete = async (deltedMsgId) => {
+    try {
+      const deleteMsgRef = doc(db, 'chats', deltedMsgId);
+      deleteDoc(deleteMsgRef);
+    } catch (error) {
+      console.error('Error deleting message:', error);
+    }
+  };
 
   const open = Boolean(anchorEl);
   const openDoc = Boolean(send);
@@ -151,6 +200,10 @@ const Chat = () => {
   const handleCloseChat = () => {
     setCurrentChatUser(null);
   };
+
+  useEffect(() => {
+    getChatmessages();
+  }, [sendMessage, currentChatUser]);
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
   return (
@@ -250,19 +303,24 @@ const Chat = () => {
           flexGrow: '1',
           display: 'flex',
           flexDirection: 'column',
-          // backgroundImage: `url(${chatbg})`,
-          bgcolor:'#333',
+          backgroundImage: `url(${chatbg})`,
+          bgcolor: '#333',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          overflowY: 'hidden',
           width: '100%',
           height: '300px',
           position: 'relative',
+          overflow: 'auto',
         }}
       >
         {chatMessages.map((message, index) => (
-          <Message key={index} message={message} userId={user.userId} />
+          <Message
+            key={index}
+            message={message}
+            userId={user.userId}
+            onDelete={handleDelete}
+          />
         ))}
       </Box>
 
