@@ -13,9 +13,10 @@ import {
 export const GetAddedUsers = createContext();
 
 const GetAddedUsersProvider = ({ children }) => {
-  const [addedUsers, setAddedUsers] = useState([]);
   const [currentChatUser, setCurrentChatUser] = useState();
-
+  
+  const [addedUsers, setAddedUsers] = useState([]);
+  
   const addNewUser = (addUser, setOpenNewChat) => {
     onAuthStateChanged(auth, (loggedInUser) => {
       if (loggedInUser) {

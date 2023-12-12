@@ -8,7 +8,9 @@ import { DataContext } from '../Contexts/MyContextProvider';
 
 const AddNewUser = () => {
   const { userCollection } = useContext(GetRegUsersContext);
+
   const { addNewUser } = useContext(GetAddedUsers);
+
   const { setOpenNewChat } = useContext(DataContext);
 
   return (

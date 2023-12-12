@@ -58,16 +58,7 @@ const Message = ({ message, userId, onDelete }) => {
     left: isSentByMe ? '75%;' : '12px',
   };
   const [anchorEl, setAnchorEl] = useState(null);
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        // console.log('SignOut Successfull');
-        router.push('signin');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -107,13 +98,10 @@ const Message = ({ message, userId, onDelete }) => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem
-            className='moreIcon-sub'
-            onClick={() => onDelete(message.msgDocId)}
-          >
+          <MenuItem onClick={() => onDelete(message.msgDocId)}>
             Delete Msg
           </MenuItem>
-          <MenuItem className='moreIcon-sub'>Edit Msg</MenuItem>
+          <MenuItem>Edit Msg</MenuItem>
         </Menu>
       </Box>
     </Box>
@@ -157,24 +145,25 @@ const Chat = () => {
 
   const date = new Date();
   const sendMessage = async (e) => {
-    if (e.key === 'Enter' && currentChatUser.id && user.userId) {
-      const chat = {
-        senderId: user.userId,
-        receiverId: currentChatUser.id,
-        messageText: message,
-        date: date,
-      };
-      // console.log("Chat object:", chat);
-      try {
-        const collectionRef = collection(db, 'chats');
-        await addDoc(collectionRef, chat);
-        setMessage('');
-        await getChatmessages();
-      } catch (error) {
-        console.error('Error sending message:', error);
-      }
+    if (e.key !== 'Enter' || !currentChatUser.id || !user.userId) return;
+
+    const chat = {
+      senderId: user.userId,
+      receiverId: currentChatUser.id,
+      messageText: message,
+      date: Date.now(), 
+    };
+
+    try {
+      const collectionRef = collection(db, 'chats');
+      await addDoc(collectionRef, chat);
+      setChatMessages((prevMessages) => [...prevMessages, chat]);
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
     }
   };
+
   const handleDelete = async (deltedMsgId) => {
     try {
       const deleteMsgRef = doc(db, 'chats', deltedMsgId);
@@ -200,10 +189,10 @@ const Chat = () => {
   const handleCloseChat = () => {
     setCurrentChatUser(null);
   };
-
   useEffect(() => {
     getChatmessages();
-  }, [sendMessage, currentChatUser]);
+  }, [currentChatUser.id]);
+
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
   return (
