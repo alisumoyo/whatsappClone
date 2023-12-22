@@ -41,6 +41,8 @@ import {
   deleteDoc,
   onSnapshot,
 } from '../firebase/friebaseConfig';
+import InputFileUpload from './ChatInput';
+import Loader from './Loader';
 
 const Message = ({ message, userId, onDelete }) => {
   const isSentByMe = message.senderId === userId;
@@ -51,10 +53,11 @@ const Message = ({ message, userId, onDelete }) => {
     bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
     maxWidth: '270px',
     width: 'fit-content',
-    wordWrap: 'break-word',
     alignItems: 'center',
     display: 'flex',
     flexWrap: 'wrap',
+    wordWrap: 'break-word',
+    overflow: 'hidden',
     position: 'relative',
     marginBottom: '10px',
     top: '10px',
@@ -79,6 +82,7 @@ const Message = ({ message, userId, onDelete }) => {
             fontSize: '14px',
             position: 'relative',
             padding: '1px 14px 1px 4px',
+            overflow: 'auto',
           }}
         >
           {message.messageText}
@@ -90,7 +94,7 @@ const Message = ({ message, userId, onDelete }) => {
             onClick={handleClick}
             sx={{ position: 'absoulte', left: '10px' }}
           >
-            <MoreVertOutlinedIcon sx={{ fontSize: '10px' }} />
+            <MoreVertOutlinedIcon sx={{ fontSize: '11px' }} />
           </IconButton>
         </Typography>
         <Box
@@ -144,7 +148,7 @@ const Chat = () => {
           querySnapshot.forEach((doc) => {
             const messageData = doc.data();
             const msgDocId = doc.id;
-            const dateObject = new Date(messageData.date);
+            const dateObject = serverTimestamp(messageData.date);
             allMessages.push({ ...messageData, dateObject, msgDocId });
           });
           allMessages.sort((a, b) => a.date - b.date);
@@ -156,8 +160,6 @@ const Chat = () => {
       return [];
     }
   };
-
-  const date = new Date();
   const sendMessage = async (e) => {
     if (e.key !== 'Enter' || !currentChatUser.id || !user.userId) return;
 
@@ -165,7 +167,7 @@ const Chat = () => {
       senderId: user.userId,
       receiverId: currentChatUser.id,
       messageText: message,
-      date: Date.now(),
+      date: serverTimestamp(),
     };
 
     try {
@@ -206,9 +208,12 @@ const Chat = () => {
   useEffect(() => {
     getChatmessages();
   }, [currentChatUser.id]);
-
+  const handleMenuItemClick = () => {
+    console.log('hello');
+  };
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
+
   return (
     <>
       <Box
@@ -261,7 +266,6 @@ const Chat = () => {
             </IconButton>
           </Tooltip>
           <Menu
-            className='moreIcon-sub'
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
@@ -307,7 +311,6 @@ const Chat = () => {
           // display: 'flex',
           // flexDirection: 'column',
           backgroundImage: `url(${chatbg})`,
-          // bgcolor: '#333',
           // backgroundPosition: 'center',
           // backgroundSize: 'cover',
           // backgroundRepeat: 'no-repeat',
@@ -319,7 +322,7 @@ const Chat = () => {
           <Message
             key={index}
             message={message}
-            userId={user.userId}
+            userId={user?.userId}
             onDelete={handleDelete}
           />
         ))}
@@ -355,14 +358,13 @@ const Chat = () => {
         </IconButton>
         <Menu
           sx={{
-            '.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper': {
-              borderRadius: ' 16px',
+            '.MuiPaper-root': {
+              borderRadius: '16px !important',
               bottom: '75px !important',
               left: '480px !important',
               top: 'unset !important',
             },
           }}
-          className='moreIcon-sub'
           id='basic-menu'
           anchorEl={send}
           open={openDoc}
@@ -371,41 +373,78 @@ const Chat = () => {
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <DescriptionIcon color='secondary' />
-            </ListItemIcon>
-            Document
+          <MenuItem onClick={handleClose} sx={{ bgcolor: 'pink' }}>
+            <InputFileUpload
+              text='Document'
+              icon={
+                <ListItemIcon>
+                  <DescriptionIcon color='secondary' />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='file'
+            />
           </MenuItem>
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <PhotoLibraryIcon color='success' />
-            </ListItemIcon>
-            Photos & Videos
+          <MenuItem onClick={handleClose}>
+            <InputFileUpload
+              text='Photos & Videos'
+              icon={
+                <ListItemIcon>
+                  <PhotoLibraryIcon color='success' />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='file'
+              accept='image/*'
+            />
           </MenuItem>
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <CameraAltIcon sx={{ color: pink[500] }} />
-            </ListItemIcon>
-            Photos & Videos
+          <MenuItem onClick={handleClose}>
+            <InputFileUpload
+              text='Photos & Videos'
+              icon={
+                <ListItemIcon>
+                  <CameraAltIcon sx={{ color: pink[500] }} />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='video/*'
+            />
           </MenuItem>
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <PersonIcon sx={{ color: purple[500] }} />
-            </ListItemIcon>
-            Contact
+          <MenuItem onClick={handleClose}>
+            <InputFileUpload
+              text='Contact'
+              icon={
+                <ListItemIcon>
+                  <PersonIcon sx={{ color: purple[500] }} />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='text/vcard'
+            />
           </MenuItem>
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <PollIcon sx={{ color: yellow[500] }} />
-            </ListItemIcon>
-            Poll
+          <MenuItem onClick={handleClose}>
+            <InputFileUpload
+              text='Poll'
+              icon={
+                <ListItemIcon>
+                  <PollIcon sx={{ color: yellow[500] }} />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='application/json'
+            />
           </MenuItem>
-          <MenuItem className='moreIcon-sub' onClick={handleClose}>
-            <ListItemIcon>
-              <LabelIcon color='primary' />
-            </ListItemIcon>
-            Label
+          <MenuItem onClick={handleClose}>
+            <InputFileUpload
+              text='Label'
+              icon={
+                <ListItemIcon>
+                  <LabelIcon color='primary' />
+                </ListItemIcon>
+              }
+              onClick={handleMenuItemClick}
+              fileType='text/plain'
+            />
           </MenuItem>
         </Menu>
 

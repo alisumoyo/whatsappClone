@@ -90,9 +90,9 @@ const Signup = () => {
       <Container
         sx={{
           backgroundColor: '#eae6df',
-          padding: '30px',
+          padding: '20px',
           width: '400px',
-          margin: 'auto',
+          // margin: 'auto',
           display: 'flex',
           flexDirection: 'column',
           position: 'absolute',
@@ -120,7 +120,7 @@ const Signup = () => {
           required
           error={!name.trim() && error.includes('name')}
           helperText={!name.trim() && error.includes('name') && error}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '12px' }}
         />
         <TextField
           label='Email'
@@ -133,7 +133,7 @@ const Signup = () => {
           required
           error={!email.trim() && error.includes('email')}
           helperText={!email.trim() && error.includes('email') && error}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '12px' }}
         />
         <TextField
           label='Number'
@@ -146,7 +146,7 @@ const Signup = () => {
           required
           error={!number.trim() && error.includes('number')}
           helperText={!number.trim() && error.includes('number') && error}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '12px' }}
         />
         <TextField
           label='Password'
@@ -159,7 +159,7 @@ const Signup = () => {
           required
           error={!password.trim() && error.includes('password')}
           helperText={!password.trim() && error.includes('password') && error}
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '12px' }}
         />
         <TextField
           label='Confirm Password'
@@ -176,9 +176,9 @@ const Signup = () => {
             error.includes('confirmPassword') &&
             error
           }
-          style={{ marginBottom: '16px' }}
+          style={{ marginBottom: '12px' }}
         />
-        {loading && <CircularProgress style={{ marginBottom: '16px' }} />}
+        {loading && <CircularProgress style={{ marginBottom: '12px' }} />}
         {error &&
           !error.includes('name') &&
           !error.includes('email') &&
@@ -188,7 +188,7 @@ const Signup = () => {
             <Typography
               variant='body2'
               color='error'
-              style={{ marginBottom: '16px' }}
+              style={{ marginBottom: '12px' }}
             >
               {error}
             </Typography>
