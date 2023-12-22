@@ -54,9 +54,7 @@ const NewChat = ({ sx }) => {
           Contact on Whatsapp
         </Typography>
       </Box>
-      <Box
-        sx={{ flexGrow: '1', bgcolor: 'red', height: '100%', overflow: 'auto' }}
-      >
+      <Box sx={{ flexGrow: '1', height: '100%', overflow: 'auto' }}>
         <AddNewUser />
       </Box>
     </Box>

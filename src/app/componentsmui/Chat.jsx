@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import { useContext, useState, useEffect } from 'react';
 import {
@@ -70,7 +71,7 @@ const Message = ({ message, userId, onDelete }) => {
   };
 
   return (
-    <Box sx={{ width: '100%', padding: '2px 10px 8px 10px' ,bgcolor:"red"}}>
+    <Box sx={{ width: '100%', padding: '2px 10px 8px 10px' }}>
       <Box sx={messageStyle}>
         <Typography
           variant='h6'
@@ -204,7 +205,7 @@ const Chat = () => {
   };
   useEffect(() => {
     getChatmessages();
-  }, [currentChatUser]);
+  }, [currentChatUser.id]);
 
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
