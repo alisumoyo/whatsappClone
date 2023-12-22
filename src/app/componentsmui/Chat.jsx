@@ -34,9 +34,7 @@ import {
   addDoc,
   db,
   serverTimestamp,
-  setDoc,
   collection,
-  getDocs,
   query,
   where,
   deleteDoc,
@@ -48,14 +46,18 @@ const Message = ({ message, userId, onDelete }) => {
 
   const messageStyle = {
     borderRadius: isSentByMe ? '16px 0px 16px 16px' : '0px 16px 16px 16px',
-    padding: '6px 12px 6px 8px',
-    marginBottom: '20px',
+    padding: '4px 18px',
     bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
-    maxWidth: '300px',
+    maxWidth: '270px',
     width: 'fit-content',
+    wordWrap: 'break-word',
+    alignItems: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
     position: 'relative',
+    marginBottom: '10px',
     top: '10px',
-    left: isSentByMe ? '75%;' : '12px',
+    left: isSentByMe ? '70%' : '12px',
   };
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -68,41 +70,51 @@ const Message = ({ message, userId, onDelete }) => {
   };
 
   return (
-    <Box sx={messageStyle}>
-      <Typography variant='h3' sx={{ fontSize: '14px' }}>
-        {message.messageText}
-        <IconButton
-          id='basic-button'
-          aria-controls={open ? 'basic-menu' : undefined}
-          aria-haspopup='true'
-          aria-expanded={open ? 'true' : undefined}
-          onClick={handleClick}
-        >
-          <MoreVertOutlinedIcon sx={{ fontSize: '12px' }} />
-        </IconButton>
-      </Typography>
-      <Box
-        sx={{
-          marginTop: '8px',
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Menu
-          id='basic-menu'
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          onClick={handleClose}
-          MenuListProps={{
-            'aria-labelledby': 'basic-button',
+    <Box sx={{ width: '100%', padding: '2px 10px 8px 10px' ,bgcolor:"red"}}>
+      <Box sx={messageStyle}>
+        <Typography
+          variant='h6'
+          sx={{
+            fontSize: '14px',
+            position: 'relative',
+            padding: '1px 14px 1px 4px',
           }}
         >
-          <MenuItem onClick={() => onDelete(message.msgDocId)}>
-            Delete Msg
-          </MenuItem>
-          <MenuItem>Edit Msg</MenuItem>
-        </Menu>
+          {message.messageText}
+          <IconButton
+            id='basic-button'
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            sx={{ position: 'absoulte', left: '10px' }}
+          >
+            <MoreVertOutlinedIcon sx={{ fontSize: '10px' }} />
+          </IconButton>
+        </Typography>
+        <Box
+          sx={{
+            marginTop: '8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Menu
+            id='basic-menu'
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            onClick={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={() => onDelete(message.msgDocId)}>
+              Delete Msg
+            </MenuItem>
+            <MenuItem>Edit Msg</MenuItem>
+          </Menu>
+        </Box>
       </Box>
     </Box>
   );
@@ -127,6 +139,7 @@ const Chat = () => {
         ),
         (querySnapshot) => {
           const allMessages = [];
+          setChatMessages([]);
           querySnapshot.forEach((doc) => {
             const messageData = doc.data();
             const msgDocId = doc.id;
@@ -151,7 +164,7 @@ const Chat = () => {
       senderId: user.userId,
       receiverId: currentChatUser.id,
       messageText: message,
-      date: Date.now(), 
+      date: Date.now(),
     };
 
     try {
@@ -191,7 +204,7 @@ const Chat = () => {
   };
   useEffect(() => {
     getChatmessages();
-  }, [currentChatUser.id]);
+  }, [currentChatUser]);
 
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
@@ -290,17 +303,15 @@ const Chat = () => {
       <Box
         sx={{
           flexGrow: '1',
-          display: 'flex',
-          flexDirection: 'column',
+          // display: 'flex',
+          // flexDirection: 'column',
           backgroundImage: `url(${chatbg})`,
-          bgcolor: '#333',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          width: '100%',
-          height: '300px',
-          position: 'relative',
-          overflow: 'auto',
+          // bgcolor: '#333',
+          // backgroundPosition: 'center',
+          // backgroundSize: 'cover',
+          // backgroundRepeat: 'no-repeat',
+          overflowX: 'auto',
+          overflowX: 'hidden',
         }}
       >
         {chatMessages.map((message, index) => (
