@@ -33,6 +33,7 @@ import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 import {
   doc,
   addDoc,
+  setDoc,
   db,
   serverTimestamp,
   collection,
@@ -40,28 +41,33 @@ import {
   where,
   deleteDoc,
   onSnapshot,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  storage,
 } from '../firebase/friebaseConfig';
 import InputFileUpload from './ChatInput';
 import Loader from './Loader';
+import { Download } from '@mui/icons-material';
+import Image from 'next/image';
 
 const Message = ({ message, userId, onDelete }) => {
   const isSentByMe = message.senderId === userId;
 
   const messageStyle = {
-    borderRadius: isSentByMe ? '16px 0px 16px 16px' : '0px 16px 16px 16px',
-    padding: '4px 18px',
+    borderRadius: isSentByMe ? '8px 0px 8px 8px' : '0px 8px 8px 8px',
+
     bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
-    maxWidth: '270px',
+    maxWidth: '340px',
     width: 'fit-content',
     alignItems: 'center',
     display: 'flex',
     flexWrap: 'wrap',
     wordWrap: 'break-word',
     overflow: 'hidden',
-    position: 'relative',
     marginBottom: '10px',
-    top: '10px',
-    left: isSentByMe ? '70%' : '12px',
+    lineHeight: '19px',
+    justifySelf: isSentByMe ? 'end' : 'start',
   };
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -72,19 +78,79 @@ const Message = ({ message, userId, onDelete }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const downloadFile = () => {
+    console.log('Downloaded');
+    {
+      message.filesObj.fileDownloadLink;
+    }
+  };
   return (
-    <Box sx={{ width: '100%', padding: '2px 10px 8px 10px' }}>
+    <Box
+      sx={{
+        width: '100%',
+        padding: '8px 10px 8px 10px',
+        display: 'grid',
+      }}
+    >
       <Box sx={messageStyle}>
         <Typography
           variant='h6'
           sx={{
             fontSize: '14px',
             position: 'relative',
-            padding: '1px 14px 1px 4px',
-            overflow: 'auto',
+            padding: '10px 4px 0px 10px',
           }}
         >
+          {message.filesObj && (
+            <Box
+              sx={{
+                width: '300px',
+                height: '192px',
+              }}
+            >
+              <Box sx={{ width: '300px', height: '124px' }}>
+                <Avatar
+                  src={message.filesObj.fileDownloadLink}
+                  sx={{ width: '100%', height: '100%' }}
+                  variant='square'
+                />
+                {/* <Box
+                  component='img'
+                  sx={{
+                    height: 233,
+                    width: 350,
+                    maxHeight: { xs: 233, md: 167 },
+                    maxWidth: { xs: 350, md: 250 },
+                  }}
+                  alt='The house from the offer.'
+                src={message.filesObj.fileDownloadLink}
+                /> */}
+              </Box>
+              <Box sx={{ bgcolor: 'pink', flexGrow: 1 }}>
+                <Typography
+                  variant='h3'
+                  sx={{ fontSize: '16px', color: '#333' }}
+                >
+                  {message.filesObj.fileName}
+                </Typography>
+                <Box sx={{ display: 'flex' }}>
+                  <Download onClick={downloadFile} />
+                  <Typography
+                    variant='h6'
+                    sx={{ fontSize: '12px', color: '#333' }}
+                  >
+                    {message.filesObj.fileType}
+                  </Typography>
+                  {/* <Typography
+                  variant='h6'
+                  sx={{ fontSize: '12px', color: '#333' }}
+                >
+                  {message.filesObj.fileSize}
+                </Typography> */}
+                </Box>
+              </Box>
+            </Box>
+          )}
           {message.messageText}
           <IconButton
             id='basic-button'
@@ -92,14 +158,14 @@ const Message = ({ message, userId, onDelete }) => {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
-            sx={{ position: 'absoulte', left: '10px' }}
+            sx={{ position: 'absolute', right: '0px' }}
           >
             <MoreVertOutlinedIcon sx={{ fontSize: '11px' }} />
           </IconButton>
         </Typography>
         <Box
           sx={{
-            marginTop: '8px',
+            marginTop: '6px',
             display: 'flex',
             justifyContent: 'space-between',
           }}
@@ -133,6 +199,7 @@ const Chat = () => {
   const { user } = useContext(getLoggedUser);
   const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
   const [chatMessages, setChatMessages] = useState([]);
+  const [attachment, setAttachemnt] = useState(null);
 
   const getChatmessages = async () => {
     try {
@@ -167,6 +234,7 @@ const Chat = () => {
       senderId: user.userId,
       receiverId: currentChatUser.id,
       messageText: message,
+      filesObj: attachment,
       date: serverTimestamp(),
     };
 
@@ -208,11 +276,44 @@ const Chat = () => {
   useEffect(() => {
     getChatmessages();
   }, [currentChatUser.id]);
-  const handleMenuItemClick = () => {
-    console.log('hello');
-  };
+
   const chatbg =
     'https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png';
+
+  const handleChange = async (e) => {
+    const selectedFile = e.target.files[0];
+    console.log(selectedFile);
+
+    if (selectedFile) {
+      try {
+        const fileType = selectedFile.type.split('/')[0];
+        const storageRef = ref(
+          storage,
+          `files/${fileType}/${selectedFile.name}`
+        );
+
+        await uploadBytes(storageRef, selectedFile);
+
+        const downloadURL = await getDownloadURL(storageRef);
+        // console.log('File uploaded successfully:', downloadURL);
+        await setAttachemnt({
+          fileType: selectedFile.type,
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+          fileDownloadLink: downloadURL,
+        });
+        handleClose();
+        // const fileDocRef = collection(db, 'chats');
+        // // await addDoc(fileDocRef, {
+        // //   fileType: selectedFile.type,
+        // //   fileName: selectedFile.name,
+        // //   fileLink: downloadURL,
+        // // });
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    }
+  };
 
   return (
     <>
@@ -363,17 +464,17 @@ const Chat = () => {
               bottom: '75px !important',
               left: '480px !important',
               top: 'unset !important',
+              minWidth: '220px',
             },
           }}
           id='basic-menu'
           anchorEl={send}
           open={openDoc}
-          onClose={handleClose}
           MenuListProps={{
             'aria-labelledby': 'basic-button',
           }}
         >
-          <MenuItem onClick={handleClose} sx={{ bgcolor: 'pink' }}>
+          <MenuItem sx={{ padding: '0px 16px', width: '100%' }}>
             <InputFileUpload
               text='Document'
               icon={
@@ -381,36 +482,38 @@ const Chat = () => {
                   <DescriptionIcon color='secondary' />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
+              onChange={handleChange}
               fileType='file'
+              accept='.doc,.docx,.pdf'
             />
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem sx={{ padding: '0px 16px' }}>
             <InputFileUpload
-              text='Photos & Videos'
+              text='Photos'
               icon={
                 <ListItemIcon>
                   <PhotoLibraryIcon color='success' />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
+              onChange={handleChange}
               fileType='file'
               accept='image/*'
             />
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem sx={{ padding: '0px 16px' }}>
             <InputFileUpload
-              text='Photos & Videos'
+              text='Video'
               icon={
                 <ListItemIcon>
                   <CameraAltIcon sx={{ color: pink[500] }} />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
-              fileType='video/*'
+              onChange={handleChange}
+              fileType='file'
+              accept='video/*'
             />
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem sx={{ padding: '0px 16px' }}>
             <InputFileUpload
               text='Contact'
               icon={
@@ -418,11 +521,12 @@ const Chat = () => {
                   <PersonIcon sx={{ color: purple[500] }} />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
-              fileType='text/vcard'
+              onChange={handleChange}
+              fileType='file'
+              accept='.csv'
             />
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem sx={{ padding: '0px 16px' }}>
             <InputFileUpload
               text='Poll'
               icon={
@@ -430,11 +534,12 @@ const Chat = () => {
                   <PollIcon sx={{ color: yellow[500] }} />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
-              fileType='application/json'
+              onChange={handleChange}
+              fileType='file'
+              accept='.txt'
             />
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem sx={{ padding: '0px 16px' }}>
             <InputFileUpload
               text='Label'
               icon={
@@ -442,8 +547,9 @@ const Chat = () => {
                   <LabelIcon color='primary' />
                 </ListItemIcon>
               }
-              onClick={handleMenuItemClick}
-              fileType='text/plain'
+              onChange={handleChange}
+              fileType='file'
+              accept='.txt,.csv'
             />
           </MenuItem>
         </Menu>

@@ -33,3 +33,9 @@
   outline: none;
   border: none;
 } */
+iframe {
+  border: none; /* Remove default border */
+  width: 100%; /* Make it responsive */
+  height: 300px; /* Set a fixed height */
+  overflow: hidden; /* Prevent scrolling */
+}

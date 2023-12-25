@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Button, Box } from '@mui/material';
+import { Button } from '@mui/material';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -13,12 +13,14 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const InputFileUpload = ({ text, icon, onClick, fileType, accept }) => {
+const InputFileUpload = ({ text, icon, fileType, accept, onChange }) => {
+  const handleChange = (e) => {
+    onChange(e);
+  };
   return (
     <Button
       component='label'
       startIcon={icon}
-      onClick={onClick}
       sx={{
         width: '100%',
         display: 'flex',
@@ -27,7 +29,11 @@ const InputFileUpload = ({ text, icon, onClick, fileType, accept }) => {
       }}
     >
       {text}
-      <VisuallyHiddenInput type={fileType} accept={accept} />
+      <VisuallyHiddenInput
+        type={fileType}
+        accept={accept}
+        onChange={handleChange}
+      />
     </Button>
   );
 };
