@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import {
   Button,
@@ -83,14 +84,6 @@ const SignIn = () => {
           variant='outlined'
           autoComplete='email'
           required
-          error={
-            signInError.includes('email') ||
-            (email.trim() === '' && signInError === '')
-          }
-          helperText={
-            (signInError.includes('email') && signInError) ||
-            (email.trim() === '' && 'Email is required')
-          }
           style={{ marginBottom: '16px' }}
         />
         <TextField
@@ -104,30 +97,20 @@ const SignIn = () => {
           fullWidth
           margin='normal'
           variant='outlined'
-          error={
-            signInError.includes('password') ||
-            (password.trim() === '' && signInError === '')
-          }
-          helperText={
-            (signInError.includes('password') && signInError) ||
-            (password.trim() === '' && 'Password is required')
-          }
           style={{ marginBottom: '16px' }}
         />
 
         {loading && <CircularProgress style={{ marginBottom: '16px' }} />}
 
-        {signInError &&
-          !signInError.includes('email') &&
-          !signInError.includes('password') && (
-            <Typography
-              variant='body2'
-              color='error'
-              style={{ marginBottom: '16px' }}
-            >
-              {signInError}
-            </Typography>
-          )}
+        {signInError && (
+          <Typography
+            variant='body2'
+            color='error'
+            style={{ marginBottom: '16px' }}
+          >
+            {signInError}
+          </Typography>
+        )}
 
         <Button
           variant='outlined'
@@ -164,7 +147,7 @@ const SignIn = () => {
               borderRadius: '4px',
             }}
           >
-            Dont have an account?
+            Don't have an account?
           </Typography>
           <Link href={'/signup'}>
             <Button

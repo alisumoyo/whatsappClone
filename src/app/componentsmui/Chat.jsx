@@ -49,14 +49,12 @@ import {
 import InputFileUpload from './ChatInput';
 import Loader from './Loader';
 import { Download } from '@mui/icons-material';
-import Image from 'next/image';
 
 const Message = ({ message, userId, onDelete }) => {
   const isSentByMe = message.senderId === userId;
 
   const messageStyle = {
     borderRadius: isSentByMe ? '8px 0px 8px 8px' : '0px 8px 8px 8px',
-
     bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
     maxWidth: '340px',
     width: 'fit-content',
@@ -69,20 +67,22 @@ const Message = ({ message, userId, onDelete }) => {
     lineHeight: '19px',
     justifySelf: isSentByMe ? 'end' : 'start',
   };
-  const [anchorEl, setAnchorEl] = useState(null);
 
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const downloadFile = () => {
     console.log('Downloaded');
-    {
-      message.filesObj.fileDownloadLink;
-    }
+    // {
+    //   message.filesObj.fileDownloadLink;
+    // }
   };
   return (
     <Box
@@ -158,7 +158,6 @@ const Message = ({ message, userId, onDelete }) => {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
-            sx={{ position: 'absolute', right: '0px' }}
           >
             <MoreVertOutlinedIcon sx={{ fontSize: '11px' }} />
           </IconButton>
@@ -175,7 +174,6 @@ const Message = ({ message, userId, onDelete }) => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
@@ -197,9 +195,12 @@ const Chat = () => {
 
   const [message, setMessage] = useState('');
   const { user } = useContext(getLoggedUser);
-  const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
   const [chatMessages, setChatMessages] = useState([]);
+
+  const [addedFile, setAddedFile] = useState(null);
   const [attachment, setAttachemnt] = useState(null);
+
+  const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
 
   const getChatmessages = async () => {
     try {
@@ -227,9 +228,28 @@ const Chat = () => {
       return [];
     }
   };
+
   const sendMessage = async (e) => {
     if (e.key !== 'Enter' || !currentChatUser.id || !user.userId) return;
+    if (addedFile) {
+      try {
+        const fileType = addedFile.type.split('/')[0];
+        const storageRef = ref(storage, `files/${fileType}/${addedFile.name}`);
 
+        await uploadBytes(storageRef, addedFile);
+
+        const downloadURL = await getDownloadURL(storageRef);
+        await setAttachemnt({
+          fileType: addedFile.type,
+          fileName: addedFile.name,
+          fileSize: addedFile.size,
+          fileDownloadLink: downloadURL,
+        });
+        setAddedFile();
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    }
     const chat = {
       senderId: user.userId,
       receiverId: currentChatUser.id,
@@ -270,6 +290,10 @@ const Chat = () => {
     setAnchorEl(null);
     setSend(null);
   };
+  const handleCloseDropDown = () => {
+    setAnchorEl(null);
+    setSend(null);
+  };
   const handleCloseChat = () => {
     setCurrentChatUser(null);
   };
@@ -282,37 +306,29 @@ const Chat = () => {
 
   const handleChange = async (e) => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile);
+    // console.log(selectedFile);
+    setAddedFile(selectedFile);
+    // if (selectedFile) {
+    //   try {
+    //     const fileType = selectedFile.type.split('/')[0];
+    //     const storageRef = ref(
+    //       storage,
+    //       `files/${fileType}/${selectedFile.name}`
+    //     );
 
-    if (selectedFile) {
-      try {
-        const fileType = selectedFile.type.split('/')[0];
-        const storageRef = ref(
-          storage,
-          `files/${fileType}/${selectedFile.name}`
-        );
+    //     await uploadBytes(storageRef, selectedFile);
 
-        await uploadBytes(storageRef, selectedFile);
-
-        const downloadURL = await getDownloadURL(storageRef);
-        // console.log('File uploaded successfully:', downloadURL);
-        await setAttachemnt({
-          fileType: selectedFile.type,
-          fileName: selectedFile.name,
-          fileSize: selectedFile.size,
-          fileDownloadLink: downloadURL,
-        });
-        handleClose();
-        // const fileDocRef = collection(db, 'chats');
-        // // await addDoc(fileDocRef, {
-        // //   fileType: selectedFile.type,
-        // //   fileName: selectedFile.name,
-        // //   fileLink: downloadURL,
-        // // });
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      }
-    }
+    //     const downloadURL = await getDownloadURL(storageRef);
+    //     await setAttachemnt({
+    //       fileType: selectedFile.type,
+    //       fileName: selectedFile.name,
+    //       fileSize: selectedFile.size,
+    //       fileDownloadLink: downloadURL,
+    //     });
+    //   } catch (error) {
+    //     console.error('Error uploading file:', error);
+    //   }
+    // }
   };
 
   return (
@@ -350,7 +366,7 @@ const Chat = () => {
               <ExpandMoreIcon />
             </Button>
           </Tooltip>
-          <Tooltip title='Seacrh...'>
+          <Tooltip title='Search...'>
             <IconButton>
               <SearchIcon />
             </IconButton>
@@ -375,33 +391,15 @@ const Chat = () => {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Contact info
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Select messages
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleCloseChat}>
-              Close chat
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Mute notifications
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Disappering messages
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Clear chat
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Delete chat
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Report
-            </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={handleClose}>
-              Block
-            </MenuItem>
+            <MenuItem>Contact info</MenuItem>
+            <MenuItem>Select messages</MenuItem>
+            <MenuItem onClick={handleCloseChat}>Close chat</MenuItem>
+            <MenuItem>Mute notifications</MenuItem>
+            <MenuItem>Disappering messages</MenuItem>
+            <MenuItem>Clear chat</MenuItem>
+            <MenuItem>Delete chat</MenuItem>
+            <MenuItem>Report</MenuItem>
+            <MenuItem>Block</MenuItem>
           </Menu>
         </Box>
       </Box>
@@ -411,13 +409,15 @@ const Chat = () => {
           flexGrow: '1',
           // display: 'flex',
           // flexDirection: 'column',
-          backgroundImage: `url(${chatbg})`,
+          // backgroundImage: `url(${chatbg})`,
           // backgroundPosition: 'center',
           // backgroundSize: 'cover',
           // backgroundRepeat: 'no-repeat',
           overflowX: 'auto',
           overflowX: 'hidden',
+          bgcolor: 'red',
         }}
+        onClick={handleCloseDropDown}
       >
         {chatMessages.map((message, index) => (
           <Message
@@ -465,11 +465,13 @@ const Chat = () => {
               left: '480px !important',
               top: 'unset !important',
               minWidth: '220px',
+              bgcolor: 'pink',
             },
           }}
           id='basic-menu'
           anchorEl={send}
           open={openDoc}
+          onClose={handleClose}
           MenuListProps={{
             'aria-labelledby': 'basic-button',
           }}
