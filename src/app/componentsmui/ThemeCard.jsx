@@ -1,20 +1,39 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Button,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from '@mui/material';
+import { useContext } from 'react';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const ThemeCard = () => {
+  const { theme, toggleDarkMode } = useContext(ThemeContext);
+
+  const handleThemeChange = (event) => {
+    const selectedTheme = event.target.value;
+    toggleDarkMode(selectedTheme);
+  };
+
   return (
-    <Card sx={{ minWidth: 500, color: '#3b4a54', padding: '30px' }}>
+    <Card
+      sx={{
+        minWidth: 500,
+        bgcolor: theme.palette.background.default,
+        color: '#3b4a54',
+        color: theme.palette.text.primary,
+        padding: '30px',
+      }}
+    >
       <CardContent>
         <FormControl>
           <FormLabel>Theme</FormLabel>
-          <RadioGroup defaultValue='light'>
+          <RadioGroup defaultValue='light' onChange={handleThemeChange}>
             <FormControlLabel value='light' control={<Radio />} label='Light' />
             <FormControlLabel value='dark' control={<Radio />} label='Dark' />
             <FormControlLabel
@@ -28,7 +47,11 @@ const ThemeCard = () => {
       <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant='text'
-          sx={{ bgcolor: '#fff', color: '#008069', borderRadius: '25px' }}
+          sx={{
+            bgcolor: theme.palette.background.primary,
+            color: '#008069',
+            borderRadius: '25px',
+          }}
         >
           Cancel
         </Button>
@@ -48,4 +71,5 @@ const ThemeCard = () => {
     </Card>
   );
 };
+
 export default ThemeCard;

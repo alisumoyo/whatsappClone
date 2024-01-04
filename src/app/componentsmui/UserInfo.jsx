@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 import { deleteDoc, db, doc } from '../firebase/friebaseConfig';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const CustomMenu = ({ chatUser }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -30,6 +31,12 @@ const CustomMenu = ({ chatUser }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const { theme } = useContext(ThemeContext);
+
+  const iconsCss = {
+    color: theme.palette.text.primary,
+    bgcolor: theme.palette.background.default,
+  };
   return (
     <>
       <ExpandMoreIcon
@@ -38,6 +45,7 @@ const CustomMenu = ({ chatUser }) => {
         aria-haspopup='true'
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        sx={{ color: iconsCss }}
       />
 
       <Menu
@@ -83,6 +91,7 @@ const UserInfo = () => {
     await setCurrentChatUser(chatUser);
     // console.log(chatUser);
   };
+  const { theme } = useContext(ThemeContext);
 
   return (
     <>
@@ -91,8 +100,10 @@ const UserInfo = () => {
           key={index}
           onClick={() => handleClick(chatUser)}
           sx={{
-            bgcolor: '#fff',
-            color: '#3b4a54',
+            // bgcolor: '#fff',
+            // color: '#3b4a54',
+            bgcolor: theme.palette.background.default,
+            color: theme.palette.text.primary,
             display: 'flex',
             alignItems: 'center',
             minHeight: '50px',
@@ -100,7 +111,8 @@ const UserInfo = () => {
             borderTop: '1px solid #e9edef',
             '&:hover': {
               transition: 'all 0.4s',
-              bgcolor: '#f0f2f5',
+              // bgcolor: '#f0f2f5',
+              bgcolor: theme.palette.hover.primary,
             },
           }}
         >

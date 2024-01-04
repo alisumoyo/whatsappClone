@@ -11,6 +11,7 @@ import {
 } from '../firebase/friebaseConfig';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { DataContext } from '../Contexts/MyContextProvider';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const ProfileSideBarBox = () => {
   const { user } = useContext(getLoggedUser);
@@ -37,7 +38,7 @@ const ProfileSideBarBox = () => {
 
       // Update user document with the image URL
       const userDocRef = doc(db, 'users', user.userId);
-       // Replace 'YOUR_COLLECTION' with your actual collection name
+      // Replace 'YOUR_COLLECTION' with your actual collection name
       await setDoc(userDocRef, { proImgLink: downloadUrl }, { merge: true });
 
       // console.log(
@@ -48,15 +49,19 @@ const ProfileSideBarBox = () => {
   };
   const userImgFirebase = user?.proImgLink;
   const userName = user?.name;
+
+  const { theme } = useContext(ThemeContext);
   return (
     <Box
       sx={{
         bgcolor: '#fff',
+        bgcolor: theme.palette.background.default,
         display: 'flex',
         alignItems: 'center',
         cursor: 'pointer',
         '&:hover': {
           bgcolor: '#f0f2f6',
+          bgcolor: theme.palette.hover.primary,
         },
       }}
       onClick={() => setOpenProfile(true)}
@@ -81,10 +86,24 @@ const ProfileSideBarBox = () => {
         </label>
       </Box>
       <Box sx={{ flexGrow: '1' }}>
-        <Typography variant='h6' sx={{ color: '#111b21', fontSize: '16px' }}>
+        <Typography
+          variant='h6'
+          sx={{
+            color: '#111b21',
+            color: theme.palette.text.primary,
+            fontSize: '16px',
+          }}
+        >
           {userName}
         </Typography>
-        <Typography variant='span' sx={{ color: '#54656f', fontSize: '12px' }}>
+        <Typography
+          variant='span'
+          sx={{
+            color: '#54656f',
+            color: theme.palette.text.primary,
+            fontSize: '12px',
+          }}
+        >
           Bio: Tell Something About Yourself
         </Typography>
       </Box>

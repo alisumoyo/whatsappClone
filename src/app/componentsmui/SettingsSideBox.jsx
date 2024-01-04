@@ -1,7 +1,9 @@
 import { Box, ListItemIcon, ListItemText } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const SettingsSideBox = ({ icon, text, onClick }) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <Box
@@ -11,12 +13,15 @@ const SettingsSideBox = ({ icon, text, onClick }) => {
           alignItems: 'center',
           justifyContent: 'center',
           color: '#3b4a54',
+          color: theme.palette.text.primary,
           height: '60px',
           bgcolor: '#fff',
+          bgcolor: theme.palette.background.default,
           cursor: 'pointer',
           '&:hover': {
             transition: 'all 0.3s',
             bgcolor: '#f0f2f5',
+            bgcolor: theme.palette.hover.primary,
           },
         }}
       >
@@ -25,7 +30,8 @@ const SettingsSideBox = ({ icon, text, onClick }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#3b4a54',
+            // color: '#3b4a54',
+            color: theme.palette.text.primary,
           }}
         >
           {icon}
@@ -41,7 +47,12 @@ const SettingsSideBox = ({ icon, text, onClick }) => {
           }}
         >
           <ListItemText
-            sx={{ flexGrow: '1', color: '#3b4a54', fontWeight: '100' }}
+            sx={{
+              flexGrow: '1',
+              // color: '#3b4a54',
+              color: theme.palette.text.primary,
+              fontWeight: '100',
+            }}
           >
             {text}
           </ListItemText>

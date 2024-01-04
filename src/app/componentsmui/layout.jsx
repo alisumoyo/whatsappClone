@@ -1,5 +1,5 @@
 'use client';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, ThemeProvider } from '@mui/material';
 import React, { useContext } from 'react';
 import ChatBg from './ChatBg';
 import UserInfo from './UserInfo';
@@ -10,12 +10,15 @@ import UserProfile from './UserProfile';
 import NewChat from './NewChat';
 import ChatHead from './ChatHead';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const Layout = () => {
+  const { theme, toggleDarkMode, isDarkMode } = useContext(ThemeContext);
   const { currentChatUser } = useContext(GetAddedUsers);
   const menuStyles = {
     position: 'absolute',
-    bgcolor: '#fff',
+    // bgcolor: '#fff',
+    bgcolor: theme.palette.background.default,
     zIndex: '1000',
     width: '100%',
     height: '100%',
@@ -23,9 +26,8 @@ const Layout = () => {
     top: '0',
     transition: 'all 0.3s ease-in-out',
   };
-
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {/* START OF LAYOUT BG*/}
       <Box
         sx={{
@@ -58,6 +60,7 @@ const Layout = () => {
             width: '400px',
             height: '100%',
             bgcolor: '#f0f2f6',
+            bgcolor: theme.palette.background.default,
             display: 'flex',
             flexDirection: 'column',
             transition: 'all 0.5s ease-in-out',
@@ -82,6 +85,7 @@ const Layout = () => {
             sx={{
               height: '100%',
               bgcolor: '#f0f2f6',
+              bgcolor: theme.palette.background.default,
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -108,6 +112,7 @@ const Layout = () => {
         <Box
           sx={{
             bgcolor: '#f0f2f5',
+            bgcolor: theme.palette.background.default,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -118,7 +123,7 @@ const Layout = () => {
         </Box>
         {/* Chat SECTION  END*/}
       </Box>
-    </>
+    </ThemeProvider>
   );
 };
 

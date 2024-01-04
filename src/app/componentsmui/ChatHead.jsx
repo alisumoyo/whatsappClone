@@ -18,13 +18,14 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
 import { auth, signOut } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const ChatHead = () => {
   const router = useRouter();
   const { user } = useContext(getLoggedUser);
   const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
     useContext(DataContext);
-    
+
   const [anchorEl, setAnchorEl] = useState(null);
   const logout = () => {
     signOut(auth)
@@ -43,8 +44,14 @@ const ChatHead = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const { theme } = useContext(ThemeContext);
   // const userImgFirebase = user?.proImgLink;
+
+  const iconsCss = {
+    color: theme.palette.text.primary,
+    bgcolor: theme.palette.background.default,
+  };
+
   return (
     <>
       <Box
@@ -55,6 +62,8 @@ const ChatHead = () => {
           padding: '8px 16px ',
           color: '#54656f',
           bgcolor: '#f0f2f5',
+          color: theme.palette.text.primary,
+          bgcolor: theme.palette.background.default,
           minHeight: '54px',
         }}
       >
@@ -64,22 +73,25 @@ const ChatHead = () => {
         <Box sx={{ display: 'flex', gap: '2px', cursor: 'pointer' }}>
           <Tooltip title='Communities'>
             <IconButton>
-              <GroupsRoundedIcon fontSize='md' />
+              <GroupsRoundedIcon fontSize='md' sx={{ color: iconsCss }} />
             </IconButton>
           </Tooltip>
           <Tooltip title='Status'>
             <IconButton>
-              <DonutLargeOutlinedIcon fontSize='md' />
+              <DonutLargeOutlinedIcon fontSize='md' sx={{ color: iconsCss }} />
             </IconButton>
           </Tooltip>
           <Tooltip title='Channels'>
             <IconButton>
-              <RadioButtonCheckedOutlinedIcon fontSize='md' />
+              <RadioButtonCheckedOutlinedIcon
+                fontSize='md'
+                sx={{ color: iconsCss }}
+              />
             </IconButton>
           </Tooltip>
           <Tooltip title='New chat'>
             <IconButton onClick={() => setOpenNewChat(true)}>
-              <AddCommentRoundedIcon fontSize='md' />
+              <AddCommentRoundedIcon fontSize='md' sx={{ color: iconsCss }} />
             </IconButton>
           </Tooltip>
 
@@ -91,7 +103,7 @@ const ChatHead = () => {
               aria-expanded={open ? 'true' : undefined}
               onClick={handleClick}
             >
-              <MoreVertOutlinedIcon fontSize='md' />
+              <MoreVertOutlinedIcon fontSize='md' sx={{ color: iconsCss }} />
             </IconButton>
           </Tooltip>
           <Menu

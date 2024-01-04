@@ -11,16 +11,19 @@ import Link from 'next/link';
 const Landing = () => {
   const bgLanding =
     'https://img.freepik.com/premium-photo/3d-rendering-bunch-square-badges-with-whatsapp-logo-green-background_284880-352.jpg?size=626&ext=jpg&ga=GA1.1.1803636316.1701302400&semt=ais';
+
+  const bgGreenImg = './bggreen.jpeg';
+  const imgBgGreeen ='./bg.jpg';
   return (
     <>
       <Box
         sx={{
-          backgroundImage: `url(${bgLanding})`,
+          backgroundImage: `url(${imgBgGreeen})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           width: '100%',
-          height:'100vh',
+          height: '100vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -87,11 +90,11 @@ const Landing = () => {
         >
           <Typography
             variant='h4'
-            sx={{ color: '#25d366', color: '#333', marginBottom: '16px' }}
+            sx={{ color: '#25d366', color: '#fff', marginBottom: '16px' }}
           >
             WHATSAPP
           </Typography>
-          <Typography variant='h6' sx={{ color: '#fff', width: '400px' }}>
+          <Typography variant='h6' sx={{ color: '#ccc', width: '400px' }}>
             Whatsapp helps you connect and share with the people in your life
           </Typography>
         </Container>

@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
 import { GetAddedUsers } from '../Contexts/GetAddedUsers';
 import { DataContext } from '../Contexts/MyContextProvider';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const AddNewUser = () => {
   const { userCollection } = useContext(GetRegUsersContext);
@@ -12,17 +13,19 @@ const AddNewUser = () => {
   const { addNewUser } = useContext(GetAddedUsers);
 
   const { setOpenNewChat } = useContext(DataContext);
-
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       {userCollection?.map((addUser, index) => (
         <Box
           key={index}
-          onClick={() => addNewUser(addUser,setOpenNewChat)}
+          onClick={() => addNewUser(addUser, setOpenNewChat)}
           sx={{
-            bgcolor: '#fff',
-            color: '#3b4a54',
-            color: '#111b21',
+            // bgcolor: '#fff',
+            bgcolor: theme.palette.background.default,
+            // color: '#3b4a54',
+            // color: '#111b21',
+            color: theme.palette.text.primary,
             display: 'flex',
             alignItems: 'center',
             minHeight: '50px',
@@ -31,6 +34,7 @@ const AddNewUser = () => {
             '&:hover': {
               transition: 'all 0.4s',
               bgcolor: '#f0f2f5',
+              bgcolor: theme.palette.hover.primary,
             },
           }}
         >

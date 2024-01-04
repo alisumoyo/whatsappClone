@@ -1,9 +1,21 @@
+// _app.js
 import '../src/app/globals.css';
+import ThemeContextProvider, {
+  ThemeContext,
+} from '@/app/Contexts/ThemeContext';
 
-export default function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
+  // const { theme } = useContext(ThemeContext);
+
   return (
     <>
-      <Component {...pageProps} />
+      {/* <ThemeProvider theme={theme}> */}
+      <ThemeContextProvider>
+        <Component {...pageProps} />
+      </ThemeContextProvider>
+      {/* </ThemeProvider> */}
     </>
   );
 }
+
+export default App;

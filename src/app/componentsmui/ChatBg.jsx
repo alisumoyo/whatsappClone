@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -7,32 +7,47 @@ import Box from '@mui/material/Box';
 import bgImg from '../assets/img.png';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const ChatBg = () => {
-const  handleButtonClick = () => {
-    const isConfirmed = window.confirm('https://web.whatsapp.com wants to open this application.');
+  const handleButtonClick = () => {
+    const isConfirmed = window.confirm(
+      'https://web.whatsapp.com wants to open this application.'
+    );
 
     if (isConfirmed) {
       // Open the link if the user clicked OK
-      window.location.href = 'https://www.microsoft.com/store/productId/9NKSQGP7F2NH?ocid=pdpshare'; // Replace with your desired link
+      window.location.href =
+        'https://www.microsoft.com/store/productId/9NKSQGP7F2NH?ocid=pdpshare'; // Replace with your desired link
     } else {
       // Do something else or nothing if the user clicked Cancel
     }
   };
+  const { theme, toggleDarkMode, isDarkMode } = useContext(ThemeContext);
   return (
     <>
-      <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          bgcolor: theme.palette.background.default,
+        }}
+      >
+        <Button onClick={toggleDarkMode}>HEllo</Button>
         <Card
           sx={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            bgcolor: '#f0f2f5',
+            // bgcolor: '#f0f2f5',
+            bgcolor: theme.palette.background.default,
             padding: '10px 20px',
             width: '100%',
             height: '400px',
             border: 'none',
             color: '#41525d',
+            color: theme.palette.text.primary,
             border: 'none',
             boxShadow: 'none',
           }}

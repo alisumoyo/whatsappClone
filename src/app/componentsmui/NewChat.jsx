@@ -7,6 +7,7 @@ import SideBarHeading from './SideBarHead';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
 import { useState } from 'react';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
+import { ThemeContext } from '../Contexts/ThemeContext';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
@@ -16,7 +17,7 @@ const NewChat = ({ sx }) => {
   const handleEnter = (value) => {
     fetchData(value, user);
   };
-
+const {theme}=useContext(ThemeContext);
   return (
     <Box
       sx={sx}
@@ -31,6 +32,7 @@ const NewChat = ({ sx }) => {
       <Box
         sx={{
           bgcolor: '#fff',
+          bgcolor: theme.palette.background.default,
           display: 'flex',
           alignItems: 'center',
           minHeight: '50px',
@@ -39,6 +41,7 @@ const NewChat = ({ sx }) => {
           '&:hover': {
             transition: 'all 0.4s',
             bgcolor: '#f0f2f5',
+            bgcolor: theme.palette.hover.primary,
           },
         }}
       >
@@ -46,6 +49,7 @@ const NewChat = ({ sx }) => {
           variant='subtitle1'
           sx={{
             color: '#008069',
+            bgcolor: theme.palette.background.default,
             fontSize: '1.1rem',
             padding: '12px 24px',
             fontWeight: '200',
