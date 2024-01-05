@@ -15,14 +15,13 @@ import Link from 'next/link';
 import theme from './ThemeColors';
 import { useTheme } from '@mui/system';
 import { ThemeContext } from '../Contexts/ThemeContext';
-// const theme = useTheme();
 
 const SignIn = () => {
   // const theme = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInError, setSignInError] = useState('');
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const router = useRouter();
   const bgImg =
     'https://img.freepik.com/premium-photo/3d-rendering-bunch-square-badges-with-whatsapp-logo-green-background_284880-352.jpg?size=626&ext=jpg&ga=GA1.1.1803636316.1701302400&semt=ais';
@@ -33,10 +32,38 @@ const SignIn = () => {
   const validateForm = () => {
     return email.trim() !== '' && password.trim() !== '';
   };
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const timer = React.useRef();
 
+  // const buttonSx = {
+  //   ...(success && {
+  //     bgcolor: green[500],
+  //     '&:hover': {
+  //       bgcolor: green[700],
+  //     },
+  //   }),
+  // };
+
+  // React.useEffect(() => {
+  //   return () => {
+  //     clearTimeout(timer.current);
+  //   };
+  // }, []);
+
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+      timer.current = window.setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
+    }
+  };
   const handleSignin = async (e) => {
     e.preventDefault();
-
+    handleButtonClick();
     if (!validateForm()) {
       setSignInError('Please fill in all fields.');
       return;
@@ -82,7 +109,11 @@ const SignIn = () => {
         >
           <Typography
             variant='h4'
-            style={{ color: theme.palette.text.primary, margin: 'auto' }}
+            style={{
+              color: theme.palette.text.primary,
+              margin: 'auto',
+            }}
+            // sx={{ buttonSx }}
           >
             Sign In
           </Typography>
@@ -148,7 +179,7 @@ const SignIn = () => {
             }}
           />
 
-          {loading && <CircularProgress style={{ marginBottom: '16px' }} />}
+          {/* {loading && <CircularProgress style={{ marginBottom: '16px' }} />} */}
 
           {signInError && (
             <Typography
@@ -174,11 +205,29 @@ const SignIn = () => {
                 fontWeight: 'bold',
                 outline: 'none',
                 border: 'none',
+                m: 1,
+                position: 'relative',
               },
             }}
+            disabled={loading}
           >
             Sign In
+            {loading && (
+              <CircularProgress
+                size={24}
+                sx={{
+                  color: theme.palette.background.default,
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  marginTop: '-12px',
+                  marginLeft: '-12px',
+                }}
+              />
+            )}
+            {/* <Loader/> */}
           </Button>
+
           <Box
             sx={{
               marginTop: '10px',
@@ -238,5 +287,5 @@ const SignIn = () => {
     </ThemeProvider>
   );
 };
-
+const inputFieldCss = {};
 export default SignIn;

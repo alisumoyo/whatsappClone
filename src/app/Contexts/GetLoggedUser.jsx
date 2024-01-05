@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import {
   onAuthStateChanged,
   auth,
@@ -12,7 +12,9 @@ import { useRouter } from 'next/router';
 import Card from '../componentsmui/SureBox';
 
 export const getLoggedUser = createContext();
-
+export const useLoggedUserContext = () => {
+  return useContext(getLoggedUser);
+};
 const LoggedUser = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -26,6 +28,7 @@ const LoggedUser = ({ children }) => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     onAuthStateChanged(auth, (loginUser) => {
       if (loginUser) {

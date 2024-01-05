@@ -46,7 +46,7 @@ const ThemeCard = () => {
           </RadioGroup>
         </FormControl>
       </CardContent>
-      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      {/* <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant='text'
           sx={{
@@ -69,7 +69,7 @@ const ThemeCard = () => {
         >
           OK
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 };

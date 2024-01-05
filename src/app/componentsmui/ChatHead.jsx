@@ -15,16 +15,14 @@ import {
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import { DataContext } from '../Contexts/MyContextProvider';
-import { getLoggedUser } from '../Contexts/GetLoggedUser';
-import { useRouter } from 'next/router';
+import { useLoggedUserContext } from '../Contexts/GetLoggedUser';
 import { ThemeContext, useThemeContext } from '../Contexts/ThemeContext';
-import Card from './SureBox';
 import DialogBox from './DialogBox';
 import SureBox from './SureBox';
+import { userLoggedUserContext } from '../Contexts/GetLoggedUser';
 
 const ChatHead = () => {
-  const router = useRouter();
-  const { user, logout } = useContext(getLoggedUser);
+  const { user, logout } = useLoggedUserContext();
   const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
     useContext(DataContext);
 
@@ -129,6 +127,7 @@ const ChatHead = () => {
             <DialogBox
               openBtn={<MenuItem className='moreIcon-sub'>Log out</MenuItem>}
               content={<SureBox />}
+              yesFunction={logout}
             />
             <Divider />
             <MenuItem className='moreIcon-sub'>

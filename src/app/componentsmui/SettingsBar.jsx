@@ -65,7 +65,7 @@ const SettingsBar = ({ sx }) => {
       text: 'Logout',
     },
   ];
-
+  
   return (
     <Box
       sx={sx}
@@ -92,6 +92,7 @@ const SettingsBar = ({ sx }) => {
                 key={index}
                 openBtn={item.button}
                 content={item.content}
+                
               />
             ) : (
               <SettingsSideBox
