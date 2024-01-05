@@ -6,6 +6,7 @@ import SideBarHeading from './SideBarHead';
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import { updateDoc, db, doc } from '../firebase/friebaseConfig';
+import { useThemeContext } from '../Contexts/ThemeContext';
 
 const UserProfile = ({ sx }) => {
   const { user } = useContext(getLoggedUser);
@@ -33,7 +34,11 @@ const UserProfile = ({ sx }) => {
       }
     }
   };
-
+  const { theme } = useThemeContext();
+  const iconsCss = {
+    color: theme.palette.text.primary,
+    bgcolor: theme.palette.background.default,
+  };
   return (
     <>
       <Box
@@ -52,6 +57,7 @@ const UserProfile = ({ sx }) => {
         <Box
           sx={{
             bgcolor: '#f0f2f6',
+            bgcolor: theme.palette.background.default,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -76,12 +82,19 @@ const UserProfile = ({ sx }) => {
           </label>
         </Box>
 
-        <Box sx={{ bgcolor: '#f0f2f6', flexGrow: '1' }}>
+        <Box
+          sx={{
+            bgcolor: '#f0f2f6',
+            bgcolor: theme.palette.background.default,
+            flexGrow: '1',
+          }}
+        >
           <Box
             sx={{
               minHeight: '56px',
               padding: '10px 30px',
               bgcolor: '#fff',
+              bgcolor: theme.palette.background.default,
             }}
           >
             <Typography
@@ -104,7 +117,7 @@ const UserProfile = ({ sx }) => {
                   }}
                 />
                 <IconButton onClick={handleSave}>
-                  <DoneIcon />
+                  <DoneIcon sx={{color:iconsCss}}/>
                 </IconButton>
               </Box>
             ) : (
@@ -112,12 +125,12 @@ const UserProfile = ({ sx }) => {
                 <Typography
                   variant='subtitle1'
                   flexGrow={1}
-                  sx={{ color: '#3b4a54', fontSize: '14px' }}
+                  sx={{ color: '#3b4a54', color:theme.palette.text.primary,fontSize: '14px' }}
                 >
                   {user?.name}
                 </Typography>
                 <IconButton onClick={() => setEditingName(true)}>
-                  <EditIcon fontSize='small' />
+                  <EditIcon fontSize='small' sx={{color:iconsCss}}/>
                 </IconButton>
               </Box>
             )}
@@ -128,11 +141,12 @@ const UserProfile = ({ sx }) => {
               minHeight: '66px',
               padding: '14px 30px',
               bgcolor: '#f0f2f6',
+              bgcolor: theme.palette.background.default,
             }}
           >
             <Typography
               variant='body1'
-              sx={{ color: '#667781', fontSize: '0.8rem', lineHeight: '1.4' }}
+              sx={{ color: '#667781',color:theme.palette.text.primary, fontSize: '0.8rem', lineHeight: '1.4' }}
             >
               This is not your username or pin. This name will be visible to
               your WhatsApp contacts.
@@ -143,11 +157,12 @@ const UserProfile = ({ sx }) => {
               minHeight: '56px',
               padding: '10px 30px',
               bgcolor: '#fff',
+              bgcolor: theme.palette.background.default,
             }}
           >
             <Typography
               variant='subtitle1'
-              sx={{ color: '#008069', fontSize: '12px' }}
+              sx={{ color: '#008069',color:theme.palette.text.primary, fontSize: '12px' }}
             >
               About
             </Typography>
@@ -165,7 +180,7 @@ const UserProfile = ({ sx }) => {
                   }}
                 />
                 <IconButton onClick={handleSave}>
-                  <DoneIcon />
+                  <DoneIcon sx={{color:iconsCss}}/>
                 </IconButton>
               </Box>
             ) : (
@@ -173,12 +188,12 @@ const UserProfile = ({ sx }) => {
                 <Typography
                   variant='subtitle1'
                   flexGrow={1}
-                  sx={{ color: '#3b4a54', fontSize: '14px' }}
+                  sx={{ color: '#3b4a54', color:theme.palette.text.primary,fontSize: '14px' }}
                 >
                   {user?.bio}
                 </Typography>
                 <IconButton onClick={() => setEditingAbout(true)}>
-                  <EditIcon fontSize='small' />
+                  <EditIcon fontSize='small' sx={{color:iconsCss}}/>
                 </IconButton>
               </Box>
             )}
@@ -188,6 +203,7 @@ const UserProfile = ({ sx }) => {
               minHeight: '66px',
               padding: '14px 30px',
               bgcolor: '#fff',
+              bgcolor: theme.palette.background.default,
             }}
           >
             <Typography
@@ -199,7 +215,7 @@ const UserProfile = ({ sx }) => {
             <Typography
               variant='subtitle1'
               flexGrow={1}
-              sx={{ color: '#3b4a54', fontSize: '14px' }}
+              sx={{ color: '#3b4a54',color:theme.palette.text.primary, fontSize: '14px' }}
             >
               {user?.number}
             </Typography>

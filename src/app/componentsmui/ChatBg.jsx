@@ -16,14 +16,13 @@ const ChatBg = () => {
     );
 
     if (isConfirmed) {
-      // Open the link if the user clicked OK
       window.location.href =
-        'https://www.microsoft.com/store/productId/9NKSQGP7F2NH?ocid=pdpshare'; // Replace with your desired link
+        'https://www.microsoft.com/store/productId/9NKSQGP7F2NH?ocid=pdpshare';
     } else {
       // Do something else or nothing if the user clicked Cancel
     }
   };
-  const { theme, toggleDarkMode, isDarkMode } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <Box
@@ -34,7 +33,6 @@ const ChatBg = () => {
           bgcolor: theme.palette.background.default,
         }}
       >
-        <Button onClick={toggleDarkMode}>HEllo</Button>
         <Card
           sx={{
             display: 'flex',

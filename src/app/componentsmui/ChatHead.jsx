@@ -16,27 +16,19 @@ import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
 import { DataContext } from '../Contexts/MyContextProvider';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
-import { auth, signOut } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
-import { ThemeContext } from '../Contexts/ThemeContext';
+import { ThemeContext, useThemeContext } from '../Contexts/ThemeContext';
+import Card from './SureBox';
+import DialogBox from './DialogBox';
+import SureBox from './SureBox';
 
 const ChatHead = () => {
   const router = useRouter();
-  const { user } = useContext(getLoggedUser);
+  const { user, logout } = useContext(getLoggedUser);
   const { setOpenSettings, openProfile, setOpenProfile, setOpenNewChat } =
     useContext(DataContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        // console.log('SignOut Successfull');
-        router.push('signin');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -44,8 +36,7 @@ const ChatHead = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const { theme } = useContext(ThemeContext);
-  // const userImgFirebase = user?.proImgLink;
+  const { theme } = useThemeContext();
 
   const iconsCss = {
     color: theme.palette.text.primary,
@@ -119,7 +110,7 @@ const ChatHead = () => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            onClick={handleClose}
+            // onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
@@ -134,9 +125,11 @@ const ChatHead = () => {
             >
               Settings
             </MenuItem>
-            <MenuItem className='moreIcon-sub' onClick={logout}>
-              Log out
-            </MenuItem>
+
+            <DialogBox
+              openBtn={<MenuItem className='moreIcon-sub'>Log out</MenuItem>}
+              content={<SureBox />}
+            />
             <Divider />
             <MenuItem className='moreIcon-sub'>
               Get Whatsapp for Windows

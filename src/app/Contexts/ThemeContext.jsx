@@ -3,21 +3,21 @@ import { lightTheme, darkTheme } from '@/app/componentsmui/ThemeColors';
 
 export const ThemeContext = createContext();
 
-// export const useThemeContext = () => {
-//   return useContext(ThemeContext);
-// };
+export const useThemeContext = () => {
+  return useContext(ThemeContext);
+};
 
 const ThemeContextProvider = ({ children }) => {
-  const [isDarkMode, setDarkMode] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState('light');
 
-  const theme = isDarkMode ? darkTheme : lightTheme;
-
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode);
+  const toggleDarkMode = (theme) => {
+    setSelectedTheme(theme);
   };
 
+  const theme = selectedTheme === 'dark' ? darkTheme : lightTheme;
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleDarkMode,isDarkMode }}>
+    <ThemeContext.Provider value={{ theme, toggleDarkMode, selectedTheme }}>
       {children}
     </ThemeContext.Provider>
   );

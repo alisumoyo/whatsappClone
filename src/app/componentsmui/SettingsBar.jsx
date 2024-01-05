@@ -81,6 +81,7 @@ const SettingsBar = ({ sx }) => {
         sx={{
           overflow: 'auto',
           flexGrow: '1',
+          height: '460px',
         }}
       >
         <ProfileSideBarBox />
@@ -89,7 +90,7 @@ const SettingsBar = ({ sx }) => {
             {item.content && item.button ? (
               <DialogBox
                 key={index}
-                button={item.button}
+                openBtn={item.button}
                 content={item.content}
               />
             ) : (

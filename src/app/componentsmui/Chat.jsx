@@ -47,147 +47,8 @@ import {
   storage,
 } from '../firebase/friebaseConfig';
 import InputFileUpload from './ChatInput';
-import Loader from './Loader';
-import { Download } from '@mui/icons-material';
-
-const Message = ({ message, userId, onDelete }) => {
-  const isSentByMe = message.senderId === userId;
-
-  const messageStyle = {
-    borderRadius: isSentByMe ? '8px 0px 8px 8px' : '0px 8px 8px 8px',
-    bgcolor: isSentByMe ? '#d9fdd3' : '#f5f7fa',
-    maxWidth: '340px',
-    width: 'fit-content',
-    alignItems: 'center',
-    display: 'flex',
-    flexWrap: 'wrap',
-    wordWrap: 'break-word',
-    overflow: 'hidden',
-    marginBottom: '10px',
-    lineHeight: '19px',
-    justifySelf: isSentByMe ? 'end' : 'start',
-  };
-
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const downloadFile = () => {
-    console.log('Downloaded');
-    // {
-    //   message.filesObj.fileDownloadLink;
-    // }
-  };
-  return (
-    <Box
-      sx={{
-        width: '100%',
-        padding: '8px 10px 8px 10px',
-        display: 'grid',
-      }}
-    >
-      <Box sx={messageStyle}>
-        <Typography
-          variant='h6'
-          sx={{
-            fontSize: '14px',
-            position: 'relative',
-            padding: '10px 4px 0px 10px',
-          }}
-        >
-          {message.filesObj && (
-            <Box
-              sx={{
-                width: '300px',
-                height: '192px',
-              }}
-            >
-              <Box sx={{ width: '300px', height: '124px' }}>
-                <Avatar
-                  src={message.filesObj.fileDownloadLink}
-                  sx={{ width: '100%', height: '100%' }}
-                  variant='square'
-                />
-                {/* <Box
-                  component='img'
-                  sx={{
-                    height: 233,
-                    width: 350,
-                    maxHeight: { xs: 233, md: 167 },
-                    maxWidth: { xs: 350, md: 250 },
-                  }}
-                  alt='The house from the offer.'
-                src={message.filesObj.fileDownloadLink}
-                /> */}
-              </Box>
-              <Box sx={{ bgcolor: 'pink', flexGrow: 1 }}>
-                <Typography
-                  variant='h3'
-                  sx={{ fontSize: '16px', color: '#333' }}
-                >
-                  {message.filesObj.fileName}
-                </Typography>
-                <Box sx={{ display: 'flex' }}>
-                  <Download onClick={downloadFile} />
-                  <Typography
-                    variant='h6'
-                    sx={{ fontSize: '12px', color: '#333' }}
-                  >
-                    {message.filesObj.fileType}
-                  </Typography>
-                  {/* <Typography
-                  variant='h6'
-                  sx={{ fontSize: '12px', color: '#333' }}
-                >
-                  {message.filesObj.fileSize}
-                </Typography> */}
-                </Box>
-              </Box>
-            </Box>
-          )}
-          {message.messageText}
-          <IconButton
-            id='basic-button'
-            aria-controls={open ? 'basic-menu' : undefined}
-            aria-haspopup='true'
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-          >
-            <MoreVertOutlinedIcon sx={{ fontSize: '11px' }} />
-          </IconButton>
-        </Typography>
-        <Box
-          sx={{
-            marginTop: '6px',
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Menu
-            id='basic-menu'
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-          >
-            <MenuItem onClick={() => onDelete(message.msgDocId)}>
-              Delete Msg
-            </MenuItem>
-            <MenuItem>Edit Msg</MenuItem>
-          </Menu>
-        </Box>
-      </Box>
-    </Box>
-  );
-};
+import Message from './Message';
+import { useThemeContext } from '../Contexts/ThemeContext';
 
 const Chat = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -199,8 +60,8 @@ const Chat = () => {
 
   const [addedFile, setAddedFile] = useState(null);
   const [attachment, setAttachemnt] = useState(null);
-
   const { currentChatUser, setCurrentChatUser } = useContext(GetAddedUsers);
+  const { theme } = useThemeContext();
 
   const getChatmessages = async () => {
     try {
@@ -245,9 +106,11 @@ const Chat = () => {
           fileSize: addedFile.size,
           fileDownloadLink: downloadURL,
         });
-        setAddedFile();
       } catch (error) {
         console.error('Error uploading file:', error);
+      } finally {
+        setAttachemnt('Hello');
+        setAddedFile(null);
       }
     }
     const chat = {
@@ -272,6 +135,7 @@ const Chat = () => {
     try {
       const deleteMsgRef = doc(db, 'chats', deltedMsgId);
       deleteDoc(deleteMsgRef);
+      set;
     } catch (error) {
       console.error('Error deleting message:', error);
     }
@@ -338,6 +202,7 @@ const Chat = () => {
           width: '100%',
           padding: '8px 16px ',
           bgcolor: '#f0f2f5',
+          bgcolor: theme.palette.background.default,
           minHeight: '54px',
           maxHeight: '56px',
           display: 'flex',
@@ -347,14 +212,16 @@ const Chat = () => {
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Avatar alt='User' src={currentChatUser.proImgLink} />
-          <Box sx={{ fontSize: '14px', color: '#111b21' }}>
+          <Box sx={{ fontSize: '14px', color: '#111b21' ,
+        color:theme.palette.text.primary
+        }}>
             <Typography variant='h6'>{currentChatUser.name}</Typography>
             <Typography variant='p'>
               <small>Last seen today at 13:08</small>
             </Typography>
           </Box>
         </Box>
-        <Box sx={{ color: '#54656f' }}>
+        <Box sx={{ color: '#54656f', color: theme.palette.text.primary }}>
           <Tooltip title='Get the App for calling'>
             <Button
               variant='filledTonal'
@@ -407,15 +274,15 @@ const Chat = () => {
       <Box
         sx={{
           flexGrow: '1',
-          // display: 'flex',
-          // flexDirection: 'column',
-          // backgroundImage: `url(${chatbg})`,
-          // backgroundPosition: 'center',
-          // backgroundSize: 'cover',
-          // backgroundRepeat: 'no-repeat',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundImage: `url(${chatbg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
           overflowX: 'auto',
           overflowX: 'hidden',
-          bgcolor: 'red',
+          bgcolor: theme.palette.background.default,
         }}
         onClick={handleCloseDropDown}
       >
@@ -433,6 +300,7 @@ const Chat = () => {
         sx={{
           display: 'flex',
           bgcolor: '#f0f2f5',
+          bgcolor: theme.palette.background.default,
           width: '100%',
           padding: '8px 16px 8px 30px ',
           color: '#8696a0',

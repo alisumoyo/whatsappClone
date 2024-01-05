@@ -6,13 +6,26 @@ import {
   db,
   doc,
   onSnapshot,
+  signOut,
 } from '../firebase/friebaseConfig';
+import { useRouter } from 'next/router';
+import Card from '../componentsmui/SureBox';
 
 export const getLoggedUser = createContext();
 
 const LoggedUser = ({ children }) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
-
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        <Card />;
+        router.push('signin');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     onAuthStateChanged(auth, (loginUser) => {
       if (loginUser) {
@@ -45,7 +58,7 @@ const LoggedUser = ({ children }) => {
   }, []);
 
   return (
-    <getLoggedUser.Provider value={{ user, setUser }}>
+    <getLoggedUser.Provider value={{ user, setUser, logout }}>
       {children}
     </getLoggedUser.Provider>
   );

@@ -7,7 +7,7 @@ import SideBarHeading from './SideBarHead';
 import { GetRegUsersContext } from '../Contexts/getRegUsers';
 import { useState } from 'react';
 import { getLoggedUser } from '../Contexts/GetLoggedUser';
-import { ThemeContext } from '../Contexts/ThemeContext';
+import { ThemeContext, useThemeContext } from '../Contexts/ThemeContext';
 
 const NewChat = ({ sx }) => {
   const { openNewChat, setOpenNewChat } = useContext(DataContext);
@@ -17,7 +17,7 @@ const NewChat = ({ sx }) => {
   const handleEnter = (value) => {
     fetchData(value, user);
   };
-const {theme}=useContext(ThemeContext);
+  const { theme } = useThemeContext();
   return (
     <Box
       sx={sx}
@@ -58,7 +58,7 @@ const {theme}=useContext(ThemeContext);
           Contact on Whatsapp
         </Typography>
       </Box>
-      <Box sx={{ flexGrow: '1', height: '100%', overflow: 'auto' }}>
+      <Box sx={{ flexGrow: '1', height: '400px', overflow: 'auto' }}>
         <AddNewUser />
       </Box>
     </Box>

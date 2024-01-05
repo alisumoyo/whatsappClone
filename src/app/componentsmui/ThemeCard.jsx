@@ -13,7 +13,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../Contexts/ThemeContext';
 
 const ThemeCard = () => {
-  const { theme, toggleDarkMode } = useContext(ThemeContext);
+  const { theme, toggleDarkMode, selectedTheme } = useContext(ThemeContext);
 
   const handleThemeChange = (event) => {
     const selectedTheme = event.target.value;
@@ -23,7 +23,7 @@ const ThemeCard = () => {
   return (
     <Card
       sx={{
-        minWidth: 500,
+        // minWidth: 500,
         bgcolor: theme.palette.background.default,
         color: '#3b4a54',
         color: theme.palette.text.primary,
@@ -32,7 +32,9 @@ const ThemeCard = () => {
     >
       <CardContent>
         <FormControl>
-          <FormLabel>Theme</FormLabel>
+          <FormLabel sx={{ color: theme.palette.text.primary }}>
+            Theme
+          </FormLabel>
           <RadioGroup defaultValue='light' onChange={handleThemeChange}>
             <FormControlLabel value='light' control={<Radio />} label='Light' />
             <FormControlLabel value='dark' control={<Radio />} label='Dark' />
