@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Button,
-  CardActions,
-  DialogActions,
-  DialogTitle,
-} from '@mui/material';
-import { useThemeContext } from '../Contexts/ThemeContext';
+// import React, { useState } from 'react';
+// import {
+//   Box,
+//   Button,
+//   CardActions,
+//   DialogActions,
+//   DialogTitle,
+// } from '@mui/material';
+// import { useThemeContext } from '../Contexts/ThemeContext';
 
-const SureBox = () => {
-  // const { theme } = useThemeContext();
-  return (
-    <Box>
-      <DialogTitle>Are you sure you want to logout?</DialogTitle>
-    </Box>
-  );
-};
+// const SureBox = () => {
+//   // const { theme } = useThemeContext();
+//   return (
+//     <Box>
+//       <DialogTitle>Are you sure you want to logout?</DialogTitle>
+//     </Box>
+//   );
+// };
 
-export default SureBox;
+// export default SureBox;
 
 {
   /* <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>

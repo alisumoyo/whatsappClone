@@ -2,7 +2,7 @@ import { Box, ListItemIcon, ListItemText } from '@mui/material';
 import React, { useContext } from 'react';
 import { ThemeContext } from '../Contexts/ThemeContext';
 
-const SettingsSideBox = ({ icon, text, onClick }) => {
+const SettingsSideBox = ({ icon, text, onClick, color }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <>
@@ -14,6 +14,7 @@ const SettingsSideBox = ({ icon, text, onClick }) => {
           justifyContent: 'center',
           color: '#3b4a54',
           color: theme.palette.text.primary,
+          color: color,
           height: '60px',
           bgcolor: '#fff',
           bgcolor: theme.palette.background.default,
@@ -50,6 +51,7 @@ const SettingsSideBox = ({ icon, text, onClick }) => {
             sx={{
               flexGrow: '1',
               // color: '#3b4a54',
+              color: color,
               color: theme.palette.text.primary,
               fontWeight: '100',
             }}

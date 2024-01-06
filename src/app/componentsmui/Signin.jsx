@@ -192,15 +192,15 @@ const SignIn = () => {
           )}
 
           <Button
-            variant='outlined'
+            variant='contained'
             onClick={handleSignin}
             sx={{
-              bgcolor: '#0aa884',
+              bgcolor: '#00401A',
               border: 'none',
               color: '#fff',
               fontSize: '16px',
               '&:hover': {
-                bgcolor: '#0aa884',
+                bgcolor: '#00401A',
                 color: '##fff',
                 fontWeight: 'bold',
                 outline: 'none',
@@ -239,7 +239,7 @@ const SignIn = () => {
             <Typography
               sx={{
                 padding: '10px 20px',
-                bgcolor: '#0aa884',
+                bgcolor: '#00401A',
                 color: '#fff',
                 borderRadius: '4px',
               }}
@@ -250,12 +250,12 @@ const SignIn = () => {
               <Button
                 variant='contained'
                 sx={{
-                  bgcolor: '#0aa884',
+                  bgcolor: '#00401A',
                   border: 'none',
                   color: '#fff',
                   fontSize: '16px',
                   '&:hover': {
-                    bgcolor: '#0aa884',
+                    bgcolor: '#00401A',
                     color: '##fff',
                     fontWeight: 'bold',
                     outline: 'none',
@@ -267,7 +267,7 @@ const SignIn = () => {
               </Button>
             </Link>
           </Box>
-          {isDarkMode ? (
+          {/* {isDarkMode ? (
             <Button
               onClick={toggleDarkMode}
               sx={{ color: theme.palette.text.primary }}
@@ -281,7 +281,7 @@ const SignIn = () => {
             >
               Switch to Dark
             </Button>
-          )}
+          )} */}
         </Container>
       </Box>
     </ThemeProvider>

@@ -11,6 +11,7 @@ import {
   MenuItem,
   Divider,
   Avatar,
+  DialogTitle,
 } from '@mui/material';
 import AddCommentRoundedIcon from '@mui/icons-material/AddCommentRounded';
 import GroupsRoundedIcon from '@mui/icons-material/GroupsRounded';
@@ -108,7 +109,7 @@ const ChatHead = () => {
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            // onClick={handleClose}
+            onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
@@ -126,7 +127,9 @@ const ChatHead = () => {
 
             <DialogBox
               openBtn={<MenuItem className='moreIcon-sub'>Log out</MenuItem>}
-              content={<SureBox />}
+              content={
+                <DialogTitle>Are you sure you want to logout?</DialogTitle>
+              }
               yesFunction={logout}
             />
             <Divider />

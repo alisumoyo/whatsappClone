@@ -1,5 +1,11 @@
 import React, { useContext } from 'react';
-import { Box, Button, IconButton, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  DialogTitle,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchField from './SearchField';
 import SettingsSideBox from './SettingsSideBox';
@@ -17,9 +23,11 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import DialogBox from './DialogBox';
 import ThemeCard from './ThemeCard';
 import SideBarHeading from './SideBarHead';
+import { useLoggedUserContext } from '../Contexts/GetLoggedUser';
 
 const SettingsBar = ({ sx }) => {
   const { openSettings, setOpenSettings } = useContext(DataContext);
+  const { logout } = useLoggedUserContext();
   const SideBarIconBox = [
     {
       icon: <NotificationsIcon fontSize='small' />,
@@ -36,6 +44,7 @@ const SettingsBar = ({ sx }) => {
     },
     {
       content: <ThemeCard />,
+      method: () => console.log('hello'),
       button: (
         <SettingsSideBox
           icon={<Brightness6Icon fontSize='small' />}
@@ -61,11 +70,18 @@ const SettingsBar = ({ sx }) => {
       text: 'Help',
     },
     {
-      icon: <LogoutIcon fontSize='small' />,
-      text: 'Logout',
+      content: <DialogTitle>Are you sure you want to logout?</DialogTitle>,
+      method: logout,
+      button: (
+        <SettingsSideBox
+          icon={<LogoutIcon fontSize='small' />}
+          text='Logout'
+          color='#f15c6d'
+        />
+      ),
     },
   ];
-  
+
   return (
     <Box
       sx={sx}
@@ -81,7 +97,7 @@ const SettingsBar = ({ sx }) => {
         sx={{
           overflow: 'auto',
           flexGrow: '1',
-          height: '460px',
+          height: '70vh',
         }}
       >
         <ProfileSideBarBox />
@@ -92,7 +108,7 @@ const SettingsBar = ({ sx }) => {
                 key={index}
                 openBtn={item.button}
                 content={item.content}
-                
+                yesFunction={item.method}
               />
             ) : (
               <SettingsSideBox
