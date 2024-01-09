@@ -9,6 +9,7 @@ const CustomTextField = ({
   fullWidth = true,
   margin = 'normal',
   variant = 'outlined',
+  size ='small',
   required = true,
   error,
   helperText,
@@ -25,6 +26,7 @@ const CustomTextField = ({
     required={required}
     error={error}
     helperText={helperText}
+    size={size}
     sx={{
       marginBottom: '12px',
       color: theme.palette.text.primary, // Set text color

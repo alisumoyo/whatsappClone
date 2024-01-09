@@ -9,19 +9,19 @@ import {
   signOut,
 } from '../firebase/friebaseConfig';
 import { useRouter } from 'next/router';
-import Card from '../componentsmui/SureBox';
 
 export const getLoggedUser = createContext();
+
 export const useLoggedUserContext = () => {
   return useContext(getLoggedUser);
 };
 const LoggedUser = ({ children }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
+
   const logout = () => {
     signOut(auth)
       .then(() => {
-        <Card />;
         router.push('signin');
       })
       .catch((error) => {
@@ -37,7 +37,7 @@ const LoggedUser = ({ children }) => {
           userDocRef,
           (docSnapshot) => {
             if (docSnapshot.exists()) {
-              const data = docSnapshot.data();
+              const data = docSnapshot?.data();
               // console.log('Document Data:', data);
               setUser(data);
             } else {

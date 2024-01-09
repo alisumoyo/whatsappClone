@@ -304,45 +304,7 @@
 //           >
 //             Signup
 //           </Button>
-//           <Box
-//             sx={{
-//               marginTop: '10px',
-//               display: 'flex',
-//               justifyContent: 'space-between',
-//               alignItems: 'center',
-//             }}
-//           >
-//             <Typography
-//               sx={{
-//                 padding: '10px 20px',
-//                 bgcolor: '#0aa884',
-//                 color: '#fff',
-//                 borderRadius: '4px',
-//               }}
-//             >
-//               Already have an account?
-//             </Typography>
-//             <Link href={'/signin'}>
-//               <Button
-//                 variant='contained'
-//                 sx={{
-//                   bgcolor: '#0aa884',
-//                   border: 'none',
-//                   color: '#fff',
-//                   fontSize: '16px',
-//                   '&:hover': {
-//                     bgcolor: '#0aa884',
-//                     color: '##fff',
-//                     fontWeight: 'bold',
-//                     outline: 'none',
-//                     border: 'none',
-//                   },
-//                 }}
-//               >
-//                 Signin
-//               </Button>
-//             </Link>
-//           </Box>
+//
 //           {isDarkMode ? (
 //             <Button
 //               onClick={toggleDarkMode}
@@ -388,6 +350,8 @@ import { useRouter } from 'next/router';
 import { useTheme } from '@mui/system';
 import { ThemeContext } from '../Contexts/ThemeContext';
 import CustomTextField from './BaseInput';
+import CustomButton from './BaseBtn';
+import PasswordInputWithIcon from './BasePassword';
 
 // Custom TextField component
 // const CustomTextField = ({
@@ -449,6 +413,11 @@ const Signup = () => {
   const router = useRouter();
   const { theme, toggleDarkMode, isDarkMode } = useContext(ThemeContext);
 
+  const bgImg =
+    'https://img.freepik.com/premium-photo/3d-rendering-bunch-square-badges-with-whatsapp-logo-green-background_284880-352.jpg?size=626&ext=jpg&ga=GA1.1.1803636316.1701302400&semt=ais';
+  const bgGreenImg = './bggreen.jpeg';
+  const imgBgGreeen = './bg.jpg';
+
   const validateForm = () => {
     return Object.values(formData).every((value) => value.trim() !== '');
   };
@@ -496,7 +465,7 @@ const Signup = () => {
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
-          // backgroundImage: `url(${imgBgGreeen})`,
+          backgroundImage: `url(${imgBgGreeen})`,
         }}
       >
         <Container
@@ -526,47 +495,139 @@ const Signup = () => {
             <CustomTextField
               key={fieldName}
               label={fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}
-              type={fieldName === 'password' || fieldName === 'confirmPassword' ? 'password' : 'text'}
+              type={
+                fieldName === 'password' || fieldName === 'confirmPassword'
+                  ? 'password'
+                  : 'text'
+              }
               value={fieldValue}
-              onChange={(e) => setFormData({ ...formData, [fieldName]: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, [fieldName]: e.target.value })
+              }
               error={!fieldValue.trim() && error.includes(fieldName)}
-              helperText={!fieldValue.trim() && error.includes(fieldName) && error}
+              helperText={
+                !fieldValue.trim() && error.includes(fieldName) && error
+              }
               theme={theme}
             />
           ))}
 
           {loading && <CircularProgress style={{ marginBottom: '12px' }} />}
           {error &&
-            Object.keys(formData).every((fieldName) => !error.includes(fieldName)) && (
-              <Typography variant='body2' color='error' style={{ marginBottom: '12px' }}>
+            Object.keys(formData).every(
+              (fieldName) => !error.includes(fieldName)
+            ) && (
+              <Typography
+                variant='body2'
+                color='error'
+                style={{ marginBottom: '12px' }}
+              >
                 {error}
               </Typography>
             )}
-          <Button
-            variant='outlined'
-            onClick={handleSignup}
+
+          <CustomButton text='Sign up' pressed={handleSignup} />
+          <Box
             sx={{
-              bgcolor: '#0aa884',
-              border: 'none',
-              color: '#fff',
-              fontSize: '16px',
-              '&:hover': {
-                bgcolor: '#0aa884',
-                color: '##fff',
-                fontWeight: 'bold',
-                outline: 'none',
-                border: 'none',
-              },
+              marginTop: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent:'center',
+              gap: '16px',
+              paddingRight: '20px',
             }}
           >
-            Signup
-          </Button>
-          
-          {/* rest of the code */}
+            <Typography
+              sx={{
+                color: '#333',
+              }}
+            >
+              Already have an account?
+            </Typography>
+
+            <Link href={'/signin'} style={{ textDecoration: 'none' }}>
+              <Typography
+                variant='contained'
+                sx={{
+                  color: '#00401A',
+                  fontSize: '16px',
+                  textDecoration: 'none',
+                  fontWeight: 'bold',
+                }}
+              >
+                Sign in
+              </Typography>
+            </Link>
+          </Box>
+          {/* <PasswordInputWithIcon /> */}
         </Container>
       </Box>
     </ThemeProvider>
   );
 };
-
 export default Signup;
+
+{
+  /* <Button
+  variant='outlined'
+  onClick={handleSignup}
+  sx={{
+    bgcolor: '#0aa884',
+    border: 'none',
+    color: '#fff',
+    fontSize: '16px',
+    '&:hover': {
+      bgcolor: '#0aa884',
+      color: '##fff',
+      fontWeight: 'bold',
+      outline: 'none',
+      border: 'none',
+    },
+  }}
+>
+  Signup
+</Button>; */
+}
+
+// Link
+{
+  /* <Box
+            sx={{
+              marginTop: '10px',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              sx={{
+                padding: '10px 20px',
+                bgcolor: '#0aa884',
+                color: '#fff',
+                borderRadius: '4px',
+              }}
+            >
+              Already have an account?
+            </Typography>
+            <Link href={'/signin'}>
+              <Button
+                variant='contained'
+                sx={{
+                  bgcolor: '#0aa884',
+                  border: 'none',
+                  color: '#fff',
+                  fontSize: '16px',
+                  '&:hover': {
+                    bgcolor: '#0aa884',
+                    color: '##fff',
+                    fontWeight: 'bold',
+                    outline: 'none',
+                    border: 'none',
+                  },
+                }}
+              >
+                Signin
+              </Button>
+            </Link>
+          </Box> */
+}

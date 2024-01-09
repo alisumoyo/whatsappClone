@@ -1,17 +1,16 @@
 import React from 'react';
 import { Box, CircularProgress, Button } from '@mui/material';
-import { green } from '@mui/material/colors';
 
-const CustomButton = ({ text, clicked }) => {
+const CustomButton = ({ text, pressed }) => {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
 
   const buttonSx = {
     ...(success && {
-      bgcolor: green[500],
+      bgcolor: '#00401A',
       '&:hover': {
-        bgcolor: green[700],
+        bgcolor: '#00401A',
       },
     }),
   };
@@ -26,15 +25,13 @@ const CustomButton = ({ text, clicked }) => {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      clicked();
-      console.log('button clicked');
+      pressed(e);
+      // console.log('button clicked');
       timer.current = window.setTimeout(() => {
         setSuccess(true);
         setLoading(false);
       }, 2000);
     }
-
-    // Call the provided onClick function
   };
 
   return (
@@ -43,14 +40,15 @@ const CustomButton = ({ text, clicked }) => {
         variant='contained'
         sx={buttonSx}
         disabled={loading}
-        onClick={handleButtonClick}
+        onClick={(handleButtonClick)}
+        fullWidth
       >
         {text}
         {loading && (
           <CircularProgress
             size={24}
             sx={{
-              color: green[500],
+              color: '#00401A',
               position: 'absolute',
               top: '50%',
               left: '50%',

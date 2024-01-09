@@ -1,19 +1,15 @@
-// _app.js
 import '../src/app/globals.css';
-import ThemeContextProvider, {
-  ThemeContext,
-} from '@/app/Contexts/ThemeContext';
-
+import ThemeContextProvider from '@/app/Contexts/ThemeContext';
+import LoggedUser from '@/app/Contexts/GetLoggedUser';
+import withAuth from '@/app/componentsmui/withAuth';
 function App({ Component, pageProps }) {
-  // const { theme } = useContext(ThemeContext);
-
   return (
     <>
-      {/* <ThemeProvider theme={theme}> */}
       <ThemeContextProvider>
-        <Component {...pageProps} />
+        <LoggedUser>
+          <Component {...pageProps} />
+        </LoggedUser>
       </ThemeContextProvider>
-      {/* </ThemeProvider> */}
     </>
   );
 }

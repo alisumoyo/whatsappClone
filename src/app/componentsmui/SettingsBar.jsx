@@ -116,6 +116,8 @@ const SettingsBar = ({ sx }) => {
                 icon={item.icon}
                 text={item.text}
                 onClick={item.method}
+                // color={item.color}
+                sx={{color: "#fff"}}
               />
             )}
           </Box>

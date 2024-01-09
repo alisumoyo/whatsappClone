@@ -15,6 +15,7 @@ import Link from 'next/link';
 import theme from './ThemeColors';
 import { useTheme } from '@mui/system';
 import { ThemeContext } from '../Contexts/ThemeContext';
+import CustomButton from './BaseBtn';
 
 const SignIn = () => {
   // const theme = useTheme();
@@ -113,7 +114,6 @@ const SignIn = () => {
               color: theme.palette.text.primary,
               margin: 'auto',
             }}
-            // sx={{ buttonSx }}
           >
             Sign In
           </Typography>
@@ -178,9 +178,6 @@ const SignIn = () => {
               },
             }}
           />
-
-          {/* {loading && <CircularProgress style={{ marginBottom: '16px' }} />} */}
-
           {signInError && (
             <Typography
               variant='body2'
@@ -191,83 +188,92 @@ const SignIn = () => {
             </Typography>
           )}
 
-          <Button
-            variant='contained'
-            onClick={handleSignin}
-            sx={{
-              bgcolor: '#00401A',
-              border: 'none',
-              color: '#fff',
-              fontSize: '16px',
-              '&:hover': {
-                bgcolor: '#00401A',
-                color: '##fff',
-                fontWeight: 'bold',
-                outline: 'none',
-                border: 'none',
-                m: 1,
-                position: 'relative',
-              },
-            }}
-            disabled={loading}
-          >
-            Sign In
-            {loading && (
-              <CircularProgress
-                size={24}
-                sx={{
-                  color: theme.palette.background.default,
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  marginTop: '-12px',
-                  marginLeft: '-12px',
-                }}
-              />
-            )}
-            {/* <Loader/> */}
-          </Button>
-
+          <CustomButton text='Sign In' pressed={handleSignin} />
           <Box
             sx={{
               marginTop: '10px',
               display: 'flex',
-              justifyContent: 'space-between',
               alignItems: 'center',
+              justifyContent:'center',
+              gap: '16px',
+              paddingRight: '20px',
             }}
           >
             <Typography
               sx={{
-                padding: '10px 20px',
-                bgcolor: '#00401A',
-                color: '#fff',
-                borderRadius: '4px',
+                color: '#333',
               }}
             >
-              Don't have an account?
+              {/* Don't have an account? */}
+              No account?
             </Typography>
-            <Link href={'/signup'}>
-              <Button
+
+            <Link href={'/signup'} style={{ textDecoration: 'none' }}>
+              <Typography
                 variant='contained'
                 sx={{
-                  bgcolor: '#00401A',
-                  border: 'none',
-                  color: '#fff',
+                  color: '#00401A',
                   fontSize: '16px',
-                  '&:hover': {
-                    bgcolor: '#00401A',
-                    color: '##fff',
-                    fontWeight: 'bold',
-                    outline: 'none',
-                    border: 'none',
-                  },
+                  textDecoration: 'none',
+                  fontWeight: 'bold',
                 }}
               >
-                Sign up
-              </Button>
+                {/* Sign up */}
+                Create one
+              </Typography>
             </Link>
           </Box>
-          {/* {isDarkMode ? (
+        </Container>
+      </Box>
+    </ThemeProvider>
+  );
+};
+// const inputFieldCss = {};
+export default SignIn;
+
+// Button used First
+{
+  /* <Button
+variant='contained'
+onClick={handleSignin}
+sx={{
+  bgcolor: '#00401A',
+  border: 'none',
+  color: '#fff',
+  fontSize: '16px',
+  '&:hover': {
+    bgcolor: '#00401A',
+    color: '##fff',
+    fontWeight: 'bold',
+    outline: 'none',
+    border: 'none',
+    m: 1,
+    position: 'relative',
+  },
+}}
+disabled={loading}
+>
+Log In
+{loading && (
+  <CircularProgress
+    size={24}
+    sx={{
+      color: theme.palette.background.default,
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginTop: '-12px',
+      marginLeft: '-12px',
+    }}
+  />
+)}
+{/* <Loader/> 
+  </Button>*/
+}
+
+// Dark Mode Button
+{
+  /* {isDarkMode ? (
             <Button
               onClick={toggleDarkMode}
               sx={{ color: theme.palette.text.primary }}
@@ -281,11 +287,29 @@ const SignIn = () => {
             >
               Switch to Dark
             </Button>
-          )} */}
-        </Container>
-      </Box>
-    </ThemeProvider>
-  );
-};
-const inputFieldCss = {};
-export default SignIn;
+          )} */
+}
+
+// Link Button
+{
+  /* <Link href={'/signup'}>
+<Button
+  variant='contained'
+  sx={{
+    // bgcolor: '#00401A',
+    // border: 'none',
+    color: '#00401A',
+    fontSize: '16px',
+    // '&:hover': {
+    //   bgcolor: '#00401A',
+    //   color: '##fff',
+    //   fontWeight: 'bold',
+    //   outline: 'none',
+    //   border: 'none',
+    // },
+  }}
+>
+  Sign up
+</Button>
+</Link> */
+}

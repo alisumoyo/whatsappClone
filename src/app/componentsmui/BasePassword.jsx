@@ -20,6 +20,7 @@ export default function PasswordInputWithIcon() {
     <FormControl sx={{ m: 1, width: '25ch' }} variant='outlined'>
       <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
       <OutlinedInput
+        fullWidth
         id='outlined-adornment-password'
         type={showPassword ? 'text' : 'password'}
         endAdornment={

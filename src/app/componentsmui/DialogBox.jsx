@@ -13,12 +13,7 @@ import { useContext } from 'react';
 import { ThemeContext, useThemeContext } from '../Contexts/ThemeContext';
 import { useLoggedUserContext } from '../Contexts/GetLoggedUser';
 
-const DialogBox = ({
-  content,
-  openBtn,
-  yesFunction,
-  additionalFunctionAfterYes,
-}) => {
+const DialogBox = ({ content, openBtn, yesFunction, noFunction }) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
@@ -32,19 +27,25 @@ const DialogBox = ({
   const handleYesClick = async () => {
     try {
       if (yesFunction && typeof yesFunction === 'function') {
-        // If yesFunction is a function, call it
         await yesFunction();
-        console.log('executed yesFunction:',);
       }
-
-      // Close the dialog regardless of the type of yesFunction
-      handleClose();
     } catch (error) {
-      // Handle errors that may occur during the execution of yesFunction
       console.error('Error during yesFunction execution:', error);
+    } finally {
+      handleClose();
     }
   };
-
+  const handleNoClick = async () => {
+    try {
+      if (noFunction && typeof noFunction === 'function') {
+        await noFunction();
+      }
+    } catch (error) {
+      console.error('Error during noFunction execution:', error);
+    } finally {
+      handleClose();
+    }
+  };
   const { theme } = useThemeContext();
   return (
     <>
@@ -71,7 +72,7 @@ const DialogBox = ({
             }}
           >
             <Button
-              onClick={handleClose}
+              onClick={handleNoClick}
               variant='text'
               sx={{
                 bgcolor: theme.palette.background.primary,

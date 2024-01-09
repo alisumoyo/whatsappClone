@@ -10,6 +10,7 @@ const signin = () => {
         <link rel='icon' href='./logged.ico' />
       </Head>
       <SignIn />
+      
     </>
   );
 };

@@ -19,8 +19,6 @@ import { DataContext } from '../Contexts/MyContextProvider';
 import { useLoggedUserContext } from '../Contexts/GetLoggedUser';
 import { ThemeContext, useThemeContext } from '../Contexts/ThemeContext';
 import DialogBox from './DialogBox';
-import SureBox from './SureBox';
-import { userLoggedUserContext } from '../Contexts/GetLoggedUser';
 
 const ChatHead = () => {
   const { user, logout } = useLoggedUserContext();
@@ -42,6 +40,14 @@ const ChatHead = () => {
     bgcolor: theme.palette.background.default,
   };
 
+  const handleSetting = () => {
+    setOpenSettings(true);
+    handleClose();
+  };
+  const handleLogout = () => {
+    handleClose();
+    logout();
+  };
   return (
     <>
       <Box
@@ -103,37 +109,46 @@ const ChatHead = () => {
                 // bottom: '75px !important',
                 left: '190px !important',
                 top: '70px !important',
+                // iconsCss,
+                bgcolor: '#333',
+                color:'red'
               },
             }}
             id='basic-menu'
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
-            onClick={handleClose}
+            // onClick={handleClose}
             MenuListProps={{
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem className='moreIcon-sub'>New Group</MenuItem>
-            <MenuItem className='moreIcon-sub'>New commuinty</MenuItem>
-            <MenuItem className='moreIcon-sub'>Starred messages</MenuItem>
-            <MenuItem className='moreIcon-sub'>Select chats</MenuItem>
-            <MenuItem
-              className='moreIcon-sub'
-              onClick={() => setOpenSettings(true)}
-            >
+            <MenuItem sx={{iconsCss}} onClick={handleClose}>
+              New Group
+            </MenuItem>
+            <MenuItem sx={{iconsCss}} onClick={handleClose}>
+              New commuinty
+            </MenuItem>
+            <MenuItem sx={{iconsCss}} onClick={handleClose}>
+              Starred messages
+            </MenuItem>
+            <MenuItem sx={{iconsCss}} onClick={handleClose}>
+              Select chats
+            </MenuItem>
+            <MenuItem sx={{iconsCss}} onClick={handleSetting}>
               Settings
             </MenuItem>
 
             <DialogBox
-              openBtn={<MenuItem className='moreIcon-sub'>Log out</MenuItem>}
+              openBtn={<MenuItem sx={{iconsCss}}>Log out</MenuItem>}
               content={
                 <DialogTitle>Are you sure you want to logout?</DialogTitle>
               }
-              yesFunction={logout}
+              yesFunction={handleLogout}
+              noFunction={handleClose}
             />
             <Divider />
-            <MenuItem className='moreIcon-sub'>
+            <MenuItem sx={{iconsCss}} onClick={handleClose}>
               Get Whatsapp for Windows
             </MenuItem>
           </Menu>
